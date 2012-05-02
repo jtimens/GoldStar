@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Main</title>
+		<link href="css/bootstrap.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<div class="hero-unit">
+				<h1> Welcome to Gold Star! </h1> <br />
+				<p> Click here to get started! <button id="giveGoldStar" class="btn btn-large" type="button" onclick="redirect(this.id)">Give a Gold Star</button></p>
+				<br />
+				<p>Or choose one of the three links below to start giving out Gold Stars to people who deserve them! </p>
+			</div>
+			<div class="row">
+				<div class="span6">
+				  <h2>My Gold Stars</h2>
+				   <p><button id="myGoldStars" type="button" class="btn btn-mini" onclick="redirect(this.id)" >My Gold Stars &raquo;</button></p>
+				</div>
+				<div class="span6">
+				  <h2>Awarded Stars</h2>
+				   <p><button id="awardedStars" type="button" class="btn btn-mini" onclick="redirect(this.id)" >Awarded Stars &raquo;</button></p>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		function redirect(id)
+		{
+			var page;
+			page = document.getElementById(id).id;
+			if (page == "giveGoldStar")
+				window.location = "index.html";
+			else if (page == "myGoldStars")
+				window.location = "myGoldStar.html";
+			else if (page == "awardedStars")
+				window.location = "awardedStar.html";
+			else
+				window.location = "main.html";
+		}
+	</script>
+</html>
