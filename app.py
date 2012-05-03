@@ -17,7 +17,7 @@ class Star(db.Model):
 	category = db.Column(db.Unicode(100))
 	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	issuer = db.relationship("User", backref="issued",primaryjoin='Star.issuer_id==User.id')
+	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 
 class User(db.Model):
@@ -29,15 +29,18 @@ class User(db.Model):
 	
 
 
-
-db.create_all()
-
-
-manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
+def main():
+	db.create_all()
 
 
-manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
-manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
+	manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
-# start the flask loop
-app.run()
+
+	manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
+	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
+
+	# start the flask loop
+	app.run()
+
+if __name__ == "__main__":
+	main()
