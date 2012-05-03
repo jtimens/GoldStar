@@ -30,8 +30,13 @@ class testDatabaseFunctions(unittest.TestCase):
 
 	def test_listofusers(self):
 		listtheusers()
-	def test_giveastar(self):
-		giveastar()
+	def test_giveastarexists(self):
+		issuerEmail = "dukebdfan@comcast.net"
+		ownerEmail = "mgraham@problemsolutions.net"
+		category = "INFLUENCED"
+		description = "This is a test description"
+		addusertodatabase("Matt", "Graham", ownerEmail)
+		self.assertEqual(giveastar(issuerEmail, ownerEmail, category, description), True)
 
 
 if __name__ == "__main__":
