@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="user-scalable=no,width=device-width">
 		<title>Gold Star</title>
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -9,16 +9,24 @@
 	<body>
 		<div class="navbar">
 			<div class="navbar-inner">
-				<div class="containter">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					
 					<a class="brand" href="#">
 						<img src="goldstar.png" width="20" height="20" /> Gold Star <img src="goldstar.png" width="20" height="20" />
 					</a>
-					<ul class="nav">
-						<li><button id="main" class="btn btn-inverse" onclick="toggleView(this.id)">Home</button></li>
-						<li><button id="gg" class="btn btn-inverse" onclick="toggleView(this.id)">Give Gold Star</button></li>
-						<li><button id="ms" class="btn btn-inverse" onclick="toggleView(this.id)">My Gold Stars</button></li>
-						<li><button id="as" class="btn btn-inverse" onclick="toggleView(this.id)">Awarded Stars</button></li>
-					</ul>
+					
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li><button id="gg" class="btn btn-inverse" onclick="toggleView(this.id)">Give Gold Star</button></li>
+							<li><button id="ms" class="btn btn-inverse" onclick="toggleView(this.id)">My Gold Stars</button></li>
+							<li><button id="as" class="btn btn-inverse" onclick="toggleView(this.id)">Awarded Stars</button></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -49,8 +57,8 @@
 		</div>
 						
 	</body>
-	
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/customscripts.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery-1.7.2.min.js"></script>
 	
 </html>
