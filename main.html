@@ -14,18 +14,38 @@
 						<img src="goldstar.png" width="20" height="20" /> Gold Star <img src="goldstar.png" width="20" height="20" />
 					</a>
 					<ul class="nav">
-						<li class="active">
-							<a  onclick="redirect(this.id)">Home</a>
-						</li>
-						<li><a href="giveGold.html">Give Gold Star</a></li>
-						<li><a href="myGoldStar.html">My Stars</a></li>
-						<li><a href="awardedStar.html">Awarded Stars</a></li>
+						<li><button id="main" class="btn btn-inverse" onclick="toggleView(this.id)">Home</button></li>
+						<li><button id="gg" class="btn btn-inverse" onclick="toggleView(this.id)">Give Gold Star</button></li>
+						<li><button id="ms" class="btn btn-inverse" onclick="toggleView(this.id)">My Gold Stars</button></li>
+						<li><button id="as" class="btn btn-inverse" onclick="toggleView(this.id)">Awarded Stars</button></li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<div>
-			what the fuck
+		<div id="gold1" style="display:none;">
+			<div class="container">
+				<div class="hero-unit">
+					<h1> Give Gold Star </h1> <br />
+					<p>Choose who you want to give the gold star to:</p>
+					<p> [search bar for people] </p>
+				</div>
+			</div>
+		</div>
+		<div id="gold2" style="display:none;">
+			<div class="container">
+				<div class="hero-unit">
+					<h1> My Gold Stars</h1> <br />
+					<p>These are the stars that people have awarded you.</p>
+				</div>
+			</div>
+		</div>
+		<div id="gold3" style="display:none;">
+			<div class="container">
+				<div class="hero-unit">
+					<h1> Awarded Stars </h1> <br />
+					<p>These are the stars that you have awarded people</p>
+				</div>
+			</div>
 		</div>
 						
 	</body>

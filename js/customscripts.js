@@ -11,3 +11,21 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
+function toggleView(id)
+{
+	
+	document.getElementById("gold1").style.display = 'none';
+	document.getElementById("gold2").style.display = 'none';
+	document.getElementById("gold3").style.display = 'none';
+	
+	e = document.getElementById(id).id;
+	
+	if (e == "gg")
+		document.getElementById("gold1").style.display = 'block';
+	else if (e == "ms")
+		document.getElementById("gold2").style.display = 'block';
+	else if (e == "as")
+		document.getElementById("gold3").style.display = 'block';
+	else
+		window.location = 'main.html';
+}
