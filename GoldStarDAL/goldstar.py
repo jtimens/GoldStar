@@ -17,7 +17,7 @@ class User(Entity):
 	lastName = Field(Unicode(50))
 	email = Field(Unicode(100))
 	owned = OneToMany('Star', inverse='issuer')
-	issued = OneToMany('Star', inverse='owner')
+	issued = ManyToOne('Star', inverse='owner')
 	def __init__(self, firstname, lastname, email):
 		self.firstName = firstname
 		self.lastName = lastname
