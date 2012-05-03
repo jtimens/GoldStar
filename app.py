@@ -26,12 +26,7 @@ class User(db.Model):
 	firstName = db.Column(db.Unicode(50))
 	lastName = db.Column(db.Unicode(50))
 	email = db.Column(db.Unicode(100))
-	def __init__(self, firstname, lastname, email):
-		self.firstName = firstname
-		self.lastName = lastname
-		self.email = email
-	def __repr__(self):
-		return "<User('%s', '%s' , '%s')>" % (self.firstName, self.lastName, self.email)
+	
 
 
 
