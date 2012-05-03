@@ -1,32 +1,33 @@
-from sqlalchemy import create_engine, Column, Integer, String, Sequence, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Sequence, ForeignKey, Table, update
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, backref
 engine = create_engine('sqlite:///:memory:', echo = False)
 Base = declarative_base()
+
+class Star(Base):
+	__tablename__ = 'stars'
+	id = Column(Integer,primary_key=True)
+	owner_id = Column(Integer, ForeignKey('users.id'))
+	issuer_id = Column(Integer, ForeignKey('users.id'))
+	category = Column(String(100))
+	description = Column(String(120))
+	issuer = relationship("User", backref="issued",primaryjoin='Star.issuer_id==User.id')
+	owner = relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
+
 class User(Base):
 	__tablename__ = 'users'
 
-	id = Column(Integer, Sequence('user_id_seq'), primary_key = True)
+	id = Column(Integer, primary_key = True)
 	firstName = Column(String(50))
 	lastName = Column(String(50))
-	email = Column(String(100))
-
+	email = Column(String(100))	
 	def __init__(self, firstname, lastname, email):
 		self.firstName = firstname
 		self.lastName = lastname
 		self.email = email
 	def __repr__(self):
 		return "<User('%s', '%s' , '%s')>" % (self.firstName, self.lastName, self.email)
-	stars = relationship("Star", order_by="Star.id", backref="user")
-
-class Star(Base):
-	__tablename__ = 'star'
-
-	id = Column(Integer, primary_key = True)
-	issueID = Column(Integer, ForeignKey(users.id))
-	ownerID = Column(Integer, ForeignKey(users.id))
-	user = relationship("User", backref=backref('star', order_by=id))
-
+	
 
 Base.metadata.create_all(engine)
 def addusertodatabase(firstnamefromhtml, lastnamefromhtml, emailfromhtml):
@@ -44,8 +45,17 @@ def addusertodatabase(firstnamefromhtml, lastnamefromhtml, emailfromhtml):
 			session.commit()
 			success = True
 	return success
+
 def listtheusers():
 	Session = sessionmaker(bind = engine)
 	session = Session()
 	for instance in session.query(User).order_by(User.firstName):
 		print instance.firstName
+def giveastar():
+	Session = sessionmaker(bind = engine)
+	session = Session()
+	#print dir(session)
+	#update().where(User.firstName == "Jay").values(firstName = "Jonathan")
+	updateobj = session.query(User).filter_by(firstName = "Jay", lastName = "Ostinowsky").one()
+	updateobj.firstName = "Jonathan"
+	session.commit()
