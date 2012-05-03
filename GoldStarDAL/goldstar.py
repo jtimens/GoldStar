@@ -50,12 +50,17 @@ def listtheusers():
 	Session = sessionmaker(bind = engine)
 	session = Session()
 	for instance in session.query(User).order_by(User.firstName):
-		print instance.firstName
+		print instance.stars
 def giveastar():
 	Session = sessionmaker(bind = engine)
 	session = Session()
 	#print dir(session)
 	#update().where(User.firstName == "Jay").values(firstName = "Jonathan")
 	updateobj = session.query(User).filter_by(firstName = "Jay", lastName = "Ostinowsky").one()
-	updateobj.firstName = "Jonathan"
+	newStar = Star()
+	newStar.category = "INFLUENCED"
+	newStar.description = "This is a test"
+	newStar.issuer_id = updateobj.id
+	newStar.owner_id = updateobj.id
+	updateobj.stars.append(newStar)
 	session.commit()
