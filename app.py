@@ -31,7 +31,7 @@ class User(db.Model):
 
 
 def main():
-	@app.route('/index.html')
+	@app.route('/')
 	def index():
 		return render_template('index.html')
 
@@ -52,7 +52,7 @@ def main():
 
 
 	# start the flask loop
-	app.run()
+	app.run('0.0.0.0')
 
 if __name__ == "__main__":
 	main()
