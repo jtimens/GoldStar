@@ -26,18 +26,35 @@
 					<h2> Give Gold Star </h2> <br />
 					<h6>HERE YOU CAN GIVE A GOLD STAR TO SOMEONE WHO HAS HAD A POSITIVE IMPACT ON YOU</h6>
 					<p> <button id="btnshow1" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Begin</button></p>
-					<div id="tbl1" style="display:block;">
-						<div id="give1" style="display:block;">
+					<div id="tbl1" style="display:none;">
+						<div id="give1" style="display:none;">
 							<h6>CHOOSE A PERSON TO GIVE A STAR TO</h6>
-							<p> <button id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>
+							<p>
+									<input type="text" class="input-medium search-query">
+									<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>
+							</p>
 						</div>
 						<div id="give2" style="display:none;">
 							<h6>CHOOSE WHAT THE PERSON DID</h6>
+							<p> 
+								<select>
+									<option id="sel0" value="influenced" selected>Select One</option>
+									<option id="sel1" value="influenced">INFLUENCED</option>
+									<option id="sel2" value="helped">HELPED</option>
+									<option id="sel3" value="guided">GUIDED</option>
+									<option id="sel4" value="impressed">INPRESSED</option>
+									<option id="sel5" value="persuaded">PERSUADED</option>
+									<option id="sel6" value="inspired">INSPIRED</option>
+								</select>
+							</p>
 							<p> <button id="innergive2" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Why</button></p>
 						</div>
 						<div id="give3" style="display:none;">
 							<h6>CHOOSE TO COMMENT (120 character limit)</h6>
-							<p> <button id="innergive3" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Give Star</button></p>
+							<p>
+								<textarea maxwidth="50%" placeholder="120 character limit"></textarea><br />
+								<button id="innergive3" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Give Star</button>
+							</p>
 						</div>
 					</div>
 				</div>
