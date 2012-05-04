@@ -29,26 +29,22 @@ class User(db.Model):
 	email = db.Column(db.Unicode(100))
 	
 
+@app.route('/index.html')
+def index():
+	return render_template('index.html')
 
+@app.route('/main.html')
+def main_route():
+	return render_template('main.html')
+db.create_all()
+
+
+manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
+
+
+manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
+manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])	
 def main():
-	@app.route('/index.html')
-	def index():
-		return render_template('index.html')
-
-	@app.route('/main.html')
-	def main_route():
-		return render_template('main.html')
-
-	db.create_all()
-
-
-	manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
-
-
-	manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
-	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
-
-
 
 
 	# start the flask loop
