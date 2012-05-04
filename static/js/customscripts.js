@@ -29,3 +29,19 @@ function toggleView(id)
 	else
 		window.location = 'main.html';
 }
+function toggleInnerView(id)
+{
+	document.getElementById("goldb2").style.display = 'none';
+	document.getElementById("goldc2").style.display = 'none';
+	
+	e = document.getElementById(id).id;
+	
+	if (e == "golda")
+		alert("You selected " +e);
+	else if (e == "goldb")
+		document.getElementById("goldb2").style.display = 'block';
+	else if (e == "goldc")
+		document.getElementById("goldc2").style.display = 'block';
+	else
+		window.location = 'main.html';
+}
