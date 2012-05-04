@@ -13,7 +13,6 @@ function redirect(id)
 }
 function toggleView(id)
 {
-	
 	document.getElementById("gold1").style.display = 'none';
 	document.getElementById("gold2").style.display = 'none';
 	document.getElementById("gold3").style.display = 'none';
@@ -21,7 +20,10 @@ function toggleView(id)
 	e = document.getElementById(id).id;
 	
 	if (e == "gg")
+	{
 		document.getElementById("gold1").style.display = 'block';
+		resetView();
+	}
 	else if (e == "ms")
 		document.getElementById("gold2").style.display = 'block';
 	else if (e == "as")
@@ -31,13 +33,14 @@ function toggleView(id)
 }
 function toggleInnerView(id)
 {
-	document.getElementById("tbl3").style.display = 'none';
-	document.getElementById("tbl3").style.display = 'none';
 	
 	e = document.getElementById(id);
 	
 	if (e.id == "btnshow1")
-		alert("You selected " +e.id+ ".");
+	{
+		document.getElementById("tbl1").style.display = 'block';
+		document.getElementById("give1").style.display = 'block';
+	}
 	else if (e.id == "btnshow2" || e.id == "btnhide2")
 	{
 		if (e.id == "btnshow2")
@@ -82,7 +85,13 @@ function giveGoldStar(id)
 	if (e.id == "innergive3")
 		alert("Got to Inner Give 3.  Redirect to results page.");
 }
-
+function resetView()
+{
+	document.getElementById("give3").style.display = 'none';
+	document.getElementById("give2").style.display = 'none';
+	document.getElementById("give1").style.display = 'none';
+	document.getElementById("tbl1").style.display = 'none';
+}
 
 
 
