@@ -6,7 +6,7 @@ import flask.ext.restless
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:password@localhost/goldstar'
 db = SQLAlchemy(app)
 
 
@@ -39,15 +39,12 @@ def main_route():
 	return render_template('main.html')
 db.create_all()
 
-
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
 
 manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
 manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])	
 def main():
-
-
 	# start the flask loop
 	app.run()
 
