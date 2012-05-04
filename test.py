@@ -19,8 +19,12 @@ class testdb(unittest.TestCase):
 		B.firstName = u"Matt"
 		B.lastName = u"Graham"
 		B.email = u"mgraham@problemsolutions.net"
-		db.insert(B)
-		db.insert(A)
+		db.session.add(B)
+		db.session.add(A)
+		db.session.commit()
+
+
+
 
 if __name__ == "__main__":
 	unittest.main()
