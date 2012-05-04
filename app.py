@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+import datetime
 import flask.ext.restless
 
 
@@ -14,6 +15,7 @@ class Star(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	description = db.Column(db.Unicode(120))
 	category = db.Column(db.Unicode(100))
+	created = db.Column(db.DateTime, default = datetime.datetime.now())
 	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
