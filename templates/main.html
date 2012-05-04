@@ -7,11 +7,11 @@
 		<link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<div class="navbar navbar-fixed-top">
+		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
-					<img class="pull-left" width="25" height="25" src="goldstar.png" />
-					<img class="pull-right" width="25" height="25" src="goldstar.png" />
+					<img class="pull-left" width="25" height="25" src="../static/img/goldstar.png" />
+					<img class="pull-right" width="25" height="25" src="../static/img/goldstar.png" />
 					<div style="text-align:center;">
 						<button id="gg" class="btn btn-inverse" onclick="toggleView(this.id)">Give</button>
 						<button id="ms" class="btn btn-inverse" onclick="toggleView(this.id)">To</button>
@@ -20,9 +20,9 @@
 				</div>
 			</div>
 		</div>
-		<div id="gold1" style="display:none;">
+		<div id="gold1" style="display:block;">
 			<div class="container">
-				<div class="hero-unit">
+				<div class="well">
 					<h2> Give Gold Star </h2> <br />
 					<h6>Choose who you want to give the gold star to:</h6>
 					<p> [search bar for people] </p>
@@ -31,25 +31,83 @@
 		</div>
 		<div id="gold2" style="display:none;">
 			<div class="container">
-				<div class="hero-unit">
+				<div class="well">
 					<h2> My Gold Stars</h2> <br />
 					<h6>These are the stars that people have awarded you.</h6>
 					<p>[list of stars awarded to you, by whom, and what for]</p>
+					<table class="table" style="width:100%;">
+						<thead>Current Date</thead>
+						<tr>
+							<td>You</td>
+							<td>INFLUENCED</td>
+							<td>Michael Jordan</td>
+						</tr>
+						<tr>
+							<td>You</td>
+							<td>INSPIRED</td>
+							<td>Michael Jackson</td>
+						</tr>
+						<tr>
+							<td>You</td>
+							<td>MOTIVATED</td>
+							<td>Michael Jayson</td>
+						</tr>
+						<tr>
+							<td>You</td>
+							<td>GUIDED</td>
+							<td>Michael Johnson</td>
+						</tr>
+						<tr>
+							<td>You</td>
+							<td>CONCEIVED</td>
+							<td>Michael Ji-son</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
 		<div id="gold3" style="display:none;">
 			<div class="container">
-				<div class="hero-unit">
+				<div class="well">
 					<h2> Awarded Stars </h2> <br />
 					<h6>These are the stars that you have awarded people</h6>
 					<p>[list of stars awarded by you, to whom, and what for]</p>
+					<table class="table" style="width:100%;">
+						<thead>Current Date</thead>
+						<tr>
+							<td>Michael Jordan</td>
+							<td>INFLUENCED</td>
+							<td>You</td>
+						</tr>
+						<tr>
+							<td>Mike Jordan</td>
+							<td>INSPIRED</td>
+							<td>You</td>
+						</tr>
+						<tr>
+							<td>Matt Jordan</td>
+							<td>MOTIVATED</td>
+							<td>You</td>
+						</tr>
+						<tr>
+							<td>Mark Jordan</td>
+							<td>GUIDED</td>
+							<td>You</td>
+						</tr>
+						<tr>
+							<td>Mitch Jordan</td>
+							<td>CONCEIVED</td>
+							<td>You</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
+		
+		
 		<script src="static/js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="static/js/customscripts.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>					
 	</body>
 	
 	
