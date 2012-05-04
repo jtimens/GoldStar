@@ -31,21 +31,58 @@ function toggleView(id)
 }
 function toggleInnerView(id)
 {
-	document.getElementById("goldb2").style.display = 'none';
-	document.getElementById("goldc2").style.display = 'none';
+	document.getElementById("tbl3").style.display = 'none';
+	document.getElementById("tbl3").style.display = 'none';
 	
 	e = document.getElementById(id);
 	
-	if (e.id == "golda")
-		alert("You selected " +e+ ".");
-	else if (e.id == "goldb")
-		document.getElementById("goldb2").style.display = 'block';
-	else if (e.id == "btnshow3")
+	if (e.id == "btnshow1")
+		alert("You selected " +e.id+ ".");
+	else if (e.id == "btnshow2" || e.id == "btnhide2")
 	{
-		document.getElementById("tbl3").style.display = 'block';
-		e.style.display = 'none';
-		toggleBtnShow(e);
+		if (e.id == "btnshow2")
+		{
+			document.getElementById("btnhide2").style.display = 'block';
+			document.getElementById("tbl2").style.display = 'block';
+			e.style.display = 'none';
+		}
+		else
+		{
+			document.getElementById("btnshow2").style.display = 'block';
+			document.getElementById("tbl2").style.display = 'none';
+			e.style.display = 'none';
+		}	
+	}
+	else if (e.id == "btnshow3" || e.id == "btnhide3")
+	{
+		if (e.id == "btnshow3")
+		{
+			document.getElementById("btnhide3").style.display = 'block';
+			document.getElementById("tbl3").style.display = 'block';
+			e.style.display = 'none';
+		}
+		else
+		{
+			document.getElementById("btnshow3").style.display = 'block';
+			document.getElementById("tbl3").style.display = 'none';
+			e.style.display = 'none';
+		}	
 	}
 	else
 		window.location = 'main.html';
+}
+function toggleBtnShow(id)
+{
+	e = document.getElementById(id);
+	
+	if (e.id == "btnshow3")
+	{
+		document.getElementById("btnhide3").style.display = 'block';
+		e.style.display = 'none';
+	}
+	else if (e.id == "btnhide3")
+	{
+		document.getElementById("btnshow3").style.display = 'block';
+		e.style.display = 'none';
+	}
 }
