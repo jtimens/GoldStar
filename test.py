@@ -1,5 +1,7 @@
 import unittest
 import os
+import json
+import requests
 from app import *
 
 class testdb(unittest.TestCase):
@@ -11,18 +13,8 @@ class testdb(unittest.TestCase):
 
 
 	def testAddUsersToDatabase(self):
-		A = User()
-		A.firstName = u"Jay"
-		A.lastName = u"Ostinowsky"
-		A.email = u"dukebdfan@comcast.net"
-		B = User()
-		B.firstName = u"Matt"
-		B.lastName = u"Graham"
-		B.email = u"mgraham@problemsolutions.net"
-		db.session.add(B)
-		db.session.add(A)
-		db.session.commit()
-
+		newUser = {"firstName": "Jay", "lastName":"Ostinowsky", "email":"dukebdfan@comcast.net"}
+		r = requests.post('/api/user', data=json.dumps(newUser), headers={'content-type': 'application/json'})
 
 
 if __name__ == "__main__":
