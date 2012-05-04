@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 import flask.ext.restless
 
@@ -7,7 +7,6 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
-
 
 
 class Star(db.Model):
@@ -30,6 +29,14 @@ class User(db.Model):
 
 
 def main():
+	@app.route('/index.html')
+	def index():
+		return render_template('index.html')
+
+	@app.route('/main.html')
+	def main_route():
+		return render_template('main.html')
+
 	db.create_all()
 
 
@@ -38,6 +45,9 @@ def main():
 
 	manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
 	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
+
+
+
 
 	# start the flask loop
 	app.run()
