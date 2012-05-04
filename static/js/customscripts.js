@@ -71,18 +71,34 @@ function toggleInnerView(id)
 	else
 		window.location = 'main.html';
 }
-function toggleBtnShow(id)
+function giveGoldStar(id)
 {
 	e = document.getElementById(id);
 	
-	if (e.id == "btnshow3")
-	{
-		document.getElementById("btnhide3").style.display = 'block';
-		e.style.display = 'none';
-	}
-	else if (e.id == "btnhide3")
-	{
-		document.getElementById("btnshow3").style.display = 'block';
-		e.style.display = 'none';
-	}
+	if (e.id == "innergive1")
+		document.getElementById("give2").style.display = 'block';
+	if (e.id == "innergive2")
+		document.getElementById("give3").style.display = 'block';
+	if (e.id == "innergive3")
+		alert("Got to Inner Give 3.  Redirect to results page.");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
