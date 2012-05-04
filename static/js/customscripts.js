@@ -34,14 +34,18 @@ function toggleInnerView(id)
 	document.getElementById("goldb2").style.display = 'none';
 	document.getElementById("goldc2").style.display = 'none';
 	
-	e = document.getElementById(id).id;
+	e = document.getElementById(id);
 	
-	if (e == "golda")
-		alert("You selected " +e);
-	else if (e == "goldb")
+	if (e.id == "golda")
+		alert("You selected " +e+ ".");
+	else if (e.id == "goldb")
 		document.getElementById("goldb2").style.display = 'block';
-	else if (e == "goldc")
-		document.getElementById("goldc2").style.display = 'block';
+	else if (e.id == "btnshow3")
+	{
+		document.getElementById("tbl3").style.display = 'block';
+		e.style.display = 'none';
+		toggleBtnShow(e);
+	}
 	else
 		window.location = 'main.html';
 }
