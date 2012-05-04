@@ -3,8 +3,8 @@
 	<head>
 		<meta name="viewport" content="user-scalable=no,width=device-width">
 		<title>Gold Star</title>
-		<link href="static/css/bootstrap.min.css" rel="stylesheet">
-		<link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<div class="navbar">
@@ -13,9 +13,9 @@
 					<img class="pull-left" width="25" height="25" src="../static/img/goldstar.png" />
 					<img class="pull-right" width="25" height="25" src="../static/img/goldstar.png" />
 					<div style="text-align:center;">
-						<button id="gg" class="btn btn-inverse" onclick="toggleView(this.id)">Give</button>
-						<button id="ms" class="btn btn-inverse" onclick="toggleView(this.id)">To</button>
-						<button id="as" class="btn btn-inverse" onclick="toggleView(this.id)">From</button>
+						<button id="gg" class="btn btn-inverse" onclick="toggleView(this.id)">Give To</button>
+						<button id="ms" class="btn btn-inverse" onclick="toggleView(this.id)">To Me</button>
+						<button id="as" class="btn btn-inverse" onclick="toggleView(this.id)">From Me</button>
 					</div>
 				</div>
 			</div>
@@ -24,8 +24,8 @@
 			<div class="container">
 				<div class="well">
 					<h2> Give Gold Star </h2> <br />
-					<h6>Choose who you want to give the gold star to:</h6>
-					<p> [search bar for people] </p>
+					<h6>HERE YOU CAN GIVE A GOLD STAR TO SOMEONE WHO HAS HAD A POSITIVE IMPACT ON YOU</h6>
+					<p> <button id="golda" class="btn btn-info btn-large" onclick="toggleInnerView(this.id)">Click Here to Begin</button></p>
 				</div>
 			</div>
 		</div>
@@ -33,36 +33,42 @@
 			<div class="container">
 				<div class="well">
 					<h2> My Gold Stars</h2> <br />
-					<h6>These are the stars that people have awarded you.</h6>
-					<p>[list of stars awarded to you, by whom, and what for]</p>
-					<table class="table" style="width:100%;">
-						<thead>Current Date</thead>
-						<tr>
-							<td>You</td>
-							<td>INFLUENCED</td>
-							<td>Michael Jordan</td>
-						</tr>
-						<tr>
-							<td>You</td>
-							<td>INSPIRED</td>
-							<td>Michael Jackson</td>
-						</tr>
-						<tr>
-							<td>You</td>
-							<td>MOTIVATED</td>
-							<td>Michael Jayson</td>
-						</tr>
-						<tr>
-							<td>You</td>
-							<td>GUIDED</td>
-							<td>Michael Johnson</td>
-						</tr>
-						<tr>
-							<td>You</td>
-							<td>CONCEIVED</td>
-							<td>Michael Ji-son</td>
-						</tr>
-					</table>
+					<h6>THESE ARE THE STARS THAT PEOPLE HAVE AWARDED YOU</h6>
+					<p> <button id="goldb" class="btn btn-info btn-large" onclick="toggleInnerView(this.id)">Click Here to Show</button></p>
+					<div id="goldb2" style="display:none;">
+						<table class="table" style="width:100%;">
+							<tr>
+								<td>You</td>
+								<td>INFLUENCED</td>
+								<td>Michael Jordan</td>
+							</tr>
+							<tr>
+								<td>You</td>
+								<td>HELPED</td>
+								<td>Michael Jackson</td>
+							</tr>
+							<tr>
+								<td>You</td>
+								<td>GUIDED</td>
+								<td>Michael Jayson</td>
+							</tr>
+							<tr>
+								<td>You</td>
+								<td>IMPRESED</td>
+								<td>Michael Johnson</td>
+							</tr>
+							<tr>
+								<td>You</td>
+								<td>PERSUADED</td>
+								<td>Michael Ji-son</td>
+							</tr>
+							<tr>
+								<td>You</td>
+								<td>INSPIRED</td>
+								<td>Michael Ji-son</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -70,44 +76,50 @@
 			<div class="container">
 				<div class="well">
 					<h2> Awarded Stars </h2> <br />
-					<h6>These are the stars that you have awarded people</h6>
-					<p>[list of stars awarded by you, to whom, and what for]</p>
-					<table class="table" style="width:100%;">
-						<thead>Current Date</thead>
-						<tr>
-							<td>Michael Jordan</td>
-							<td>INFLUENCED</td>
-							<td>You</td>
-						</tr>
-						<tr>
-							<td>Mike Jordan</td>
-							<td>INSPIRED</td>
-							<td>You</td>
-						</tr>
-						<tr>
-							<td>Matt Jordan</td>
-							<td>MOTIVATED</td>
-							<td>You</td>
-						</tr>
-						<tr>
-							<td>Mark Jordan</td>
-							<td>GUIDED</td>
-							<td>You</td>
-						</tr>
-						<tr>
-							<td>Mitch Jordan</td>
-							<td>CONCEIVED</td>
-							<td>You</td>
-						</tr>
-					</table>
+					<h6>THESE ARE THE STARS THAT YOU HAVE AWARDED PEOPLE</h6>
+					<p> <button id="goldc" class="btn btn-info btn-large" onclick="toggleInnerView(this.id)">Click Here to Begin</button></p>
+					<div id="goldc2" style="display:none;">
+						<table class="table" style="width:100%;">
+							<tr>
+								<td>Michael Jordan</td>
+								<td>INFLUENCED</td>
+								<td>You</td>
+							</tr>
+							<tr>
+								<td>Mike Jordan</td>
+								<td>HELPED</td>
+								<td>You</td>
+							</tr>
+							<tr>
+								<td>Matt Jordan</td>
+								<td>GUIDED</td>
+								<td>You</td>
+							</tr>
+							<tr>
+								<td>Mark Jordan</td>
+								<td>IMPRESSED</td>
+								<td>You</td>
+							</tr>
+							<tr>
+								<td>Mitch Jordan</td>
+								<td>PERSUADED</td>
+								<td>You</td>
+							</tr>
+							<tr>
+								<td>Mitch Jordan</td>
+								<td>INSPIRED</td>
+								<td>You</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 		
 		
-		<script src="static/js/bootstrap.js"></script>
+		<script src="../static/js/bootstrap.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="static/js/customscripts.js"></script>
+		<script src="../static/js/customscripts.js"></script>
 	</body>
 	
 	
