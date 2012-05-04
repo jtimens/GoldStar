@@ -37,6 +37,7 @@ def index():
 @app.route('/main.html')
 def main_route():
 	return render_template('main.html')
+
 db.create_all()
 
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
