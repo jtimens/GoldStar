@@ -30,6 +30,7 @@ class User(db.Model):
 	
 
 @app.route('/index.html')
+@app.route('/')
 def index():
 	return render_template('index.html')
 
