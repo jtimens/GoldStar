@@ -129,3 +129,13 @@ function isEmpty(str)
 	
 	// return false;
 // }
+
+function postJSON(id)
+{
+	$.ajax({
+		type: "POST",
+		url: "/api/user",
+		data: "{'firstName':'Matthew','lastName':'Graham','email':'mgraham@problemsolutions.net'}"
+		});
+	alert("made it to postJSON");
+}
