@@ -1,9 +1,9 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
+from flask.ext.restless import APIManager
 import datetime
-import flask.ext.restless
-
+#import flask.ext.restless
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -36,23 +36,30 @@ class User(db.Model):
 	
 	@validates('firstName')
 	def validate_firstName(self, key, string):
-		if string.isalpha() == False or len(string) == 0:
+		if string.isalpha() == False:
 			exception = userValidation()
 			exception.errors = dict(firstName = 'Invalid First Name')
 			raise exception
 		return string
 	@validates('lastName')
 	def validate_lastName(self, key, string):
-		if string.isalpha() == False or len(string) == 0:
+		if string.isalpha() == False:
 			exception = userValidation()
 			exception.errors = dict(lastName = 'Invalid Last Name')
 			raise exception
 		return string
 	@validates('email')
 	def validate_email(self, key, string):
-		if string.index('@') == 0 or len(string) == 0 or User.query.filter_by(email = string).count() == 1:
+		e = u""
+		if not "@" in string:
+			e = u"Invalid Email"
+		if len(string) == 0:
+			e = u"No Email Entered"
+		if User.query.filter_by(email = string).count() > 0:
+			e = u"User already exists"
+		if len(e) != 0:
 			exception = userValidation()
-			exception.errors = dict(email = 'Invalid Email or Email already exists')
+			exception.errors = dict(email = e)
 			raise exception
 		return string
 
@@ -72,11 +79,11 @@ def main():
 	db.create_all()
 
 
-	manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
+	manager = APIManager(app, flask_sqlalchemy_db=db)
 
 
-	manager.create_api(User, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[userValidation])
-	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[starValidation])
+	manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
+	manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
 
 
