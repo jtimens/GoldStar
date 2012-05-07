@@ -1,4 +1,4 @@
-import String
+import string
 
 User_Error = {'firstName':'Invalid firstName', 
 				'lastName':'Invalid lastName',
