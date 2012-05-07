@@ -18,25 +18,25 @@
 		<div class="container" style="width:100%; padding-left:0px; padding-right:0px;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
-				<form action="main.html" name="beginform" method="GET" >
+				<form action="main.html" name="beginform" method="GET" ONSUBMIT="return checkRequired(this);">
 					<h6 style="text-align:center;"> Please provide some information to us before starting: </h6>
 					<p> 
 						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input type="text" class="input-medium" placeholder="First Name" name="FName" >
+									<input  type="text" class="input-medium" placeholder="First Name" name="FName" maxlength="50" required>
 								</td>
 								
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input type="text" class="input-medium" placeholder="Last Name" name="LName" />
+									<input  type="text" class="input-medium" placeholder="Last Name" name="LName" maxlength="50" required>
 								</td>
 								
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input type="text" class="input-medium" placeholder="Email" name="Email" />
+									<input  type="text" class="input-medium" placeholder="Email" name="Email" maxlength="100" required>
 								</td>
 								
 							</tr>
@@ -52,6 +52,9 @@
 				</form>
 			</div>
 		</div>
-	
+		<script src="../static/js/bootstrap.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="../static/js/customscripts.js"></script>
+		<script src="https://raw.github.com/jprichardson/string.js/master/lib/string.min.js"></script>
 	</body>
 </html>

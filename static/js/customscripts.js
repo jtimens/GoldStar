@@ -94,3 +94,38 @@ function resetView()
 	document.getElementById("give1").style.display = 'none';
 	document.getElementById("tbl1").style.display = 'none';
 }
+function isEmpty(str) 
+{
+	// Check whether string is empty.
+	for (var intLoop = 0; intLoop < str.length; intLoop++)
+	   if (" " != str.charAt(intLoop))
+		  return false;
+	return true;
+}
+
+// function checkRequired(id) 
+// {
+	// alert(id.FName.value);
+	// var validChars = "abcdefghijklmnopqrstuvwxyz";
+	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	
+	// var testfn = id.FName.value;
+	// var testln = id.LName.value;
+	// var teste = id.Email.value;
+	
+	// var test1isValid = false;
+	// var test2isValid = false;
+	// var test3isValid = false;
+	
+	// for (i=0;i<testfn.length;++i)
+	// {
+		// for (j=0; j<validChars.length;++j)
+		// {
+			// if testfn.charAt(i) == validChars.charAt(j)
+				// test1isValid = true;
+			
+		// }
+	// }
+	
+	// return false;
+// }
