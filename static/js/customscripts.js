@@ -132,7 +132,7 @@ function isEmpty(str)
 
 function postJSON(id)
 {
-	var userData = {'firstName':'Matthew','lastName':'Graham','email':'mgraham@problemsolutions.net'};
+	var userData = "{'firstName':'Matthew','lastName':'Graham','email':'mgraham@problemsolutions.net'}";
 	$.ajax({
 		type: "POST",
 		url: "/api/user",
