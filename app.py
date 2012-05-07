@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
-from validation import userValidation, starValidation
 import datetime
 import flask.ext.restless
 
@@ -11,6 +10,11 @@ app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
 db = SQLAlchemy(app)
 
+class userValidation(Exception):
+	pass
+
+class starValidation(Exception):
+	pass
 
 class Star(db.Model):
 
@@ -26,11 +30,31 @@ class Star(db.Model):
 class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
-	firstName = db.Column(db.Unicode(50))
-	lastName = db.Column(db.Unicode(50))
-	email = db.Column(db.Unicode(100))
+	firstName = db.Column(db.Unicode(50), nullable = False)
+	lastName = db.Column(db.Unicode(50), nullable = False)
+	email = db.Column(db.Unicode(100), nullable = False)
 	
-
+	@validates('firstName')
+	def validate_firstName(self, key, string):
+		if string.isalpha() == False or len(string) == 0:
+			exception = userValidation()
+			exception.errors = dict(firstName = 'Invalid First Name')
+			raise exception
+		return string
+	@validates('lastName')
+	def validate_lastName(self, key, string):
+		if string.isalpha() == False or len(string) == 0:
+			exception = userValidation()
+			exception.errors = dict(lastName = 'Invalid Last Name')
+			raise exception
+		return string
+	@validates('email')
+	def validate_email(self, key, string):
+		if string.index('@') == 0 or len(string) == 0 or User.query.filter_by(email = string).count() == 1:
+			exception = userValidation()
+			exception.errors = dict(email = 'Invalid Email or Email already exists')
+			raise exception
+		return string
 
 def main():
 	@app.route('/')
