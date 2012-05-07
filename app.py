@@ -1,9 +1,9 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
+from flask.ext.restless import APIManager
 import datetime
-import flask.ext.restless
-
+#import flask.ext.restless
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -79,7 +79,7 @@ def main():
 	db.create_all()
 
 
-	manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
+	manager = APIManager(app, flask_sqlalchemy_db=db)
 
 
 	manager.create_api(User, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[userValidation])
