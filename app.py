@@ -40,6 +40,7 @@ class User(db.Model):
 			exception.errors = dict(firstName = 'Invalid First Name')
 			raise exception
 		return string
+		
 	@validates('lastName')
 	def validate_lastName(self, key, string):
 		if string.isalpha() == False:
@@ -47,6 +48,7 @@ class User(db.Model):
 			exception.errors = dict(lastName = 'Invalid Last Name')
 			raise exception
 		return string
+
 	@validates('email')
 	def validate_email(self, key, string):
 		e = u""
