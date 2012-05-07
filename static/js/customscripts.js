@@ -159,7 +159,7 @@ function getJSON()
 		console.log(jdata.objects.length);
 		console.log(jdata.objects[0]);
 		for(i=0;i<jdata.objects.length;++i){
-			$(#jsondump).append('First Name: '+jdata.objects[0].firstName+'.');}})
+			$('#jsondump').append('First Name: '+jdata.objects[i].firstName+'.');}})
 }
 
 
