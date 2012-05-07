@@ -155,7 +155,9 @@ function postJSON(id)
 function getJSON()
 {
 	$.getJSON('/api/user', function(jdata){
-		console.log(jdata);})
+		console.log(jdata);
+		console.log(jdata.length);
+		console.log(jdata[0]);})
 }
 
 
