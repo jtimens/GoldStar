@@ -151,3 +151,10 @@ function postJSON(id)
 		
 	alert("made it to postJSON");
 }
+
+function getJSON()
+{
+	$.getJSON('/api/user', function(jdata){
+		for (i=0;i<jdata.length;++i){
+			$('#jsondump').append('<p> First Name: '+jdata[i].firstName+'</p>');}
+}
