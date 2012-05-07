@@ -109,9 +109,9 @@ function isEmpty(str)
 	// var validChars = "abcdefghijklmnopqrstuvwxyz";
 	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
-	var testfn = id.FName.value;
-	var testln = id.LName.value;
-	var teste = id.Email.value;
+	// var testfn = id.FName.value;
+	// var testln = id.LName.value;
+	// var teste = id.Email.value;
 	
 	// var test1isValid = false;
 	// var test2isValid = false;
@@ -132,6 +132,7 @@ function isEmpty(str)
 
 function postJSON(id)
 {
+	alert(id.FName.value);
 	var fn = id.FName.value;
 	var ln = id.LName.value;
 	var em = id.Email.value;
