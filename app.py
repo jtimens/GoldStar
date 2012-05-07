@@ -34,7 +34,7 @@ class User(db.Model):
 
 def main():
 	@app.route('/')
-	def index():
+	def index_route():
 		return render_template('index.html')
 
 	@app.route('/main.html')
@@ -52,7 +52,7 @@ def main():
 
 
 	manager.create_api(User, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[userValidation])
-	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'],validation_exceptions=[starValidation])
+	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[starValidation])
 
 
 
