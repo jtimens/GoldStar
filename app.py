@@ -53,6 +53,12 @@ class User(db.Model):
 		if string.index('@') == 0 or len(string) == 0:
 			exception = userValidation()
 			exception.errors = dict(email = 'Invalid Email')
+			raise exception
+		if User.query.filter_by(email = string).count() == 1:
+			exception = userValidation()
+			exception.errors = dict(email = 'Email already exists')
+			return exception
+		return string
 
 def main():
 	@app.route('/')
