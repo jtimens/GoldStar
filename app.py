@@ -36,14 +36,14 @@ class User(db.Model):
 	
 	@validates('firstName')
 	def validate_firstName(self, key, string):
-		if string.isalpha() == False or len(string) == 0:
+		if string.isalpha() == False:
 			exception = userValidation()
 			exception.errors = dict(firstName = 'Invalid First Name')
 			raise exception
 		return string
 	@validates('lastName')
 	def validate_lastName(self, key, string):
-		if string.isalpha() == False or len(string) == 0:
+		if string.isalpha() == False:
 			exception = userValidation()
 			exception.errors = dict(lastName = 'Invalid Last Name')
 			raise exception
@@ -51,7 +51,7 @@ class User(db.Model):
 	@validates('email')
 	def validate_email(self, key, string):
 		e = u""
-		if string.index('@') == 0:
+		if not "@" in string:
 			e = u"Invalid Email"
 		if len(string) == 0:
 			e = u"No Email Entered"
