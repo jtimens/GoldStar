@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
+from validation import userValidation, starValidation
 import datetime
 import flask.ext.restless
 
@@ -40,14 +41,18 @@ def main():
 	def main_route():
 		return render_template('main.html')
 
+	@app.route('/results.html')
+	def result_route():
+		return render_template('results.html')
+
 	db.create_all()
 
 
 	manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
 
-	manager.create_api(User, methods=['GET', 'POST', 'DELETE'])
-	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
+	manager.create_api(User, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[userValidation])
+	manager.create_api(Star, methods=['GET', 'POST', 'DELETE'],validation_exceptions=[starValidation])
 
 
 
