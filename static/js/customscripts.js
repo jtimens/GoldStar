@@ -135,7 +135,11 @@ function postJSON(id)
 	$.ajax({
 		type: "POST",
 		url: "/api/user",
-		data: "{'firstName':'Matthew','lastName':'Graham','email':'mgraham@problemsolutions.net'}"
+		data: {'firstName':'Matthew','lastName':'Graham','email':'mgraham@problemsolutions.net'}
+		success: function(data){alert(data);},
+        failure: function(errMsg) {
+            alert(errMsg);}
 		});
+		
 	alert("made it to postJSON");
 }
