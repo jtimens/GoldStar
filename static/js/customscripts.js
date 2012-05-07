@@ -131,15 +131,14 @@ function isEmpty(str)
 // }
 
 function postJSON(id)
-{
-	// alert(id.FName.value);
-	// var fn = id.FName.value;
-	// var ln = id.LName.value;
-	// var em = id.Email.value;
-	
-	//var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
-	var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
-	
+{	
+	//alert( $("input[name=FName]").val() );
+	var fn = $("input[name=FName]").val();
+	var ln = $("input[name=LName]").val();
+	var em = $("input[name=Email]").val();
+	alert(fn+ln+em);
+	//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
+	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 	$.ajax({
 		type: "POST",
 		url: "/api/user",
