@@ -109,9 +109,9 @@ function isEmpty(str)
 	// var validChars = "abcdefghijklmnopqrstuvwxyz";
 	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
-	// var testfn = id.FName.value;
-	// var testln = id.LName.value;
-	// var teste = id.Email.value;
+	var testfn = id.FName.value;
+	var testln = id.LName.value;
+	var teste = id.Email.value;
 	
 	// var test1isValid = false;
 	// var test2isValid = false;
@@ -132,13 +132,20 @@ function isEmpty(str)
 
 function postJSON(id)
 {
+	var fn = id.FName.value;
+	var ln = id.LName.value;
+	var em = id.Email.value;
+	
+	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+	
 	$.ajax({
 		type: "POST",
 		url: "/api/user",
-		data: {'firstName':'Matthew','lastName':'Graham','email':'mgraham@problemsolutions.net'}
-		success: function(data){alert(data);},
-        failure: function(errMsg) {
-            alert(errMsg);}
+		data: userData,
+		contentType: "application/json",
+		dataType: "json",
+		complete: function(data){
+			console.log(data);}
 		});
 		
 	alert("made it to postJSON");
