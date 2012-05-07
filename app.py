@@ -50,9 +50,16 @@ class User(db.Model):
 		return string
 	@validates('email')
 	def validate_email(self, key, string):
-		if string.index('@') == 0 or len(string) == 0 or User.query.filter_by(email = string).count() == 1:
+		e = u""
+		if string.index('@') == 0:
+			e = u"Invalid Email"
+		if len(string) == 0:
+			e = u"No Email Entered"
+		if User.query.filter_by(email = string).count() > 0:
+			e = u"User already exists"
+		if len(e) != 0:
 			exception = userValidation()
-			exception.errors = dict(email = 'Invalid Email or Email already exists')
+			exception.errors = dict(email = e)
 			raise exception
 		return string
 
