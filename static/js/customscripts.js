@@ -84,7 +84,6 @@ function giveGoldStar(id)
 		document.getElementById("give3").style.display = 'block';
 	if (e.id == "innergive3")
 	{
-		alert("Got to Inner Give 3.  Redirect to results page.");
 		window.location = "results.html";
 	}
 }
