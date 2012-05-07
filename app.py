@@ -3,7 +3,6 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from flask.ext.restless import APIManager
 import datetime
-#import flask.ext.restless
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
