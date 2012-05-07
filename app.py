@@ -4,16 +4,20 @@ from sqlalchemy.orm import validates
 from flask.ext.restless import APIManager
 import datetime
 
+# Create the app for Flask
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
 db = SQLAlchemy(app)
 
+# User Table Exception and Validation handling
 class userValidation(Exception):
 	pass
 
+# Star Table Exception and Validation handling
 class starValidation(Exception):
 	pass
+
 
 class Star(db.Model):
 
@@ -33,6 +37,9 @@ class User(db.Model):
 	lastName = db.Column(db.Unicode(50), nullable = False)
 	email = db.Column(db.Unicode(100), nullable = False)
 	
+	#Validation defs which validate 1 parameter of the table at a time
+
+	#Validates the First Name
 	@validates('firstName')
 	def validate_firstName(self, key, string):
 		if string.isalpha() == False:
@@ -40,7 +47,8 @@ class User(db.Model):
 			exception.errors = dict(firstName = 'Invalid First Name')
 			raise exception
 		return string
-		
+
+	#Validates the Last Name
 	@validates('lastName')
 	def validate_lastName(self, key, string):
 		if string.isalpha() == False:
@@ -49,6 +57,7 @@ class User(db.Model):
 			raise exception
 		return string
 
+	#Validates the Email
 	@validates('email')
 	def validate_email(self, key, string):
 		e = u""
