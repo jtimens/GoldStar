@@ -157,7 +157,9 @@ function getJSON()
 	$.getJSON('/api/user', function(jdata){
 		console.log(jdata);
 		console.log(jdata.objects.length);
-		console.log(jdata.objects[0]);})
+		console.log(jdata.objects[0]);
+		for(i=0;i<jdata.objects.length;++i){
+			$(#jsondump).append('First Name: '+jdata.objects[0].firstName+'.');}})
 }
 
 
