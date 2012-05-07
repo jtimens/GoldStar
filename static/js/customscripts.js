@@ -109,9 +109,9 @@ function isEmpty(str)
 	// var validChars = "abcdefghijklmnopqrstuvwxyz";
 	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
-	var testfn = id.FName.value;
-	var testln = id.LName.value;
-	var teste = id.Email.value;
+	// var testfn = id.FName.value;
+	// var testln = id.LName.value;
+	// var teste = id.Email.value;
 	
 	// var test1isValid = false;
 	// var test2isValid = false;
@@ -131,13 +131,14 @@ function isEmpty(str)
 // }
 
 function postJSON(id)
-{
-	var fn = id.FName.value;
-	var ln = id.LName.value;
-	var em = id.Email.value;
-	
+{	
+	//alert( $("input[name=FName]").val() );
+	var fn = $("input[name=FName]").val();
+	var ln = $("input[name=LName]").val();
+	var em = $("input[name=Email]").val();
+	alert(fn+ln+em);
+	//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
 	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
-	
 	$.ajax({
 		type: "POST",
 		url: "/api/user",
