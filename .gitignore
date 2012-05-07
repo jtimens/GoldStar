@@ -2,3 +2,4 @@ nenv/
 env/
 tmp/
 *.pyc
+*.json
