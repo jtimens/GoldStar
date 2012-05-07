@@ -132,12 +132,13 @@ function isEmpty(str)
 
 function postJSON(id)
 {
-	alert(id.FName.value);
-	var fn = id.FName.value;
-	var ln = id.LName.value;
-	var em = id.Email.value;
+	// alert(id.FName.value);
+	// var fn = id.FName.value;
+	// var ln = id.LName.value;
+	// var em = id.Email.value;
 	
-	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+	//var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+	var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
 	
 	$.ajax({
 		type: "POST",
