@@ -110,7 +110,7 @@ class User(db.Model):
 	#Validates the Email
 	@validates('email')
 	def validate_email(self, key, string):
-		e = u""
+		e = ""
 		if not "@" in string:
 			e = u"Invalid Email"
 		elif len(string) == 0:

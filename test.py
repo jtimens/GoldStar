@@ -13,15 +13,12 @@ class testdb(unittest.TestCase):
 			u1.firstName=u"John"
 			u1.lastName=u"Smith"
 			u1.email=u"jsmith@gmail.com"
-			u2 = User()
-			u2.firstName = u"Jay"
-			u2.lastName = u"Ostinowsky"
-			u2.email = u"dukebdfan@comcast.net"
-			u3 = User()
-			u3.firstName=u"Walt"
-			u3.lastName=u"Grata"
-			u3.email=u"wegrata@gmail.com"
+			u2 = User(firstName = u"Jay", lastName = u"Ostinowsky", email = u"dukebdfan@comcast.net")
+			u3 = User(firstName=u"Walt", lastName=u"Grata", email=u"wegrata@gmail.com")
 			db.session.add(u)
+			db.session.commit()
+			db.session.flush()
+			print User.query.filter_by(email = u"wegrata@gmail.com").count() > 0
 			db.session.add(u3)
 			db.session.add(u1)
 			db.session.add(u2)
@@ -72,10 +69,12 @@ class testdb(unittest.TestCase):
 			B = User.query.get(2)
 			C = User.query.get(3)
 			D = User.query.get(4)
+			print User.query.filter_by(email = u"wegrata@gmail.com").count() > 0
 			print A.firstName
 			print B.firstName
 			print C.firstName
 			print D.firstName
+			print User.query.all()
 		except Exception as ex:
 			print ex.message
 
