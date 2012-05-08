@@ -11,7 +11,7 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
-function login(id)
+function login()
 {
 	
 	var em = document.forms["loginform"]["Email"].value;
