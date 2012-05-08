@@ -11,6 +11,18 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
+function toggleLoginView(id)
+{
+	document.getElementById("index1").style.display = 'none';
+	document.getElementById("index2").style.display = 'none';
+	
+	e = document.getElementById(id).id;
+	
+	if (e == "login1")
+		document.getElementById("index2").style.display = 'block';
+	if (e == "login2")
+		document.getElementById("index1").style.display = 'block';
+}
 function toggleView(id)
 {
 	document.getElementById("gold1").style.display = 'none';

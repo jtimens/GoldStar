@@ -10,12 +10,12 @@
 			<div class="navbar-inner" style="width:100%; padding-left:0px; padding-right:0px;">
 				<div class="container" style="width:100%; padding-left:0px; padding-right:0px;">
 					<div style="text-align:center; width:100%;padding-left:0px; padding-right:0px;">
-							<img src="../static/img/goldstar.png" width="20" height="20" /> <button disabled="disabled" class="btn btn-large btn-inverse">Gold Star</button> <img src="../static/img/goldstar.png" width="20" height="20" />
+							<img src="../static/img/goldstar.png" width="20" height="20" /> <button id="login1" class="btn btn-large btn-inverse" onclick="toggleLoginView(id.this);">Login</button> <button id="login2" class="btn btn-large btn-inverse" onclick="toggleLoginView(id.this);">Sign Up</button><img src="../static/img/goldstar.png" width="20" height="20" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container" style="width:100%; padding-left:0px; padding-right:0px;">
+		<div id="index1" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:none;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
 				<form id="form1" action="main.html" name="beginform" method="GET" onsubmit="postJSON(id.this)">
@@ -36,7 +36,7 @@
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input  type="text" class="input-medium" placeholder="Email" name="Email" maxlength="100" required>
+									<input  type="email" class="input-medium" placeholder="Email" name="Email" maxlength="100" required>
 								</td>
 								
 							</tr>
@@ -44,6 +44,29 @@
 								
 								<td style="text-align:center;">
 									<input type="submit" class="btn btn-info" value="Begin" />
+								</td>
+							</tr>
+						</table>
+					</p>
+					
+				</form>
+			</div>
+		</div>
+		<div id="index2" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:block;">
+			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
+				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
+				<form id="form2" action="main.html" name="beginform" method="GET" onsubmit="login(this.id)">
+					<h6 style="text-align:center;"> Please use your email address to log in: </h6>
+					<p> 
+						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
+							<tr>
+								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
+									<input  type="email" class="input-medium" placeholder="Email" name="Email" maxlength="100" required>
+								</td>	
+							</tr>
+							<tr>
+								<td style="text-align:center;">
+									<input type="submit" class="btn btn-info" value="Log In" />
 								</td>
 							</tr>
 						</table>
