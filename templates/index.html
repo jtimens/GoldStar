@@ -18,7 +18,7 @@
 		<div id="index1" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:none;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
-				<form id="form1" action="main.html" name="beginform" method="GET" onsubmit="postJSON(id.this)">
+				<form id="form1" action="main.html" name="beginform" method="GET" onsubmit="return postJSON(id.this)">
 					<h6 style="text-align:center;"> Please provide some information to us before starting: </h6>
 					<p> 
 						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
@@ -55,7 +55,7 @@
 		<div id="index2" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:block;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
-				<form id="form2" action="main.html" name="beginform" method="GET" onsubmit="login(this.id)">
+				<form id="form2" action="main.html" name="loginform" method="GET" onsubmit="return login(this.id)">
 					<h6 style="text-align:center;"> Please use your email address to log in: </h6>
 					<p> 
 						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
