@@ -113,9 +113,9 @@ class User(db.Model):
 		e = u""
 		if not "@" in string:
 			e = u"Invalid Email"
-		if len(string) == 0:
+		elif len(string) == 0:
 			e = u"No Email Entered"
-		if User.query.filter_by(email = unicode(string)).count() > 0:
+		elif User.query.filter_by(email = unicode(string)).count() > 0:
 			e = u"User already exists"
 		if len(e) != 0:
 			exception = userValidation()
