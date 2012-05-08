@@ -1,4 +1,3 @@
-
  function redirect(id)
 {
 	var page;
@@ -104,41 +103,11 @@ function isEmpty(str)
 	return true;
 }
 
-// function checkRequired(id) 
-// {
-	// alert(id.FName.value);
-	// var validChars = "abcdefghijklmnopqrstuvwxyz";
-	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	
-	// var testfn = id.FName.value;
-	// var testln = id.LName.value;
-	// var teste = id.Email.value;
-	
-	// var test1isValid = false;
-	// var test2isValid = false;
-	// var test3isValid = false;
-	
-	// for (i=0;i<testfn.length;++i)
-	// {
-		// for (j=0; j<validChars.length;++j)
-		// {
-			// if testfn.charAt(i) == validChars.charAt(j)
-				// test1isValid = true;
-			
-		// }
-	// }
-	
-	// return false;
-// }
-
 function postJSON(id)
 {	
-	//alert( $("input[name=FName]").val() );
 	var fn = $("input[name=FName]").val();
 	var ln = $("input[name=LName]").val();
 	var em = $("input[name=Email]").val();
-	alert(fn+ln+em);
-	//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
 	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 	$.ajax({
 		type: "POST",
@@ -160,7 +129,10 @@ function getJSON()
 		console.log(jdata.objects.length);
 		console.log(jdata.objects[0]);
 		for(i=0;i<jdata.objects.length;++i){
-			$('#jsondump').append('First Name: '+jdata.objects[i].firstName+'.');}})
+			$('#jsondump').append('First Name: '+jdata.objects[i].firstName+'.<br />');
+			$('#jsondump').append('Last Name: '+jdata.objects[i].lastName+'.<br />');
+			$('#jsondump').append('Email: '+jdata.objects[i].email+'.<br />');
+			}})
 }
 function limitText(limitField, limitNum) {
 	e = document.getElementById(limitField);
