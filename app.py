@@ -60,23 +60,25 @@ class Star(db.Model):
 	@validates('owner_id')
 	def validate_owner_id(self, key, string):
 		e=""
+		string = str(string)
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
 			exception = starValidation()
 			exception.errors = dict(owner_id = e)
 			return exception
-		return string
+		return int(string)
 
 	#Validates the issuer ID
 	@validates('issuer_id')
 	def validate_issuer_id(self, key, string):
 		e=""
+		string = str(string)
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
 			return exception
-		return string
+		return int(string)
 
 class User(db.Model):
 
@@ -113,7 +115,7 @@ class User(db.Model):
 			e = u"Invalid Email"
 		if len(string) == 0:
 			e = u"No Email Entered"
-		if User.query.filter_by(email = string).count() > 0:
+		if User.query.filter_by(email = unicode(string)).count() > 0:
 			e = u"User already exists"
 		if len(e) != 0:
 			exception = userValidation()
