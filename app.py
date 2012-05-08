@@ -148,7 +148,6 @@ def main():
 	#Creates the API
 	manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 	manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
-<<<<<<< HEAD
 
 
 
@@ -158,5 +157,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-=======
->>>>>>> 538f307bd9c0abc7c4158c37e133533f3ec241a5
