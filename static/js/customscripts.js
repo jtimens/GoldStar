@@ -16,10 +16,10 @@ function login()
 	var rv;
 	var em = document.forms["loginform"]["Email"].value;
 	var emails=new Array();
-	$.getJSON('/api/user', function(jdata)
-	{
-		for(i=0;i<jdata.objects.length;++i)
+	$.getJSON('/api/user', function(jdata){
+		for(i=0;i<jdata.objects.length;++i){
 			emails[i]=jdata.objects[i].email;
+		}
 	})
 	alert(emails[2]);
 	
