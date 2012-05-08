@@ -1,4 +1,5 @@
-function redirect(id)
+
+ function redirect(id)
 {
 	var page;
 	page = document.getElementById(id).id;
@@ -161,10 +162,11 @@ function getJSON()
 		for(i=0;i<jdata.objects.length;++i){
 			$('#jsondump').append('First Name: '+jdata.objects[i].firstName+'.');}})
 }
-
-
-
-
-
+function limitText(limitField, limitNum) {
+	e = document.getElementById(limitField);
+	if (e.value.length > limitNum) {
+		e.value = e.value.substring(0, limitNum);
+	}
+}
 
 
