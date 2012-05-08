@@ -133,7 +133,6 @@ function getJSON(num)
 		{
 			for(i=0;i<jdata.objects.length;++i)
 			{
-				console.log(jdata.objects[i].id);
 				$('#selectuser').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
