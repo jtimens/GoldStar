@@ -13,6 +13,7 @@ function redirect(id)
 }
 function login(id)
 {
+	var rv;
 	var em = document.forms["loginform"]["Email"].value;
 	$.getJSON('/api/user', function(jdata)
 	{
@@ -21,13 +22,15 @@ function login(id)
 			if (em == jdata.objects[i].email)
 			{
 				alert("Match found!");
-				return true;
+				rv = true;
 			}
 				
 		}
 		alert("No match found");
-		return false;
+		rv = false;
 	})
+	alert(rv);
+	return rv;
 }
 function toggleLoginView(id)
 {
