@@ -19,8 +19,13 @@ function login(id)
 		for(i=0;i<jdata.objects.length;++i)
 		{
 			if (em == jdata.objects[i].email)
+			{
+				alert("Match found!");
 				return true;
+			}
+				
 		}
+		alert("No match found");
 		return false;
 	})
 }
