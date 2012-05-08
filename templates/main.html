@@ -6,7 +6,7 @@
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
-	<body>
+	<body onload="getJSON(0)">
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
@@ -31,12 +31,13 @@
 						<div id="give1" style="display:none;">
 							<h6>CHOOSE A PERSON TO GIVE A STAR TO</h6>
 							<p>
-									<input type="text" class="input-medium search-query" placeholder="Search">
+									<select id="selectuser" size="6">
+									</select>
 									<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>
 							</p>
 						</div>
 						<div id="give2" style="display:none;">
-							<h6>CHOOSE WHAT THE PERSON DIDs</h6>
+							<h6>CHOOSE WHAT THE PERSON DID</h6>
 							<p> 
 								<select>
 									<option id="sel0" value="influenced" selected>Select One</option>
@@ -53,7 +54,7 @@
 						<div id="give3" style="display:none;">
 							<h6>CHOOSE TO COMMENT (120 character limit)</h6>
 							<p>
-								<textarea id="limitedtextarea" OnKeyPress="limitText(this.id, 120);" onKeyUp="limitText(this.id, 120);" placeholder="Type Here..." style="width:100%;height:65px;resize:none" ></textarea><br />
+								<textarea placeholder="Type Here..." style="width:100%;height:65px;resize:none"></textarea><br />
 								<button id="innergive3" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Give Star</button> 
 								<!-- <button id="innergive3" class="btn btn-info btn-small" ><a style="color:white;text-decoration:none;" href="results.html">Give Star</a></button> -->
 							</p>
