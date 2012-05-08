@@ -4,18 +4,15 @@ Flask-SQLAlchemy==0.16
 Jinja2==2.6
 SQLAlchemy==0.7.6
 Werkzeug==0.8.3
-<<<<<<< HEAD
 certifi==0.0.8
 chardet==1.0.1
 distribute==0.6.19
 oauthlib==0.1.2
 pycrypto==2.5
-=======
 argparse==1.2.1
 distribute==0.6.19
 gunicorn==0.14.2
 psycopg2==2.4.5
->>>>>>> 538f307bd9c0abc7c4158c37e133533f3ec241a5
 python-dateutil==1.5
 requests==0.12.0
 wsgiref==0.1.2
