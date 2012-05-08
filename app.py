@@ -7,7 +7,7 @@ import datetime
 # Create the app for Flask
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sql'
 db = SQLAlchemy(app)
 
 # User Table Exception and Validation handling
@@ -94,12 +94,3 @@ def main():
 
 	manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 	manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
-
-
-
-
-	# start the flask loop
-	app.run('0.0.0.0')
-
-if __name__ == "__main__":
-	main()
