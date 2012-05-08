@@ -103,33 +103,6 @@ function isEmpty(str)
 	return true;
 }
 
-// function checkRequired(id) 
-// {
-	// alert(id.FName.value);
-	// var validChars = "abcdefghijklmnopqrstuvwxyz";
-	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	
-	// var testfn = id.FName.value;
-	// var testln = id.LName.value;
-	// var teste = id.Email.value;
-	
-	// var test1isValid = false;
-	// var test2isValid = false;
-	// var test3isValid = false;
-	
-	// for (i=0;i<testfn.length;++i)
-	// {
-		// for (j=0; j<validChars.length;++j)
-		// {
-			// if testfn.charAt(i) == validChars.charAt(j)
-				// test1isValid = true;
-			
-		// }
-	// }
-	
-	// return false;
-// }
-
 function postJSON(id)
 {	
 	//alert( $("input[name=FName]").val() );
@@ -160,6 +133,7 @@ function getJSON(num)
 		{
 			for(i=0;i<jdata.objects.length;++i)
 			{
+				console.log(jdata.objects[i].id);
 				$('#selectuser').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
