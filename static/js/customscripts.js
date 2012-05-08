@@ -133,7 +133,7 @@ function getJSON(num)
 		{
 			for(i=0;i<jdata.objects.length;++i)
 			{
-				$('#selectuser').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
+				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
 	}
@@ -147,7 +147,12 @@ function getJSON(num)
 			}
 		})
 	}
-	
+}
+function limitText(limitField, limitNum)
+{
+	e = document.getElementById(limitField);
+	if (e.value.length > limitNum)
+		e.value = e.value.substring(0, limitNum);
 }
 
 
