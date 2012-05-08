@@ -11,16 +11,29 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
+function login(id)
+{
+	var em = $("input[name=Email]").val();
+	$.getJSON('/api/user', function(jdata)
+	{
+		for(i=0;i<jdata.objects.length;++i)
+		{
+			if (em == jdata.objects[i].email)
+				return true;
+		}
+		return false;
+	})
+}
 function toggleLoginView(id)
 {
 	document.getElementById("index1").style.display = 'none';
 	document.getElementById("index2").style.display = 'none';
 	
-	e = document.getElementById(id).id;
+	e = document.getElementById(id);
 	
-	if (e == "login1")
+	if (e.id == "login1")
 		document.getElementById("index2").style.display = 'block';
-	if (e == "login2")
+	if (e.id == "login2")
 		document.getElementById("index1").style.display = 'block';
 }
 function toggleView(id)
@@ -135,6 +148,7 @@ function postJSON(id)
 		});
 		
 	alert("made it to postJSON");
+	return true;
 }
 
 function getJSON(num)

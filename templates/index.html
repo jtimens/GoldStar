@@ -10,7 +10,7 @@
 			<div class="navbar-inner" style="width:100%; padding-left:0px; padding-right:0px;">
 				<div class="container" style="width:100%; padding-left:0px; padding-right:0px;">
 					<div style="text-align:center; width:100%;padding-left:0px; padding-right:0px;">
-							<img src="../static/img/goldstar.png" width="20" height="20" /> <button id="login1" class="btn btn-large btn-inverse" onclick="toggleLoginView(id.this);">Login</button> <button id="login2" class="btn btn-large btn-inverse" onclick="toggleLoginView(id.this);">Sign Up</button><img src="../static/img/goldstar.png" width="20" height="20" />
+							<img src="../static/img/goldstar.png" width="20" height="20" /> <button id="login1" class="btn btn-large btn-inverse" onclick="toggleLoginView(this.id)">Login</button> <button id="login2" class="btn btn-large btn-inverse" onclick="toggleLoginView(this.id)">Sign Up</button><img src="../static/img/goldstar.png" width="20" height="20" />
 					</div>
 				</div>
 			</div>
@@ -55,13 +55,13 @@
 		<div id="index2" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:block;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
-				<form id="form2" action="main.html" name="beginform" method="GET" onsubmit="login(this.id)">
+				<form id="form2" action="main.html" name="beginform" method="GET" onsubmit="return login(this.id)">
 					<h6 style="text-align:center;"> Please use your email address to log in: </h6>
 					<p> 
 						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input  type="email" class="input-medium" placeholder="Email" name="Email" maxlength="100" required>
+									<input type="email" class="input-medium" placeholder="Email" name="Email" maxlength="100" required>
 								</td>	
 							</tr>
 							<tr>
@@ -71,6 +71,7 @@
 							</tr>
 						</table>
 					</p>
+					<p style="text-align:center;">Not a user?  No problem! Just click the Sign Up button on the top of the screen to set up an account.</p>
 					
 				</form>
 			</div>
