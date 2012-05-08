@@ -19,18 +19,24 @@ function login()
 	{
 		var rv;
 		for(i=0;i<jdata.objects.length;++i)
-		{
 			if (em == jdata.objects[i].email)
 			{
-				alert("Match found!");
 				rv = true;
+				break;
 			}
 				
+		if (rv == true)
+		{
+			alert("Match found!");
+			return rv;
 		}
-		alert("No match found");
-		rv = false;
-		alert(rv);
-		return rv;
+		else
+		{
+			alert("No match found");
+			rv = false;
+			return rv;
+		}
+		
 	})
 	
 }
