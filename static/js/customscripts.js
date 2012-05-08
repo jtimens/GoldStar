@@ -21,9 +21,9 @@ function login()
 			emails[i]=jdata.objects[i].email;
 		}
 	})
-	for (i=0;i<emails.length;++i)
+	for (j=0;i<emails.length;++j)
 	{
-		if (em == emails[i])
+		if (em == emails[j])
 		{
 			rv = true;
 			return rv;
