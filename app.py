@@ -30,6 +30,54 @@ class Star(db.Model):
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 
+	#Validation defs which validate 1 parameter of the table at a time
+
+	#Validates the Description
+	@validates('description')
+	def validate_description(self, key, string):
+		e = ""
+		if len(string) > 120:
+			e = "Description Length is too long"
+		if len(e) > 0:
+			exception = starValidation();
+			exception.errors = dict(description = e)
+			return exception
+		return string
+
+	#Validates the Category
+	@validates('category')
+	def validate_category(self, key, string):
+		e = ""
+		if len(string) > 100:
+			e = "Category Length is too long"
+		if len(e) > 0:
+			exception = starValidation()
+			exception.errors = dict(category = e)
+			return exception
+		return string
+
+	#Validates the owner ID
+	@validates('owner_id')
+	def validate_owner_id(self, key, string):
+		e=""
+		if not string.isdigit():
+			e = "Digits are only allowed for the ID"
+			exception = starValidation()
+			exception.errors = dict(owner_id = e)
+			return exception
+		return string
+
+	#Validates the issuer ID
+	@validates('issuer_id')
+	def validate_issuer_id(self, key, string):
+		e=""
+		if not string.isdigit():
+			e = "Digits are only allowed for the ID"
+			exception = starValidation()
+			exception.errors = dict(issuer_id = e)
+			return exception
+		return string
+
 class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
@@ -74,31 +122,35 @@ class User(db.Model):
 		return string
 
 def main():
+	#The main index of the Gold Star App
 	@app.route('/')
 	def index_route():
 		return render_template('index.html')
 
+	#Displays the entire Gold Star App
 	@app.route('/main.html')
 	def main_route():
 		return render_template('main.html')
 
+	#Redirect which has a lot of server requests
 	@app.route('/results.html')
 	def result_route():
 		return render_template('results.html')
 
+	#Initialize the Database
 	db.create_all()
 
-
+	#Creates an API manager
 	manager = APIManager(app, flask_sqlalchemy_db=db)
 
-
+	#Creates the API
 	manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 	manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
 
 
 
-	# start the flask loop
+	#Start the flask loop
 	app.run('0.0.0.0')
 
 if __name__ == "__main__":
