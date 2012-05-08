@@ -21,7 +21,16 @@ function login()
 			emails[i]=jdata.objects[i].email;
 		}
 	})
-	alert(emails[2]);
+	for (i=0;i<emails.length;++i)
+	{
+		if (em == emails[i])
+		{
+			rv = true;
+			return rv;
+		}
+	}
+	rv = false;
+	return rv;
 	
 }
 function toggleLoginView(id)
