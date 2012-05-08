@@ -29,6 +29,7 @@ function login()
 			return rv;
 		}
 	}
+	alert("Email Not found.  Please try again.");
 	rv = false;
 	return rv;
 	
