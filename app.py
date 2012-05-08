@@ -123,35 +123,35 @@ class User(db.Model):
 			raise exception
 		return string
 
+
+#The main index of the Gold Star App
+@app.route('/')
+@app.route('/index.html')
+def index_route():
+	return render_template('index.html')
+
+#Displays the entire Gold Star App
+@app.route('/main.html')
+def main_route():
+	return render_template('main.html')
+
+#Redirect which has a lot of server requests
+@app.route('/results.html')
+def result_route():
+	return render_template('results.html')
+
+#Initialize the Database
+db.create_all()
+
+#Creates an API manager
+manager = APIManager(app, flask_sqlalchemy_db=db)
+
+#Creates the API
+manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
+manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
+
+
 def main():
-	#The main index of the Gold Star App
-	@app.route('/')
-	def index_route():
-		return render_template('index.html')
-
-	#Displays the entire Gold Star App
-	@app.route('/main.html')
-	def main_route():
-		return render_template('main.html')
-
-	#Redirect which has a lot of server requests
-	@app.route('/results.html')
-	def result_route():
-		return render_template('results.html')
-
-	#Initialize the Database
-	db.create_all()
-
-	#Creates an API manager
-	manager = APIManager(app, flask_sqlalchemy_db=db)
-
-	#Creates the API
-	manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
-	manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
-
-
-
-
 	#Start the flask loop
 	app.run('0.0.0.0')
 
