@@ -224,9 +224,14 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{
+			i = 0;
 			for(i=0;i<jdata.objects.length;++i)
 			{
-				$('#jsondump').append('First Name: '+jdata.objects[i].firstName+'.');
+				if (sessionStorage.userID == jdata.objects[i].id)
+				{
+					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
+					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
+				}
 			}
 		})
 	}
