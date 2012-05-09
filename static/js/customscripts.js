@@ -185,7 +185,13 @@ function postJSON(id, num)
 	}
 	else if (num == 1)
 	{
-		alert("POST TO STAR API BRAH.  DO IT...\b\b\b\b\b\b\b\b\b\b\b\b\b DO IT.");
+		var e = document.getElementById("select1");
+		var e1 = e.options[e.selectedIndex].value;
+		e = document.getElementById("select2");
+		var e2 = e.options[e.selectedIndex].value;
+		var e3 = document.getElementById("select3").value;
+		var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+		alert(userData);
 	}
 }
 
