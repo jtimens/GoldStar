@@ -212,9 +212,9 @@ function limitText(limitField, limitNum)
 	if (e.value.length > limitNum)
 		e.value = e.value.substring(0, limitNum);
 }
-function showselect()
+function showselect(id)
 {
-	var e = document.getElementById("select1");
+	var e = document.getElementById(id);
 	alert(e.options[e.selectedIndex].value);
 }
 
