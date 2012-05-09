@@ -7,7 +7,7 @@ function canUseStorage()
 	}
 	else
 	{
-		alert("Your browser does not support local storage.  Update your browser or stop using IE.");
+		alert("Your browser does not support local storage.");
 		return false;
 	}
 }
@@ -44,7 +44,6 @@ function login()
 			}
 			if(rv)
 			{
-				alert((sessionStorage.userID));
 				window.location = "main.html";
 			}
 				
@@ -54,7 +53,7 @@ function login()
 	}
 	else
 	{
-		alert("Browser does not support local storage.");
+		alert("Update your browser to use this site.");
 	}
 	
 }
