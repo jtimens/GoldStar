@@ -18,7 +18,7 @@ class userValidation(Exception):
 class starValidation(Exception):
 	pass
 
-
+#Star Table that stores Star information between two users
 class Star(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
@@ -41,7 +41,7 @@ class Star(db.Model):
 		if len(e) > 0:
 			exception = starValidation();
 			exception.errors = dict(description = e)
-			return exception
+			raise exception
 		return string
 
 	#Validates the Category
@@ -53,7 +53,7 @@ class Star(db.Model):
 		if len(e) > 0:
 			exception = starValidation()
 			exception.errors = dict(category = e)
-			return exception
+			raise exception
 		return string
 
 	#Validates the owner ID
@@ -63,9 +63,12 @@ class Star(db.Model):
 		string = str(string)
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
+		if str(self.issuer_id) == string:
+			e = "Can't give yourself a star"
+		if len(e):
 			exception = starValidation()
 			exception.errors = dict(owner_id = e)
-			return exception
+			raise exception
 		return int(string)
 
 	#Validates the issuer ID
@@ -75,11 +78,13 @@ class Star(db.Model):
 		string = str(string)
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
+		if len(e):
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
-			return exception
+			raise exception
 		return int(string)
 
+#User Table which stores user information and links to stars
 class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
@@ -92,7 +97,7 @@ class User(db.Model):
 	#Validates the First Name
 	@validates('firstName')
 	def validate_firstName(self, key, string):
-		if string.isalpha() == False:
+		if not string.isalpha() or not len(string):
 			exception = userValidation()
 			exception.errors = dict(firstName = 'Invalid First Name')
 			raise exception
@@ -101,7 +106,7 @@ class User(db.Model):
 	#Validates the Last Name
 	@validates('lastName')
 	def validate_lastName(self, key, string):
-		if string.isalpha() == False:
+		if not string.isalpha() or not len(string):
 			exception = userValidation()
 			exception.errors = dict(lastName = 'Invalid Last Name')
 			raise exception
@@ -112,6 +117,8 @@ class User(db.Model):
 	def validate_email(self, key, string):
 		e = ""
 		if not "@" in string:
+			e = u"Invalid Email"
+		if not "." in string:
 			e = u"Invalid Email"
 		elif len(string) == 0:
 			e = u"No Email Entered"
