@@ -56,6 +56,12 @@ function login()
 	}
 	
 }
+function userLogout()
+{
+	alert(sessionStorage.length);
+	sessionStorage.clear();
+	alert(sessionStorage.length);
+}
 function toggleLoginView(id)
 {
 	document.getElementById("index1").style.display = 'none';
