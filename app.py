@@ -7,7 +7,7 @@ import datetime
 # Create the app for Flask
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sql'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://zoubpmfsdtxwoq:zoubpmfsdtxwoq@ec2-23-23-234-187.compute-1.amazonaws.com/resource44881'
 db = SQLAlchemy(app)
 
 # User Table Exception and Validation handling
