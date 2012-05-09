@@ -61,8 +61,12 @@ class Star(db.Model):
 	def validate_owner_id(self, key, string):
 		e=""
 		string = str(string)
+		print self.issuer_id
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
+		if str(self.issuer_id) == string:
+			e = "Can't give yourself a star"
+		if len(e):
 			exception = starValidation()
 			exception.errors = dict(owner_id = e)
 			return exception
@@ -75,6 +79,7 @@ class Star(db.Model):
 		string = str(string)
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
+		if len(e):
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
 			return exception

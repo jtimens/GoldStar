@@ -62,7 +62,12 @@ class testdb(unittest.TestCase):
 		user20 = User.query.filter_by(email = u"UserT@gmail.com").one()
 		print user2.issued
 		print user20.stars
-
+		try:
+			s2 = Star(description = u"This is a star from 2 to 2", category = u"INFLUENCED", issuer_id = "2", owner_id = "2")
+			db.session.add(s2)
+			db.session.commit()
+		except Exception as ex:
+			print ex.message
 
 
 
