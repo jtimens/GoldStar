@@ -214,7 +214,7 @@ function limitText(limitField, limitNum)
 }
 function showselect(id)
 {
-	alert(id.value);
+	alert(id.options[id.selectedIndex].value);
 }
 
 
