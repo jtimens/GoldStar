@@ -41,7 +41,7 @@ class Star(db.Model):
 		if len(e) > 0:
 			exception = starValidation();
 			exception.errors = dict(description = e)
-			return exception
+			raise exception
 		return string
 
 	#Validates the Category
@@ -53,7 +53,7 @@ class Star(db.Model):
 		if len(e) > 0:
 			exception = starValidation()
 			exception.errors = dict(category = e)
-			return exception
+			raise exception
 		return string
 
 	#Validates the owner ID
@@ -61,7 +61,6 @@ class Star(db.Model):
 	def validate_owner_id(self, key, string):
 		e=""
 		string = str(string)
-		print self.issuer_id
 		if not string.isdigit():
 			e = "Digits are only allowed for the ID"
 		if str(self.issuer_id) == string:
@@ -69,7 +68,7 @@ class Star(db.Model):
 		if len(e):
 			exception = starValidation()
 			exception.errors = dict(owner_id = e)
-			return exception
+			raise exception
 		return int(string)
 
 	#Validates the issuer ID
@@ -82,7 +81,7 @@ class Star(db.Model):
 		if len(e):
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
-			return exception
+			raise exception
 		return int(string)
 
 #User Table which stores user information and links to stars
