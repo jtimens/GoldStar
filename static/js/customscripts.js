@@ -160,27 +160,46 @@ function isEmpty(str)
 	return true;
 }
 
-function postJSON(id)
-{	
-	//alert( $("input[name=FName]").val() );
-	var fn = $("input[name=FName]").val();
-	var ln = $("input[name=LName]").val();
-	var em = $("input[name=Email]").val();
-	alert(fn+ln+em);
-	//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
-	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
-	$.ajax({
-		type: "POST",
-		url: "/api/user",
-		data: userData,
-		contentType: "application/json",
-		dataType: "json",
-		complete: function(data){
-			console.log(data);}
-		});
-		
-	alert("made it to postJSON");
-	return true;
+function postJSON(id, num)
+{
+	if (num == 0)
+	{
+		//alert( $("input[name=FName]").val() );
+		var fn = $("input[name=FName]").val();
+		var ln = $("input[name=LName]").val();
+		var em = $("input[name=Email]").val();
+		alert(fn+ln+em);
+		//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
+		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		$.ajax({
+			type: "POST",
+			url: "/api/user",
+			data: userData,
+			contentType: "application/json",
+			dataType: "json",
+			complete: function(data){}
+			});
+			
+		alert("made it to postJSON");
+		return true;
+	}
+	else if (num == 1)
+	{
+		var e = document.getElementById("select1");
+		var e1 = e.options[e.selectedIndex].value;
+		e = document.getElementById("select2");
+		var e2 = e.options[e.selectedIndex].value;
+		var e3 = document.getElementById("select3").value;
+		var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+		$.ajax({
+			type: "POST",
+			url: "/api/star",
+			data: userData,
+			contentType: "application/json",
+			dataType: "json",
+			complete: function(data){}
+			});
+	}
 }
 
 function getJSON(num)
@@ -214,8 +233,8 @@ function limitText(limitField, limitNum)
 }
 function showselect(id)
 {
-	var e = document.getElementById(id).options[id.selectedIndex].value;
-	alert(e);
+	var e = document.getElementById(id);
+	alert(e.options[e.selectedIndex].value);
 }
 
 
