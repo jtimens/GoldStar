@@ -16,17 +16,19 @@ function login()
 	var em = document.getElementById('txtemail').value;
 	$.getJSON('/api/user', function(jdata){
 		var i = 0;
+		var rv = false;
 				
 		for(i=0;i<jdata.objects.length;++i)
 		{
 			var jsonEmail = jdata.objects[i].email;
 			if (em == jsonEmail)
 			{
-				alert("email found!");
-				window.location = 'main.html';
+				//alert("email found!");
+				rv = true;
+				//window.location = 'main.html';
 			}
 		}
-		alert("email not found.");
+		alert(rv);
 	})
 }
 function toggleLoginView(id)
