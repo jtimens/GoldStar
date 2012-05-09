@@ -32,6 +32,10 @@ function login()
 			var i = 0;
 			var rv = false;
 			alert("login");
+			if (jdata.objects.length == 0)
+			{
+				alert("no users.");
+			}
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				alert("i: "+i);
