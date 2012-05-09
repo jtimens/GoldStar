@@ -31,14 +31,12 @@ function login()
 		$.getJSON('/api/user', function(jdata){
 			var i = 0;
 			var rv = false;
-			alert("login");
 			if (jdata.objects.length == 0)
 			{
 				alert("no users.");
 			}
 			for(i=0;i<jdata.objects.length;++i)
 			{
-				alert("i: "+i);
 				var jsonEmail = jdata.objects[i].email;
 				if (em.toLowerCase() == jsonEmail.toLowerCase())
 				{
