@@ -2,7 +2,6 @@ function canUseStorage()
 {
 	if(typeof(Storage)!=="undefined")
 	{
-		alert("Your browser supports local storage.");
 		return true;
 	}
 	else
@@ -212,6 +211,10 @@ function limitText(limitField, limitNum)
 	e = document.getElementById(limitField);
 	if (e.value.length > limitNum)
 		e.value = e.value.substring(0, limitNum);
+}
+function showselect(id)
+{
+	alert(id.value);
 }
 
 
