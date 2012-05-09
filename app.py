@@ -155,7 +155,7 @@ manager = APIManager(app, flask_sqlalchemy_db=db)
 
 #Creates the API
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
-manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
+manager.create_api(Star, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[starValidation])
 
 
 def main():
