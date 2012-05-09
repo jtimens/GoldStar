@@ -58,9 +58,8 @@ function login()
 }
 function userLogout()
 {
-	alert(sessionStorage.length);
 	sessionStorage.clear();
-	alert(sessionStorage.length);
+	window.location = 'index.html';
 }
 function toggleLoginView(id)
 {
