@@ -160,27 +160,33 @@ function isEmpty(str)
 	return true;
 }
 
-function postJSON(id)
-{	
-	//alert( $("input[name=FName]").val() );
-	var fn = $("input[name=FName]").val();
-	var ln = $("input[name=LName]").val();
-	var em = $("input[name=Email]").val();
-	alert(fn+ln+em);
-	//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
-	var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
-	$.ajax({
-		type: "POST",
-		url: "/api/user",
-		data: userData,
-		contentType: "application/json",
-		dataType: "json",
-		complete: function(data){
-			console.log(data);}
-		});
-		
-	alert("made it to postJSON");
-	return true;
+function postJSON(id, num)
+{
+	if (num == 0)
+	{
+		//alert( $("input[name=FName]").val() );
+		var fn = $("input[name=FName]").val();
+		var ln = $("input[name=LName]").val();
+		var em = $("input[name=Email]").val();
+		alert(fn+ln+em);
+		//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
+		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		$.ajax({
+			type: "POST",
+			url: "/api/user",
+			data: userData,
+			contentType: "application/json",
+			dataType: "json",
+			complete: function(data){}
+			});
+			
+		alert("made it to postJSON");
+		return true;
+	}
+	else if (num == 1)
+	{
+		alert("POST TO STAR API BRAH.  DO IT...\b\b\b\b\b\b\b\b\b\b\b\b\b DO IT.");
+	}
 }
 
 function getJSON(num)

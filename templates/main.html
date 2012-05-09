@@ -42,12 +42,12 @@
 							<p> 
 								<select id="select2">
 									<option selected>Select One</option>
-									<option value="influenced">INFLUENCED</option>
-									<option value="helped">HELPED</option>
-									<option value="guided">GUIDED</option>
-									<option value="impressed">IMPRESSED</option>
-									<option value="persuaded">PERSUADED</option>
-									<option value="inspired">INSPIRED</option>
+									<option value="Influenced">INFLUENCED</option>
+									<option value="Helped">HELPED</option>
+									<option value="Guided">GUIDED</option>
+									<option value="Impressed">IMPRESSED</option>
+									<option value="Persuaded">PERSUADED</option>
+									<option value="Inspired">INSPIRED</option>
 								</select> <button onclick="showselect('select2')">showSelValue</button>
 							</p>
 							<p> <button id="innergive2" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Why</button></p>
@@ -56,7 +56,7 @@
 							<h6>CHOOSE TO COMMENT (120 character limit)</h6>
 							<p>
 								<textarea id="select3" onKeyDown="limitText(this.id, 120);" onKeyUp="limitText(this.id, 120);" placeholder="Type Here..." style="width:100%;height:65px;resize:none"></textarea><br />
-								<button id="innergive3" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Give Star</button> 
+								<button id="innergive3" class="btn btn-info btn-small" onclick="postJSON('select2', 1); giveGoldStar(this.id)">Give Star</button> 
 								<!-- <button id="innergive3" class="btn btn-info btn-small" ><a style="color:white;text-decoration:none;" href="results.html">Give Star</a></button> -->
 							</p>
 						</div>
