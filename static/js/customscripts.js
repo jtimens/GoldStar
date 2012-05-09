@@ -22,7 +22,7 @@ function login()
 			emails[i]=jdata.objects[i].email;
 		for (j=0;j<emails.length;++j)
 		{
-			if (em.value == emails[j])
+			if (em == emails[j])
 			{
 				alert("email found!");
 				window.location = 'main.html';
