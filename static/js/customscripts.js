@@ -176,9 +176,9 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				return true;}
+				return true;},
 			error: function(xhr, status, error) {
-				alert ("Error: " + error);
+				alert("Error: " + error);
 			}
 		});
 		
