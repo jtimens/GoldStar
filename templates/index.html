@@ -18,38 +18,36 @@
 		<div id="index1" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:none;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				<h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
-				<form id="form1" action="index.html" name="beginform" method="GET" onsubmit="return postJSON(id.this, 0)">
 					<h6 style="text-align:center;"> Please provide some information to us before starting: </h6>
 					<p> 
 						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input  type="text" class="" placeholder="First Name" name="FName" maxlength="50" required>
+									<input id="FName" type="text" class="" placeholder="First Name" name="FName" maxlength="50" required>
 								</td>
 								
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input  type="text" class="" placeholder="Last Name" name="LName" maxlength="50" required>
+									<input id="LName" type="text" class="" placeholder="Last Name" name="LName" maxlength="50" required>
 								</td>
 								
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
-									<input  type="email" class="" placeholder="Email" name="Email" maxlength="100" required>
+									<input id="Email" type="email" class="" placeholder="Email" name="Email" maxlength="100" required>
 								</td>
 								
 							</tr>
 							<tr>
 								
 								<td style="text-align:center;">
-									<input type="submit" class="btn btn-info" value="Sign Up" />
+									<!-- <input type="submit" class="btn btn-info" value="Sign Up" /> -->
+									<button id="signupbtn" class="btn btn-large btn-primary" onclick="postJSON(id.this, 0)">Sign Up</button>
 								</td>
 							</tr>
 						</table>
 					</p>
-					
-				</form>
 			</div>
 		</div>
 		<div id="index2" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:block;">

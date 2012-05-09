@@ -164,9 +164,10 @@ function postJSON(id, num)
 {
 	if (num == 0)
 	{
-		var fn = $("input[name=FName]").val();
-		var ln = $("input[name=LName]").val();
-		var em = $("input[name=Email]").val();
+		var ajaxComplete = false;
+		var fn = document.getElementById("FName").value; //$("input[name=FName]").val();
+		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
+		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		alert(fn+ln+em);
 		$.ajax({
@@ -175,8 +176,17 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){alert("post complete");return true;}
-			});
+			complete: function(data){
+				ajaxComplete = true;}
+		});
+		while(1)
+		{
+			if (ajaxComplete == true)
+			{
+				alert("ajax done posting");
+				window.location = "index.html";
+			}
+		}
 	}
 	else if (num == 1)
 	{
