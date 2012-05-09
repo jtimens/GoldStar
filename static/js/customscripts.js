@@ -35,7 +35,7 @@ function login()
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				var jsonEmail = jdata.objects[i].email;
-				if (em == jsonEmail)
+				if (em.toLowerCase() == jsonEmail.toLowerCase())
 				{
 					rv = true;
 					sessionStorage.userID = jdata.objects[i].id;
@@ -156,15 +156,6 @@ function resetView()
 	document.getElementById("give1").style.display = 'none';
 	document.getElementById("tbl1").style.display = 'none';
 }
-function isEmpty(str) 
-{
-	// Check whether string is empty.
-	for (var intLoop = 0; intLoop < str.length; intLoop++)
-	   if (" " != str.charAt(intLoop))
-		  return false;
-	return true;
-}
-
 function postJSON(id, num)
 {
 	if (num == 0)
@@ -205,7 +196,6 @@ function postJSON(id, num)
 			});
 	}
 }
-
 function getJSON(num)
 {
 	if (num == 0)
@@ -226,18 +216,6 @@ function getJSON(num)
 	}
 	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
 	{
-		$.getJSON('/api/user', function(jdata)
-		{
-			var i = 0;
-			for(i=0;i<jdata.objects.length;++i)
-			{
-				if (sessionStorage.userID == jdata.objects[i].id)
-				{
-					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
-					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
-				}
-			}
-		})
 	}
 }
 function limitText(limitField, limitNum)
