@@ -1,3 +1,15 @@
+function canUseStorage()
+{
+	if(typeof(Storage)!=="undefined")
+	{
+		return true;
+	}
+	else
+	{
+		alert("Your browser does not support local storage.");
+		return false;
+	}
+}
 function redirect(id)
 {
 	var page;
@@ -13,26 +25,36 @@ function redirect(id)
 }
 function login()
 {
-	var em = document.getElementById('txtemail').value;
-	$.getJSON('/api/user', function(jdata){
-		var i = 0;
-		var rv = false;
-				
-		for(i=0;i<jdata.objects.length;++i)
-		{
-			var jsonEmail = jdata.objects[i].email;
-			if (em == jsonEmail)
+	if (canUseStorage())
+	{
+		var em = document.getElementById('txtemail').value;
+		$.getJSON('/api/user', function(jdata){
+			var i = 0;
+			var rv = false;
+					
+			for(i=0;i<jdata.objects.length;++i)
 			{
-				//alert("email found!");
-				rv = true;
-				//window.location = 'main.html';
+				var jsonEmail = jdata.objects[i].email;
+				if (em == jsonEmail)
+				{
+					rv = true;
+					sessionStorage.userID = jdata.objects[i].id;
+				}
 			}
-		}
-		if(rv)
-			window.location = "main.html";
-		else
-			alert(rv);
-	})
+			if(rv)
+			{
+				window.location = "main.html";
+			}
+				
+			else
+				alert("Email not found.");
+		})
+	}
+	else
+	{
+		alert("Update your browser to use this site.");
+	}
+	
 }
 function toggleLoginView(id)
 {
@@ -189,6 +211,11 @@ function limitText(limitField, limitNum)
 	e = document.getElementById(limitField);
 	if (e.value.length > limitNum)
 		e.value = e.value.substring(0, limitNum);
+}
+function showselect(id)
+{
+	var e = document.getElementById(id).options[id.selectedIndex].value;
+	alert(e);
 }
 
 

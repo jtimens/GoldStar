@@ -16,6 +16,7 @@
 						<button id="gg" class="btn btn-small" onclick="toggleView(this.id)">Give</button>
 						<button id="ms" class="btn btn-small" onclick="toggleView(this.id)">Got</button>
 						<button id="as" class="btn btn-small" onclick="toggleView(this.id)">Given</button>
+						<button id="storage" class="btn btn-small" onclick="canUseStorage()">Test for HTML5</button>
 					</div>
 				</div>
 			</div>
@@ -31,8 +32,8 @@
 						<div id="give1" style="display:none;">
 							<h6>CHOOSE A PERSON TO GIVE A STAR TO</h6>
 							<p>
-									<select id="select1" size="6">
-									</select>
+									<select id="select1" size="5">
+									</select> <button onclick="showselect('select1')">showSelValue</button>
 									<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>
 							</p>
 						</div>
