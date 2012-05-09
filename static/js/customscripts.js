@@ -35,21 +35,24 @@ function login()
 			{
 				alert("no users.");
 			}
-			for(i=0;i<jdata.objects.length;++i)
-			{
-				var jsonEmail = jdata.objects[i].email;
-				if (em.toLowerCase() == jsonEmail.toLowerCase())
-				{
-					rv = true;
-					sessionStorage.userID = jdata.objects[i].id;
-				}
-			}
-			if(rv)
-			{
-				window.location = "main.html";
-			}	
 			else
-				alert("Email not found.");
+			{
+				for(i=0;i<jdata.objects.length;++i)
+				{
+					var jsonEmail = jdata.objects[i].email;
+					if (em.toLowerCase() == jsonEmail.toLowerCase())
+					{
+						rv = true;
+						sessionStorage.userID = jdata.objects[i].id;
+					}
+				}
+				if(rv)
+				{
+					window.location = "main.html";
+				}	
+				else
+					alert("Email not found.");
+			}
 		})
 	}
 	else
