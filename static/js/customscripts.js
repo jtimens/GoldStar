@@ -168,6 +168,7 @@ function postJSON(id, num)
 		var ln = $("input[name=LName]").val();
 		var em = $("input[name=Email]").val();
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		alert(fn+ln+em);
 		$.ajax({
 			type: "POST",
 			url: "/api/user",
