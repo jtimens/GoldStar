@@ -171,10 +171,7 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){
-				storageSession.userFName = fn;
-				return true;
-			}
+			complete: function(data){return true;}
 			});
 	}
 	else if (num == 1)
@@ -200,18 +197,12 @@ function getJSON(num)
 {
 	if (num == 0)
 	{
-		alert("getJSON(num): storageSession length: "+storageSession.length);
 		$.getJSON('/api/user', function(jdata)
 		{
 			var i = 0
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				if (sessionStorage.userID == jdata.objects[i].id)
-				{
-					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
-					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
-				}
-				if ((sessionStorage.length == 0) && (i == (jdata.objects.length - 1)))
 				{
 					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
 					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
