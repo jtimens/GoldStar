@@ -11,7 +11,7 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
-function login(em)
+function login()
 {
 	var em = document.getElementById('txtemail');
 	$.getJSON('/api/user', function(jdata){
