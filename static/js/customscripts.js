@@ -208,6 +208,11 @@ function getJSON(num)
 					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
 					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
 				}
+				if (sessionStorage.length == 0 && i == (jdata.objects.length - 1)
+				{
+					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
+					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
+				}
 				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
