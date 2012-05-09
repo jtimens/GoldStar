@@ -11,6 +11,36 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
+function login()
+{
+	var em = document.getElementById('txtemail').value;
+	$.getJSON('/api/user', function(jdata){
+		var i = 0;
+				
+		for(i=0;i<jdata.objects.length;++i)
+		{
+			var jsonEmail = jdata.objects[i].email;
+			if (em == jsonEmail)
+			{
+				alert("email found!");
+				window.location = 'main.html';
+			}
+		}
+		alert("email not found.");
+	})
+}
+function toggleLoginView(id)
+{
+	document.getElementById("index1").style.display = 'none';
+	document.getElementById("index2").style.display = 'none';
+	
+	e = document.getElementById(id);
+	
+	if (e.id == "login1")
+		document.getElementById("index2").style.display = 'block';
+	if (e.id == "login2")
+		document.getElementById("index1").style.display = 'block';
+}
 function toggleView(id)
 {
 	document.getElementById("gold1").style.display = 'none';
@@ -103,33 +133,6 @@ function isEmpty(str)
 	return true;
 }
 
-// function checkRequired(id) 
-// {
-	// alert(id.FName.value);
-	// var validChars = "abcdefghijklmnopqrstuvwxyz";
-	// validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	
-	// var testfn = id.FName.value;
-	// var testln = id.LName.value;
-	// var teste = id.Email.value;
-	
-	// var test1isValid = false;
-	// var test2isValid = false;
-	// var test3isValid = false;
-	
-	// for (i=0;i<testfn.length;++i)
-	// {
-		// for (j=0; j<validChars.length;++j)
-		// {
-			// if testfn.charAt(i) == validChars.charAt(j)
-				// test1isValid = true;
-			
-		// }
-	// }
-	
-	// return false;
-// }
-
 function postJSON(id)
 {	
 	//alert( $("input[name=FName]").val() );
@@ -150,6 +153,7 @@ function postJSON(id)
 		});
 		
 	alert("made it to postJSON");
+	return true;
 }
 
 function getJSON(num)
@@ -160,7 +164,7 @@ function getJSON(num)
 		{
 			for(i=0;i<jdata.objects.length;++i)
 			{
-				$('#selectuser').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
+				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
 	}
@@ -174,7 +178,12 @@ function getJSON(num)
 			}
 		})
 	}
-	
+}
+function limitText(limitField, limitNum)
+{
+	e = document.getElementById(limitField);
+	if (e.value.length > limitNum)
+		e.value = e.value.substring(0, limitNum);
 }
 
 
