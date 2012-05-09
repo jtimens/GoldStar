@@ -172,7 +172,9 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				return true;}
+				storageSession.userFName = fn;
+				return true;
+			}
 			});
 	}
 	else if (num == 1)
@@ -198,6 +200,7 @@ function getJSON(num)
 {
 	if (num == 0)
 	{
+		alert("getJSON(num): storageSession length: "+storageSession.length);
 		$.getJSON('/api/user', function(jdata)
 		{
 			var i = 0
