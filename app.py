@@ -97,7 +97,7 @@ class User(db.Model):
 	#Validates the First Name
 	@validates('firstName')
 	def validate_firstName(self, key, string):
-		if string.isalpha() == False:
+		if not string.isalpha() or not len(string):
 			exception = userValidation()
 			exception.errors = dict(firstName = 'Invalid First Name')
 			raise exception
@@ -106,7 +106,7 @@ class User(db.Model):
 	#Validates the Last Name
 	@validates('lastName')
 	def validate_lastName(self, key, string):
-		if string.isalpha() == False:
+		if not string.isalpha() or not len(string):
 			exception = userValidation()
 			exception.errors = dict(lastName = 'Invalid Last Name')
 			raise exception
@@ -117,6 +117,8 @@ class User(db.Model):
 	def validate_email(self, key, string):
 		e = ""
 		if not "@" in string:
+			e = u"Invalid Email"
+		if not "." in string:
 			e = u"Invalid Email"
 		elif len(string) == 0:
 			e = u"No Email Entered"
