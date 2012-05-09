@@ -43,7 +43,7 @@
 								
 								<td style="text-align:center;">
 									<!-- <input type="submit" class="btn btn-info" value="Sign Up" /> -->
-									<button id="signupbtn" class="btn btn-large btn-primary" onclick="postJSON(id.this, 0)">Sign Up</button>
+									<button id="signupbtn" class="btn btn-large btn-primary" onclick="if (postJSON(id.this, 0)){window.location='index.html';}else{alert('error.');}">Sign Up</button>
 								</td>
 							</tr>
 						</table>
