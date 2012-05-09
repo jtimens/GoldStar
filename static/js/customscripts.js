@@ -164,7 +164,6 @@ function postJSON(id, num)
 {
 	if (num == 0)
 	{
-		var ajaxComplete = false;
 		var fn = document.getElementById("FName").value; //$("input[name=FName]").val();
 		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
 		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
@@ -177,16 +176,12 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				ajaxComplete = true;}
-		});
-		while(1)
-		{
-			if (ajaxComplete == true)
-			{
-				alert("ajax done posting");
-				window.location = "index.html";
+				return true;}
+			error: function(xhr, status, error) {
+				alert ("Error: " + error);
 			}
-		}
+		});
+		
 	}
 	else if (num == 1)
 	{
