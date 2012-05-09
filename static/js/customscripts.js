@@ -15,26 +15,26 @@ function login()
 {
 	var rv = false;
 	var em = document.forms["loginform"]["Email"].value;
-	var emails=new Array();
 	$.getJSON('/api/user', function(jdata){
-		for(i=0;i<jdata.objects.length;++i){
+		var i = 0;
+		var j = 0;
+		
+		for(i=0;i<jdata.objects.length;++i)
 			emails[i]=jdata.objects[i].email;
-		}
-	})
-	for (j=0;j<emails.length;++j)
-	{
-		if (em == emails[j])
+		for (j=0;j<emails.length;++j)
 		{
-			rv = true;
+			if (em == emails[j])
+				rv = true;
 		}
-	}
-	if (rv == false)
-	{
-		alert("Email Not found.  Please try again.");
-		return rv;
-	}
-	else if (rv == true)
-		return rv;
+		if (rv == false)
+		{
+			alert("Email Not found.  Please try again.");
+			return rv;
+		}
+		else if (rv == true)
+			return rv;
+	})
+	
 	
 }
 function toggleLoginView(id)
