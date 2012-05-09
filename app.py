@@ -147,6 +147,9 @@ def main_route():
 def result_route():
 	return render_template('results.html')
 
+@app.route('/t')
+def test_route():
+	return render_template('test.html')
 #Initialize the Database
 db.create_all()
 
@@ -155,7 +158,7 @@ manager = APIManager(app, flask_sqlalchemy_db=db)
 
 #Creates the API
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
-manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
+manager.create_api(Star, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[starValidation])
 
 
 def main():
