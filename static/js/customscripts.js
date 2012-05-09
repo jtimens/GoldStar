@@ -197,7 +197,8 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){}
+			complete: function(data){
+				 giveGoldStar("innergive3");}
 			});
 	}
 }
