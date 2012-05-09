@@ -18,7 +18,7 @@ class userValidation(Exception):
 class starValidation(Exception):
 	pass
 
-
+#Star Table that stores Star information between two users
 class Star(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
@@ -80,6 +80,7 @@ class Star(db.Model):
 			return exception
 		return int(string)
 
+#User Table which stores user information and links to stars
 class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
