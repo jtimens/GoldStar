@@ -31,9 +31,10 @@ function login()
 		$.getJSON('/api/user', function(jdata){
 			var i = 0;
 			var rv = false;
-					
+			alert("login");
 			for(i=0;i<jdata.objects.length;++i)
 			{
+				alert("i: "+i);
 				var jsonEmail = jdata.objects[i].email;
 				if (em.toLowerCase() == jsonEmail.toLowerCase())
 				{
@@ -44,8 +45,7 @@ function login()
 			if(rv)
 			{
 				window.location = "main.html";
-			}
-				
+			}	
 			else
 				alert("Email not found.");
 		})
