@@ -26,12 +26,15 @@ function login()
 		if (em == emails[j])
 		{
 			rv = true;
-			return rv;
 		}
 	}
-	alert("Email Not found.  Please try again.");
-	rv = false;
-	return rv;
+	if (rv == false)
+	{
+		alert("Email Not found.  Please try again.");
+		return rv;
+	}
+	else if (rv == true)
+		return rv;
 	
 }
 function toggleLoginView(id)
