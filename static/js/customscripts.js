@@ -28,7 +28,10 @@ function login()
 				//window.location = 'main.html';
 			}
 		}
-		alert(rv);
+		if(rv)
+			window.location = "main.html";
+		else
+			alert(rv);
 	})
 }
 function toggleLoginView(id)
