@@ -1,3 +1,15 @@
+function canUseStorage()
+{
+	if(typeof(Storage)!=="undefined")
+	{
+		return true;
+	}
+	else
+	{
+		alert("Your browser does not support local storage.  Update your browser or stop using IE.");
+		return false;
+	}
+}
 function redirect(id)
 {
 	var page;
