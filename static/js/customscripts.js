@@ -191,7 +191,14 @@ function postJSON(id, num)
 		var e2 = e.options[e.selectedIndex].value;
 		var e3 = document.getElementById("select3").value;
 		var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
-		alert(userData);
+		$.ajax({
+			type: "POST",
+			url: "/api/star",
+			data: userData,
+			contentType: "application/json",
+			dataType: "json",
+			complete: function(data){}
+			});
 	}
 }
 
