@@ -175,13 +175,15 @@ function postJSON(id, num)
 			dataType: "json",
 			complete: function(data){
 				rv = true;
+				return rv;
 			},
 			error: function(xhr, status, error) {
 				alert("Error: " + error);
 				rv = false;
+				return rv;
 			}
 		});
-		return rv;
+		alert('rv: ' +rv);
 		
 	}
 	else if (num == 1)
