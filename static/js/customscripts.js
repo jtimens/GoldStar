@@ -166,7 +166,6 @@ function postJSON(id, num)
 		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
 		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
-		var rv;
 		$.ajax({
 			type: "POST",
 			url: "/api/user",
@@ -174,17 +173,12 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				rv = true;
-				return rv;
+				window.location = "index.html";
 			},
 			error: function(xhr, status, error) {
 				alert("Error: " + error);
-				rv = false;
-				return rv;
 			}
-		});
-		alert('rv: ' +rv);
-		
+		});		
 	}
 	else if (num == 1)
 	{
