@@ -171,11 +171,9 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){}
+			complete: function(data){
+				return true;}
 			});
-			
-		alert("made it to postJSON");
-		return true;
 	}
 	else if (num == 1)
 	{
