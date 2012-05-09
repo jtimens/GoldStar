@@ -26,26 +26,34 @@ function redirect(id)
 }
 function login()
 {
-	var em = document.getElementById('txtemail').value;
-	$.getJSON('/api/user', function(jdata){
-		var i = 0;
-		var rv = false;
-				
-		for(i=0;i<jdata.objects.length;++i)
-		{
-			var jsonEmail = jdata.objects[i].email;
-			if (em == jsonEmail)
+	if (canUseStorage())
+	{
+		var em = document.getElementById('txtemail').value;
+		$.getJSON('/api/user', function(jdata){
+			var i = 0;
+			var rv = false;
+					
+			for(i=0;i<jdata.objects.length;++i)
 			{
-				//alert("email found!");
-				rv = true;
-				//window.location = 'main.html';
+				var jsonEmail = jdata.objects[i].email;
+				if (em == jsonEmail)
+				{
+					rv = true;
+					sessionStorage.userID = jdata.objects[i].id;
+				}
 			}
-		}
-		if(rv)
-			window.location = "main.html";
-		else
-			alert(rv);
-	})
+			if(rv)
+				alert((sessionStorage.userID));
+				window.location = "main.html";
+			else
+				alert("Email not found.");
+		})
+	}
+	else
+	{
+		alert("Browser does not support local storage.");
+	}
+	
 }
 function toggleLoginView(id)
 {
