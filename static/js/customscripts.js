@@ -35,7 +35,7 @@ function login()
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				var jsonEmail = jdata.objects[i].email;
-				if (em == jsonEmail)
+				if (em.toLowerCase() == jsonEmail.toLowerCase())
 				{
 					rv = true;
 					sessionStorage.userID = jdata.objects[i].id;
@@ -55,6 +55,11 @@ function login()
 		alert("Update your browser to use this site.");
 	}
 	
+}
+function userLogout()
+{
+	sessionStorage.clear();
+	window.location = 'index.html';
 }
 function toggleLoginView(id)
 {
@@ -151,25 +156,14 @@ function resetView()
 	document.getElementById("give1").style.display = 'none';
 	document.getElementById("tbl1").style.display = 'none';
 }
-function isEmpty(str) 
-{
-	// Check whether string is empty.
-	for (var intLoop = 0; intLoop < str.length; intLoop++)
-	   if (" " != str.charAt(intLoop))
-		  return false;
-	return true;
-}
-
 function postJSON(id, num)
 {
 	if (num == 0)
 	{
-		//alert( $("input[name=FName]").val() );
 		var fn = $("input[name=FName]").val();
 		var ln = $("input[name=LName]").val();
 		var em = $("input[name=Email]").val();
 		alert(fn+ln+em);
-		//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		$.ajax({
 			type: "POST",
@@ -177,11 +171,8 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){}
+			complete: function(data){return true;}
 			});
-			
-		alert("made it to postJSON");
-		return true;
 	}
 	else if (num == 1)
 	{
@@ -197,32 +188,31 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){}
+			complete: function(data){
+				 giveGoldStar("innergive3");}
 			});
 	}
 }
-
 function getJSON(num)
 {
 	if (num == 0)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{
+			var i = 0
 			for(i=0;i<jdata.objects.length;++i)
 			{
+				if (sessionStorage.userID == jdata.objects[i].id)
+				{
+					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
+					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
+				}
 				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
 	}
-	if (num == 1)
+	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
 	{
-		$.getJSON('/api/user', function(jdata)
-		{
-			for(i=0;i<jdata.objects.length;++i)
-			{
-				$('#jsondump').append('First Name: '+jdata.objects[i].firstName+'.');
-			}
-		})
 	}
 }
 function limitText(limitField, limitNum)
