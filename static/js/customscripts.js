@@ -2,6 +2,7 @@ function canUseStorage()
 {
 	if(typeof(Storage)!=="undefined")
 	{
+		alert("Your browser supports local storage.");
 		return true;
 	}
 	else
