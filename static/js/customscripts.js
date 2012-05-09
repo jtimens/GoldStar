@@ -43,8 +43,11 @@ function login()
 				}
 			}
 			if(rv)
+			{
 				alert((sessionStorage.userID));
 				window.location = "main.html";
+			}
+				
 			else
 				alert("Email not found.");
 		})
