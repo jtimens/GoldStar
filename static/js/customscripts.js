@@ -11,10 +11,9 @@ function redirect(id)
 	else
 		window.location = "main.html";
 }
-function login()
+function login(em)
 {
-	var rv = false;
-	var em = document.forms["loginform"]["Email"].value;
+	var em = document.getElementById('txtemail');
 	$.getJSON('/api/user', function(jdata){
 		var i = 0;
 		var j = 0;
@@ -23,19 +22,18 @@ function login()
 			emails[i]=jdata.objects[i].email;
 		for (j=0;j<emails.length;++j)
 		{
-			if (em == emails[j])
-				rv = true;
+			if (em.value == emails[j])
+			{
+				alert("email found!");
+				window.location = 'main.html';
+			}
+			if (j == 5)
+			{
+				alert("email not found =(");
+			}
+				
 		}
-		if (rv == false)
-		{
-			alert("Email Not found.  Please try again.");
-			return rv;
-		}
-		else if (rv == true)
-			return rv;
 	})
-	
-	
 }
 function toggleLoginView(id)
 {
