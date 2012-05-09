@@ -169,12 +169,10 @@ function postJSON(id, num)
 {
 	if (num == 0)
 	{
-		//alert( $("input[name=FName]").val() );
 		var fn = $("input[name=FName]").val();
 		var ln = $("input[name=LName]").val();
 		var em = $("input[name=Email]").val();
 		alert(fn+ln+em);
-		//var userData = '{"firstName":"Matt","lastName":"Graham","email":"thisemail@aim.com"}';
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		$.ajax({
 			type: "POST",
@@ -214,17 +212,23 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{
+			var i = 0
 			for(i=0;i<jdata.objects.length;++i)
 			{
+				if (sessionStorage.userID == jdata.objects[i].id)
+				{
+					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
+					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
+				}
 				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
 		})
 	}
-	if (num == 1)
+	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
 	{
 		$.getJSON('/api/user', function(jdata)
 		{
-			i = 0;
+			var i = 0;
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				if (sessionStorage.userID == jdata.objects[i].id)
