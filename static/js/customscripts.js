@@ -13,7 +13,7 @@ function redirect(id)
 }
 function login()
 {
-	var rv;
+	var rv = false;
 	var em = document.forms["loginform"]["Email"].value;
 	var emails=new Array();
 	$.getJSON('/api/user', function(jdata){
