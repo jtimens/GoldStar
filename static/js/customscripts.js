@@ -167,7 +167,6 @@ function postJSON(id, num)
 		var fn = $("input[name=FName]").val();
 		var ln = $("input[name=LName]").val();
 		var em = $("input[name=Email]").val();
-		alert(fn+ln+em);
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		$.ajax({
 			type: "POST",
@@ -175,7 +174,7 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){return true;}
+			complete: function(data){alert("post complete");return true;}
 			});
 	}
 	else if (num == 1)
