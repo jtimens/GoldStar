@@ -237,7 +237,7 @@ function getJSON(num)
 					// $('#starsyougave').append('<tr><td>'+jdata.firstName+'</td>');
 					// $('#starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
 					// $('#starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
-					$('#starsyougot').append('<tr><td>'+jdata.stars[i].issuer_id+'</td><td>'+jdata.stars[i].category+'</td><td>You</td></tr>');
+					$('#starsyougot').append('<tr><td>'+jdata.issued[i].issuer_id+'</td><td>'+jdata.issued[i].category+'</td><td>You</td></tr>');
 					
 				}
 			}
@@ -245,7 +245,7 @@ function getJSON(num)
 			{
 				for (j = 0; j < jdata.stars.length; ++j)
 				{
-					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.issued[j].category+'</td><td>'+jdata.issued[j].owner_id+'</td></tr>');
+					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.stars[j].category+'</td><td>'+jdata.stars[j].owner_id+'</td></tr>');
 				}
 			}
 		});
