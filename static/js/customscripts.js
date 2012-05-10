@@ -211,7 +211,7 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{
-			var i = 0
+			var i = 0;
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				if (sessionStorage.userID == jdata.objects[i].id)
@@ -228,7 +228,17 @@ function getJSON(num)
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
 		{
-			console.log(jdata);
+			var i = 0;
+			if (jdata.issued.length > 0)
+			{
+				for (i = 0; i < jdata.issued.length; ++i)
+				{
+					$('starsyougave').append('<tr><td>'+jdata.firstName+'</td>');
+					$('starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
+					$('starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
+				}
+			}
+			
 		});
 	}
 }
