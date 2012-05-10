@@ -233,9 +233,9 @@ function getJSON(num)
 			{
 				for (i = 0; i < jdata.issued.length; ++i)
 				{
-					$('#starsyougave1').append('<tr><td>'+jdata.firstName+'</td>');
-					$('#starsyougave1').append('<td>'+jdata.issued[i].category+'</td>');
-					$('#starsyougave1').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
+					$('#starsyougave').append('<tr><td>'+jdata.firstName+'</td>');
+					$('#starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
+					$('#starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
 				}
 			}
 			
