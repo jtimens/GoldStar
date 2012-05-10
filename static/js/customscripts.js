@@ -128,7 +128,7 @@ function toggleInnerView(id)
 	{
 		if (e.id == "btnshow3")
 		{
-			document.getElementById("btnhide3").style.display = 'block';
+			document.getElementById().style.display = 'block';
 			document.getElementById("tbl3").style.display = 'block';
 			e.style.display = 'none';
 		}
@@ -169,10 +169,11 @@ function postJSON(id, num)
 	{
 		document.getElementById("enabled").style.display = "none";
 		document.getElementById("disabled").style.display = "block";
-		var fn = document.getElementById("FName").value; 
-		var ln = document.getElementById("LName").value; 
-		var em = document.getElementById("Email").value; 
-		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		var fn = $("#FName").val(); 
+		var ln = $("#LName").val(); 
+		var em = $("#Email").val(); 
+
+		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
 		$.ajax({
 			type: "POST",
 			url: "/api/user",
@@ -210,17 +211,8 @@ function getJSON(num)
 	if (num == 0)
 	{
 		$.getJSON('/api/user', function(jdata)
-		{
-			var i = 0;
-			for(i=0;i<jdata.objects.length;++i)
-			{
-				if (sessionStorage.userID == jdata.objects[i].id)
-				{
-					$('#jsondump').html('Hello '+jdata.objects[i].firstName+'!<br />');
-					$('#jsondump').append('Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a>');
-				}
-				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
-			}
+		{	
+			ko.applyBindings(jdata,document.getElementById('give1'));			
 		});
 	}
 	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
@@ -228,26 +220,9 @@ function getJSON(num)
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
 		{
-			var i = 0;
-			var j = 0;
-			if (jdata.issued.length > 0)
-			{
-				for (i = 0; i < jdata.issued.length; ++i)
-				{
-					// $('#starsyougave').append('<tr><td>'+jdata.firstName+'</td>');
-					// $('#starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
-					// $('#starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
-					$('#starsyougot').append('<tr><td>'+jdata.issued[i].issuer_id+'</td><td>'+jdata.issued[i].category+'</td><td>You</td></tr>');
-					
-				}
-			}
-			if (jdata.stars.length > 0)
-			{
-				for (j = 0; j < jdata.stars.length; ++j)
-				{
-					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.stars[j].category+'</td><td>'+jdata.stars[j].owner_id+'</td></tr>');
-				}
-			}
+			ko.applyBindings(jdata,document.getElementById('userDisplay'));
+			ko.applyBindings(jdata,document.getElementById('gold2'));
+			ko.applyBindings(jdata,document.getElementById('gold3'));
 		});
 		
 	}
