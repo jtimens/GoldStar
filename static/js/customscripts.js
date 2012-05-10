@@ -180,7 +180,7 @@ function postJSON(id, num)
 			dataType: "json",
 			complete: function(data){
 				document.getElementById("enabled").style.display = "block";
-				document.getElementById("disabled").style.display = "none";
+				document.getElementById("disabledf").style.display = "none";
 			},
 			success: function(data, textStatus, jqXHR){
 				alert("Account creation successful!  Please log in to continue.");
