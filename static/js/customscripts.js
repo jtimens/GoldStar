@@ -245,7 +245,7 @@ function getJSON(num)
 			{
 				for (j = 0; j < jdata.stars.length; ++j)
 				{
-					$('#starsyougot').append('<tr><td>'+jdata.stars[i].owner_id+'</td><td>'+jdata.stars[i].category+'</td><td>You</td></tr>');
+					$('#starsyougot').append('<tr><td>'+jdata.stars[j].owner_id+'</td><td>'+jdata.stars[j].category+'</td><td>You</td></tr>');
 				}
 			}
 		});
