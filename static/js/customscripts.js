@@ -229,6 +229,7 @@ function getJSON(num)
 		$.getJSON(userUrl, function(jdata)
 		{
 			var i = 0;
+			var j = 0;
 			if (jdata.issued.length > 0)
 			{
 				for (i = 0; i < jdata.issued.length; ++i)
@@ -237,11 +238,18 @@ function getJSON(num)
 					// $('#starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
 					// $('#starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
 					
-					$('#starsyougave').append('<tr><td>'+jdata.firstName+'</td><td>'+jdata.issued[i].category+'</td><td>'+jdata.issued[i].owner_id+'</td></tr>');
+					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.issued[i].category+'</td><td>'+jdata.issued[i].owner_id+'</td></tr>');
 				}
 			}
-			
+			if (jdata.stars.length > 0)
+			{
+				for (j = 0; j < jdata.stars.length; ++j)
+				{
+					$('#starsyougot').append('<tr><td>'+jdata.stars[i].owner_id+'</td><td>'+jdata.stars[i].category+'</td><td>You</td></tr>');
+				}
+			}
 		});
+		
 	}
 }
 function limitText(limitField, limitNum)
