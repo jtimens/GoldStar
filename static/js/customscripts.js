@@ -48,7 +48,7 @@ function login()
 				}
 				if(rv)
 				{
-					document.getElementById("madeaccount").style.display = "none";
+					//document.getElementById("madeaccount").style.display = "none";
 					window.location = "main.html";
 				}	
 				else
@@ -177,7 +177,8 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				document.getElementById("madeaccount").style.display = 'block';
+				//document.getElementById("madeaccount").style.display = 'block';
+				alert("Account creation successful!  Please log in to continue.");
 				window.location = "index.html";
 			},
 			error: function(xhr, status, error) {
