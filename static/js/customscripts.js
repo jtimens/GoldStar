@@ -177,7 +177,7 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				document.getElementById("madeacount").innerHTML = "<p>Account creation successful! Please log in using the email you just provided.</p>";
+				document.getElementById("madeaccount").innerHTML = "<p>Account creation successful! Please log in using the email you just provided.</p>";
 				window.location = "index.html";
 			},
 			error: function(xhr, status, error) {
