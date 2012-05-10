@@ -221,7 +221,7 @@ function getJSON(num)
 				}
 				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
-		})
+		});
 	}
 	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
 	{
@@ -229,7 +229,7 @@ function getJSON(num)
 		$.getJSON(userUrl, function(jdata)
 		{
 			console.log(jdata);
-		}
+		});
 	}
 }
 function limitText(limitField, limitNum)
