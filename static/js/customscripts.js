@@ -166,6 +166,7 @@ function postJSON(id, num)
 {
 	if (num == 0)
 	{
+		document.getElementById("signupbtn").disabled = 'disabled';
 		var fn = document.getElementById("FName").value; //$("input[name=FName]").val();
 		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
 		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
@@ -179,6 +180,7 @@ function postJSON(id, num)
 			complete: function(data){
 				//document.getElementById("madeaccount").style.display = 'block';
 				alert("Account creation successful!  Please log in to continue.");
+				
 				window.location = "index.html";
 			},
 			error: function(xhr, status, error) {
