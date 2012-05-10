@@ -237,15 +237,15 @@ function getJSON(num)
 					// $('#starsyougave').append('<tr><td>'+jdata.firstName+'</td>');
 					// $('#starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
 					// $('#starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
+					$('#starsyougot').append('<tr><td>'+jdata.stars[j].issuer_id+'</td><td>'+jdata.stars[j].category+'</td><td>You</td></tr>');
 					
-					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.issued[i].category+'</td><td>'+jdata.issued[i].owner_id+'</td></tr>');
 				}
 			}
 			if (jdata.stars.length > 0)
 			{
 				for (j = 0; j < jdata.stars.length; ++j)
 				{
-					$('#starsyougot').append('<tr><td>'+jdata.stars[j].owner_id+'</td><td>'+jdata.stars[j].category+'</td><td>You</td></tr>');
+					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.issued[i].category+'</td><td>'+jdata.issued[i].owner_id+'</td></tr>');
 				}
 			}
 		});
