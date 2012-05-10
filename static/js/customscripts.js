@@ -184,7 +184,7 @@ function postJSON(id, num)
 				document.getElementById("signupbtnenable").style.display = "block";
 				document.getElementById("signupbtndisable").style.display = "none";
 			},
-			success(data, textStatus, jqXHR){
+			success: function(data, textStatus, jqXHR){
 				alert("Account creation successful!  Please log in to continue.");
 				window.location = "index.html";
 			},
