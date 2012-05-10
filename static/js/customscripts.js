@@ -164,10 +164,11 @@ function resetView()
 }
 function postJSON(id, num)
 {
-	document.getElementById("enabled").style.display = "none";
-	document.getElementById("disabled").style.display = "block";
+	
 	if (num == 0)
 	{
+		document.getElementById("enabled").style.display = "none";
+		document.getElementById("disabled").style.display = "block";
 		var fn = document.getElementById("FName").value; 
 		var ln = document.getElementById("LName").value; 
 		var em = document.getElementById("Email").value; 
