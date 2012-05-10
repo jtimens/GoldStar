@@ -164,6 +164,8 @@ function resetView()
 }
 function postJSON(id, num)
 {
+	document.getElementById("signupbtnenable").style.display = "none";
+	document.getElementById("signupbtndisable").style.display = "block";
 	if (num == 0)
 	{
 		document.getElementById("signupbtn").disabled = 'disabled';
@@ -179,8 +181,11 @@ function postJSON(id, num)
 			dataType: "json",
 			complete: function(data){
 				//document.getElementById("madeaccount").style.display = 'block';
+				document.getElementById("signupbtnenable").style.display = "block";
+				document.getElementById("signupbtndisable").style.display = "none";
+			},
+			success(data, textStatus, jqXHR){
 				alert("Account creation successful!  Please log in to continue.");
-				
 				window.location = "index.html";
 			},
 			error: function(xhr, status, error) {
