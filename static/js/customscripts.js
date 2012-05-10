@@ -168,7 +168,6 @@ function postJSON(id, num)
 	document.getElementById("signupbtndisable").style.display = "block";
 	if (num == 0)
 	{
-		document.getElementById("signupbtn").disabled = 'disabled';
 		var fn = document.getElementById("FName").value; //$("input[name=FName]").val();
 		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
 		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
