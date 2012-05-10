@@ -182,10 +182,11 @@ function postJSON(id, num)
 			complete: function(data){
 				document.getElementById("enabled").style.display = "block";
 				document.getElementById("disabled").style.display = "none";
+				window.location = "index.html";
 			},
 			success: function(data, textStatus, jqXHR){
 				alert("Account creation successful!  Please log in to continue.");
-				window.location = "index.html";
+				
 			},
 			error: function(xhr, status, error){
 				alert("Error: " + error);
