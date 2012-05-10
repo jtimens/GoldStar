@@ -48,7 +48,7 @@ function login()
 				}
 				if(rv)
 				{
-					document.getElementById("madeaccount").innerHTML = "";
+					document.getElementById("madeaccount").style.display = "none";
 					window.location = "main.html";
 				}	
 				else
@@ -177,7 +177,7 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				document.getElementById("madeaccount").innerHTML = "<p>Account creation successful! Please log in using the email you just provided.</p>";
+				document.getElementById("madeaccount").style.display = 'block';
 				window.location = "index.html";
 			},
 			error: function(xhr, status, error) {
