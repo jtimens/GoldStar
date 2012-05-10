@@ -187,7 +187,7 @@ function postJSON(id, num)
 				alert("Account creation successful!  Please log in to continue.");
 				window.location = "index.html";
 			},
-			error: function(xhr, status, error) {
+			error: function(xhr, status, error){
 				alert("Error: " + error);
 			}
 		});		
