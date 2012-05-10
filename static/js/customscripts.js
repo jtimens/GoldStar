@@ -164,13 +164,13 @@ function resetView()
 }
 function postJSON(id, num)
 {
-	document.getElementById("signupbtnenable").style.display = "none";
-	document.getElementById("signupbtndisable").style.display = "block";
+	document.getElementById("enabled").style.display = "none";
+	document.getElementById("disabled").style.display = "block";
 	if (num == 0)
 	{
-		var fn = document.getElementById("FName").value; //$("input[name=FName]").val();
-		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
-		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
+		var fn = document.getElementById("FName").value; 
+		var ln = document.getElementById("LName").value; 
+		var em = document.getElementById("Email").value; 
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		$.ajax({
 			type: "POST",
@@ -179,9 +179,8 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
-				//document.getElementById("madeaccount").style.display = 'block';
-				document.getElementById("signupbtnenable").style.display = "block";
-				document.getElementById("signupbtndisable").style.display = "none";
+				document.getElementById("enabled").style.display = "block";
+				document.getElementById("disabled").style.display = "none";
 			},
 			success: function(data, textStatus, jqXHR){
 				alert("Account creation successful!  Please log in to continue.");
