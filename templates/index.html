@@ -19,40 +19,43 @@
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
 				<h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
 					<h6 style="text-align:center;"> Please provide some information to us before starting: </h6>
+					<form>
 					<p> 
 						<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
 									<input id="FName" type="text" class="" placeholder="First Name" name="FName" maxlength="50" required>
 								</td>
-								
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
 									<input id="LName" type="text" class="" placeholder="Last Name" name="LName" maxlength="50" required>
 								</td>
-								
 							</tr>
 							<tr>
 								<td style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
 									<input id="Email" type="email" class="" placeholder="Email" name="Email" maxlength="100" required>
 								</td>
-								
 							</tr>
 							<tr>
-								
-								<td style="text-align:center;">
-									<!-- <input type="submit" class="btn btn-info" value="Sign Up" /> -->
-									<button id="signupbtn" class="btn btn-large btn-primary" onclick="postJSON(this.id, 0)">Sign Up</button>
+								<td id="enabled" style="text-align:center; width:100%; padding-left:0px; padding-right:0px;">
+									<button type="submit" id="signupbtnenable" class="btn btn-large btn-primary" onclick="postJSON(this.id, 0)">Sign Up</button>
+								</td>
+							</tr>
+							<tr>
+								<td id="disabled" style="text-align:center; width:100%; padding-left:0px; padding-right:0px; display:none;">
+									<button id="signupbtndisable" class="btn btn-large btn-primary" disabled="disabled">Sign Up</button>
 								</td>
 							</tr>
 						</table>
 					</p>
+					</form>
 			</div>
 		</div>
 		<div id="index2" class="container" style="width:100%; padding-left:0px; padding-right:0px;display:block;">
 			<div class="well" style="width:100%; padding-left:0px; padding-right:0px;">
-				 <h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
+				<h2 style="text-align:center;">Welcome to Gold Star!</h2><br /><br />
+				<div id="madeaccount" style="display:none; text-align:center;"><p>Account creation successful!  Please log in to continue.</p></div>
 				<h6 style="text-align:center;"> Please use your email address to log in: </h6>
 				<p> 
 					<table class="table" style="width:100%; padding-left:0px; padding-right:0px;">
@@ -73,7 +76,7 @@
 			</div>
 		</div>
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 		<script src="../static/js/customscripts.js"></script>
 		<script src="../static/js/bootstrap.js"></script>
 	</body>

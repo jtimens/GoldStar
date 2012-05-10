@@ -6,7 +6,7 @@
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
-	<body onload="getJSON(0)">
+	<body onload="getJSON(0); getJSON(1)">
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
@@ -33,6 +33,7 @@
 							<h6>CHOOSE A PERSON TO GIVE A STAR TO</h6>
 							<p>
 									<select id="select1">
+										<option value="-1">Select One</option>
 									</select><!-- <button onclick="showselect('select1')">showSelValue</button> -->
 									<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>
 							</p>
@@ -56,8 +57,7 @@
 							<h6>CHOOSE TO COMMENT (120 character limit)</h6>
 							<p>
 								<textarea id="select3" onKeyDown="limitText(this.id, 120);" onKeyUp="limitText(this.id, 120);" placeholder="Type Here..." style="width:100%;height:65px;resize:none"></textarea><br />
-								<button id="innergive3" class="btn btn-info btn-small" onclick="postJSON('select2', 1)">Give Star</button> 
-								<!-- <button id="innergive3" class="btn btn-info btn-small" ><a style="color:white;text-decoration:none;" href="results.html">Give Star</a></button> -->
+								<button id="innergive3" class="btn btn-info btn-small" onclick="postJSON('select2', 1)">Give Star</button>
 							</p>
 						</div>
 					</div>
@@ -69,41 +69,10 @@
 				<div class="well">
 					<h2> My Gold Stars</h2> <br />
 					<h6>THESE ARE THE STARS THAT PEOPLE HAVE AWARDED YOU</h6>
-					<p> <button id="btnshow2" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Show</button><button id="btnhide2" style="display:none;" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Hide</button></p>
-					<div id="tbl2" style="display:none;">
-						<table class="table table-striped" style="width:100%;">
-							<tr>
-								<td>You</td>
-								<td>INFLUENCED</td>
-								<td>Michael Jordan</td>
-							</tr>
-							<tr>
-								<td>You</td>
-								<td>HELPED</td>
-								<td>Michael Jackson</td>
-							</tr>
-							<tr>
-								<td>You</td>
-								<td>GUIDED</td>
-								<td>Michael Jayson</td>
-							</tr>
-							<tr>
-								<td>You</td>
-								<td>IMPRESSED</td>
-								<td>Michael Johnson</td>
-							</tr>
-							<tr>
-								<td>You</td>
-								<td>PERSUADED</td>
-								<td>Michael Ji-son</td>
-							</tr>
-							<tr>
-								<td>You</td>
-								<td>INSPIRED</td>
-								<td>Michael Ji-son</td>
-							</tr>
-						</table>
-					</div>
+					
+					<table id="starsyougave" class="table table-striped" style="width:100%;">
+					</table>
+					
 				</div>
 			</div>
 		</div>
@@ -112,47 +81,14 @@
 				<div class="well">
 					<h2> Awarded Stars </h2> <br />
 					<h6>THESE ARE THE STARS THAT YOU HAVE AWARDED PEOPLE</h6>
-					<p> <button id="btnshow3" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Show</button><button id="btnhide3" style="display:none;" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)" >Click Here to Hide</button></p>
-					<div id="tbl3" style="display:none;">
-						<table class="table table-striped" style="width:100%;">
-							<tr>
-								<td>Michael Jordan</td>
-								<td>INFLUENCED</td>
-								<td>You</td>
-							</tr>
-							<tr>
-								<td>Mike Jordan</td>
-								<td>HELPED</td>
-								<td>You</td>
-							</tr>
-							<tr>
-								<td>Matt Jordan</td>
-								<td>GUIDED</td>
-								<td>You</td>
-							</tr>
-							<tr>
-								<td>Mark Jordan</td>
-								<td>IMPRESSED</td>
-								<td>You</td>
-							</tr>
-							<tr>
-								<td>Mitch Jordan</td>
-								<td>PERSUADED</td>
-								<td>You</td>
-							</tr>
-							<tr>
-								<td>Mitch Jordan</td>
-								<td>INSPIRED</td>
-								<td>You</td>
-							</tr>
-						</table>
-					</div>
+					<table id="starsyougot" class="table table-striped" style="width:100%;">
+					</table>
 				</div>
 			</div>
 		</div>
 			
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 		<script src="../static/js/customscripts.js"></script>
 		<script src="../static/js/bootstrap.js"></script>
 	</body>

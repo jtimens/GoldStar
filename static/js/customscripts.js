@@ -48,6 +48,7 @@ function login()
 				}
 				if(rv)
 				{
+					//document.getElementById("madeaccount").style.display = "none";
 					window.location = "main.html";
 				}	
 				else
@@ -163,11 +164,14 @@ function resetView()
 }
 function postJSON(id, num)
 {
+	
 	if (num == 0)
 	{
-		var fn = document.getElementById("FName").value; //$("input[name=FName]").val();
-		var ln = document.getElementById("LName").value; //$("input[name=LName]").val();
-		var em = document.getElementById("Email").value; //$("input[name=Email]").val();
+		document.getElementById("enabled").style.display = "none";
+		document.getElementById("disabled").style.display = "block";
+		var fn = document.getElementById("FName").value; 
+		var ln = document.getElementById("LName").value; 
+		var em = document.getElementById("Email").value; 
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		$.ajax({
 			type: "POST",
@@ -176,10 +180,9 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			complete: function(data){
+				document.getElementById("enabled").style.display = "block";
+				document.getElementById("disabled").style.display = "none";
 				window.location = "index.html";
-			},
-			error: function(xhr, status, error) {
-				alert("Error: " + error);
 			}
 		});		
 	}
@@ -208,7 +211,7 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{
-			var i = 0
+			var i = 0;
 			for(i=0;i<jdata.objects.length;++i)
 			{
 				if (sessionStorage.userID == jdata.objects[i].id)
@@ -218,10 +221,35 @@ function getJSON(num)
 				}
 				$('#select1').append('<option value="'+jdata.objects[i].id+'">'+jdata.objects[i].firstName+' '+jdata.objects[i].lastName+'</option>');
 			}
-		})
+		});
 	}
 	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
 	{
+		var userUrl = "/api/user/"+sessionStorage.userID;
+		$.getJSON(userUrl, function(jdata)
+		{
+			var i = 0;
+			var j = 0;
+			if (jdata.issued.length > 0)
+			{
+				for (i = 0; i < jdata.issued.length; ++i)
+				{
+					// $('#starsyougave').append('<tr><td>'+jdata.firstName+'</td>');
+					// $('#starsyougave').append('<td>'+jdata.issued[i].category+'</td>');
+					// $('#starsyougave').append('<td>'+jdata.issued[i].owner_id+'</td></tr>');
+					$('#starsyougot').append('<tr><td>'+jdata.issued[i].issuer_id+'</td><td>'+jdata.issued[i].category+'</td><td>You</td></tr>');
+					
+				}
+			}
+			if (jdata.stars.length > 0)
+			{
+				for (j = 0; j < jdata.stars.length; ++j)
+				{
+					$('#starsyougave').append('<tr><td>You</td><td>'+jdata.stars[j].category+'</td><td>'+jdata.stars[j].owner_id+'</td></tr>');
+				}
+			}
+		});
+		
 	}
 }
 function limitText(limitField, limitNum)
