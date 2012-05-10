@@ -183,13 +183,6 @@ function postJSON(id, num)
 				document.getElementById("enabled").style.display = "block";
 				document.getElementById("disabled").style.display = "none";
 				window.location = "index.html";
-			},
-			success: function(data, textStatus, jqXHR){
-				alert("Account creation successful!  Please log in to continue.");
-				
-			},
-			error: function(xhr, status, error){
-				alert("Error: " + error);
 			}
 		});		
 	}
