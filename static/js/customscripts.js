@@ -225,8 +225,11 @@ function getJSON(num)
 	}
 	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
 	{
-		var userUrl = "/api/star/"+sessionStorage.userID;
-		alert(userUrl);
+		var userUrl = "/api/user/"+sessionStorage.userID;
+		$.getJSON(userUrl, function(jdata)
+		{
+			console.log(jdata);
+		}
 	}
 }
 function limitText(limitField, limitNum)
