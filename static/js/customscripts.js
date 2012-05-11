@@ -220,22 +220,42 @@ function getJSON(num)
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
 		{
-			function MyViewModel()
+			function Stars(issuer_id, owner_id, description, category)
 			{
 				var self = this;
-				self.stars = jdata.stars;
-				self.fullName = ko.computed(function(){
-					var URL = '/api/user' + self.issuer_id;
+				self.issuerfullName = ko.computed(function(){
+					var URL = '/api/user' + issuer_id;
 					var x = "";
 					$.getJSON(URL, function(issuedata){
 						x = issuedata.firstName + ' ' + issuedata.lastName;
 					});
 					return x;
 				});
+				self.ownerfullName = ko.computed(function(){
+					var URL = '/api/user' + owner_id;
+					var x = "";
+					$.getJSON(URL, function(ownerdata){
+						x = ownerdata.firstName + ' ' + ownerdata.lastName;
+					});
+					return x;
+				});
+				self.description = description;
+				self.category = category;
+
+			}
+			function MyViewModel()
+			{
+				var self = this;
+				var stars = ko.observableArray();
+				for(var i = 0; i < jdata.stars.length; ++i)
+				{
+					stars.push(new Stars(jdata.stars[i].issuer_id, jdata.stars[i].owner_id, jdata.stars[i].description, jdata.stars[i].category));
+				}
 			}
 			//ko.applyBindings(jdata,document.getElementById('userDisplay'));
 			//ko.applyBindings(jdata,document.getElementById('gold2'));
 			//ko.applyBindings(jdata,document.getElementById('gold3'));
+			ko.applyBindings(new MyViewModel());
 		});
 		
 	}
