@@ -1,3 +1,4 @@
+var userData = null;
 function canUseStorage()
 {
 	if(typeof(Storage)!=="undefined")
@@ -220,9 +221,12 @@ function getJSON(num)
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
 		{
-			ko.applyBindings(jdata,document.getElementById('userDisplay'));
-			ko.applyBindings(jdata,document.getElementById('gold2'));
-			ko.applyBindings(jdata,document.getElementById('gold3'));
+			jdata.stars = ko.observableArray(jdata.stars);
+			jdata.issued = ko.observableArray(jdata.issued);
+			userData = jdata;
+			ko.applyBindings(userData,document.getElementById('userDisplay'));
+			ko.applyBindings(userData,document.getElementById('gold2'));
+			ko.applyBindings(userData,document.getElementById('gold3'));
 		});
 		
 	}

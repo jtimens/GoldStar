@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
+from sqlalchemy.ext.hybrid import hybrid_property
 from flask.ext.restless import APIManager
 import datetime
 
@@ -29,7 +30,6 @@ class Star(db.Model):
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
-
 	#Validation defs which validate 1 parameter of the table at a time
 
 	#Validates the Description
