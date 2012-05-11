@@ -1,4 +1,5 @@
 var userData = null;
+var userList = {};
 function canUseStorage()
 {
 	if(typeof(Storage)!=="undefined")
@@ -213,6 +214,10 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{	
+			for(var i in jdata.objects){
+				var currentUser = jdata.objects[i];
+				userList[currentUser.id] = currentUser;				
+			}
 			ko.applyBindings(jdata,document.getElementById('give1'));			
 		});
 	}
@@ -221,6 +226,14 @@ function getJSON(num)
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
 		{
+			for(var i in jdata.stars){
+					var star = jdata.stars[i];
+					var user = userList[star.issuer_id];
+					if(user)
+						star.issuerfullName = user.firstName + " " + user.lastName;											
+					else
+						star.issuerfullName = "";
+			};
 			jdata.stars = ko.observableArray(jdata.stars);
 			jdata.issued = ko.observableArray(jdata.issued);
 			userData = jdata;
