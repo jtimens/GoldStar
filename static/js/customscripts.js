@@ -220,9 +220,22 @@ function getJSON(num)
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
 		{
-			ko.applyBindings(jdata,document.getElementById('userDisplay'));
-			ko.applyBindings(jdata,document.getElementById('gold2'));
-			ko.applyBindings(jdata,document.getElementById('gold3'));
+			function MyViewModel()
+			{
+				var self = this;
+				self.stars = jdata.stars;
+				self.fullName = ko.computed(function(){
+					var URL = '/api/user' + self.issuer_id;
+					var x = "";
+					$.getJSON(URL, function(issuedata){
+						x = issuedata.firstName + ' ' + issuedata.lastName;
+					});
+					return x;
+				});
+			}
+			//ko.applyBindings(jdata,document.getElementById('userDisplay'));
+			//ko.applyBindings(jdata,document.getElementById('gold2'));
+			//ko.applyBindings(jdata,document.getElementById('gold3'));
 		});
 		
 	}
