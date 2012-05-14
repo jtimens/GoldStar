@@ -75,7 +75,7 @@
 			<div class="container">
 				<div class="well">
 					<h2>My Gold Stars</h2> <br />
-					<h6>THESE ARE THE STARS THAT PEOPLE HAVE AWARDED YOU</h6>
+					<h6>THESE are stars from people you have impacted or had a positive effect on</h6>
 					
 					<table id="starsyougave" class="table table-striped" style="width:100%;">
 						<tbody data-bind="foreach: stars">
@@ -83,14 +83,10 @@
 								<td>YOU</td>
 								<td data-bind="text: category"></td>
 								<td data-bind="text: issuerfullName"></td>
-<<<<<<< HEAD
-								<td><button class="btn btn-primary btn-mini">Show Comment</button></td>
-=======
 								<td><button class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>
 							</tr>
 							<tr style="display: none">
 								<td><div data-bind="text: description"></div></td>
->>>>>>> 117317204644ae46d90b979f42ba05af3dae8739
 							</tr>
 						</tbody>
 					</table>
@@ -103,7 +99,7 @@
 			<div class="container">
 				<div class="well">
 					<h2>Awarded Stars</h2> <br />
-					<h6>THESE ARE THE STARS THAT YOU HAVE AWARDED PEOPLE</h6>
+					<h6>THESE ARE stars that you have given people who have had a positive effect on you</h6>
 					<table id="starsyougot" class="table table-striped" style="width:100%;">
 						<tbody data-bind="foreach: issued">
 							<tr>
