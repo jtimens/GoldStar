@@ -234,6 +234,14 @@ function getJSON(num)
 					else
 						star.issuerfullName = "";
 			};
+			for(var i in jdata.issued){
+					var star = jdata.issued[i];
+					var user = userList[star.owner_id];
+					if(user)
+						star.ownerfullName = user.firstName + " " + user.lastName;											
+					else
+						star.ownerfullName = "";
+			};
 			jdata.stars = ko.observableArray(jdata.stars);
 			jdata.issued = ko.observableArray(jdata.issued);
 			userData = jdata;
