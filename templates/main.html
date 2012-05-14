@@ -83,7 +83,14 @@
 								<td>YOU</td>
 								<td data-bind="text: category"></td>
 								<td data-bind="text: issuerfullName"></td>
+<<<<<<< HEAD
 								<td><button class="btn btn-primary btn-mini">Show Comment</button></td>
+=======
+								<td><button class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>
+							</tr>
+							<tr style="display: none">
+								<td><div data-bind="text: description"></div></td>
+>>>>>>> 117317204644ae46d90b979f42ba05af3dae8739
 							</tr>
 						</tbody>
 					</table>
@@ -102,7 +109,11 @@
 							<tr>
 								<td data-bind="text: ownerfullName"></td>
 								<td data-bind="text: category"></td>
-								<td>YOU</td>								
+								<td>YOU</td>
+								<td><button class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>			
+							</tr>
+							<tr style="display: none">
+								<td><div data-bind="text: description"></div></td>
 							</tr>
 						</tbody>												
 					</table>
