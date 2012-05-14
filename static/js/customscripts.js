@@ -56,7 +56,7 @@ function login()
 				else
 					alert("Email not found.");
 			}
-		})
+		});
 	}
 	else
 	{
