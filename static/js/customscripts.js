@@ -221,7 +221,7 @@ function getJSON(num)
 			ko.applyBindings(jdata,document.getElementById('give1'));			
 		});
 	}
-	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
+	if (num == 1)
 	{
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
