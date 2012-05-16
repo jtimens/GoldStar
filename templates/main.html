@@ -101,7 +101,7 @@
 			<div class="container">
 				<div class="well">
 					<h2>Awarded Stars</h2> <br />
-					<h6>THESE ARE stars that you have given people who have had a positive effect on you</h6>
+					<h6>THESE ARE STARS THAT YOU HAVE GIVEN PEOPLE WHO HAVE HAD A POSITIVE EFFECT ON YOU</h6>
 					<table id="starsyougot" class="table table-striped" style="width:100%;">
 						<tbody data-bind="foreach: issued">
 							<tr>
@@ -111,7 +111,7 @@
 								<td><button data-bind = "value: id" class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>			
 							</tr>
 							<tr style = "display:none">
-								<td><div data-bind="value: id text: description"></div></td>
+								<td><div data-bind="value: id, text: description"></div></td>
 							</tr>
 						</tbody>												
 					</table>
