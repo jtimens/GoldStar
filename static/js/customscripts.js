@@ -204,9 +204,11 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){
-				 giveGoldStar("innergive3");}
-			});
+			success: function(data){
+				sessionStorage.starID = data.id;
+				giveGoldStar("innergive3");
+			}
+		});
 	}
 }
 function getJSON(num)
