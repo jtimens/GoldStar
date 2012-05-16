@@ -85,10 +85,10 @@
 								<td>YOU</td>
 								<td data-bind="text: category"></td>
 								<td data-bind="text: issuerfullName"></td>
-								<td><button data-bind = "value: id" class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>
+								<td><button data-bind = "value: id" class="btn btn-primary btn-mini">Description</button></td>
 							</tr>
-							<tr style="display: none">
-								<td><div data-bind="text: description"></div></td>
+							<tr>
+								<td><div data-bind="value: id, text: description" style="display: none"></div></td>
 							</tr>
 						</tbody>
 					</table>
@@ -110,8 +110,8 @@
 								<td>YOU</td>
 								<td><button data-bind = "value: id" class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>			
 							</tr>
-							<tr style = "display:none">
-								<td><div data-bind="value: id, text: description"></div></td>
+							<tr>
+								<td><div style = "display:none" data-bind="value: id, text: description"></div></td>
 							</tr>
 						</tbody>												
 					</table>
