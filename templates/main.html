@@ -39,7 +39,9 @@
 									<select id='select1' >
 										<option value='-1'>Select One </option>
 										<!-- ko foreach: objects -->
-										<option data-bind="value: id, text:firstName + ' ' + lastName"></option>
+											<!-- ko if: id != sessionStorage.userID -->
+												<option data-bind="value: id, text:firstName + ' ' + lastName"></option>
+											<!-- /ko -->
 										<!-- /ko -->
 									</select>
 									<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>

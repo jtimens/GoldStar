@@ -147,7 +147,6 @@ function toggleInnerView(id)
 function giveGoldStar(id)
 {
 	e = document.getElementById(id);
-	
 	if (e.id == "innergive1")
 		document.getElementById("give2").style.display = 'block';
 	if (e.id == "innergive2")
@@ -174,7 +173,6 @@ function postJSON(id, num)
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
-
 		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
 		$.ajax({
 			type: "POST",
@@ -185,6 +183,7 @@ function postJSON(id, num)
 			complete: function(data){
 				document.getElementById("enabled").style.display = "block";
 				document.getElementById("disabled").style.display = "none";
+				alert("You have successfully signed up! Please Login!");
 				window.location = "index.html";
 			}
 		});		
@@ -193,6 +192,8 @@ function postJSON(id, num)
 	{
 		var e = document.getElementById("select1");
 		var e1 = e.options[e.selectedIndex].value;
+		starName = e.options[e.selectedIndex].text;
+		sessionStorage.starName = starName;
 		e = document.getElementById("select2");
 		var e2 = e.options[e.selectedIndex].value;
 		var e3 = document.getElementById("select3").value;

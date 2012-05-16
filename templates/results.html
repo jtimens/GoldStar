@@ -19,7 +19,7 @@
 		</div>
 		<div class="container">
 			<div class="well">
-				<p>Congratulations!  You successfully submitted a star!</p>
+				<p id = "successfulStar"></p>
 				<p>Redirecting to Main in 5 Seconds!</p>
 				<p>If page does not automatically redirect, <a href="main.html">click here</a> to manually redirect.</p>
 			</div>
@@ -31,6 +31,9 @@
 		<script src="../static/js/customscripts.js"></script>
 		
 		<script type="text/javascript">
+			$(function(){
+				$('#successfulStar').html('Congratulations!  You successfully gave a star to ' + sessionStorage.starName);
+			});
 			function redirectToMain()
 			{
 				window.location = "main.html";
