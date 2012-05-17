@@ -168,8 +168,8 @@ function postJSON(id, num)
 	
 	if (num == 0)
 	{
-		document.getElementById("enabled").style.display = "none";
-		document.getElementById("disabled").style.display = "block";
+		//document.getElementById("enabled").style.display = "none";
+		//document.getElementById("disabled").style.display = "block";
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
@@ -181,14 +181,19 @@ function postJSON(id, num)
 			contentType: "application/json",
 			dataType: "json",
 			success: function(data){
-				document.getElementById("enabled").style.display = "block";
-				document.getElementById("disabled").style.display = "none";
+				//document.getElementById("enabled").style.display = "block";
+				//document.getElementById("disabled").style.display = "none";
 				alert("You have successfully signed up! Please Login!");
 				window.location = "index.html";
 			},
 			error: function	(data){
-				alert("Sign Up failed! Bad Information!")
+				console.log(data);
+				alert("Sign Up failed! Bad Information!");
 			}
+			//complete: function(data){
+			//	document.getElementById("enabled").style.display = "block";
+			//	document.getElementById("disabled").style.display = "none";
+			//}
 		});		
 	}
 	else if (num == 1)
