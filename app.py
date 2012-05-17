@@ -148,10 +148,6 @@ def main_route():
 def result_route():
 	return render_template('results.html')
 
-@app.route('/t')
-def test_route():
-	return render_template('test.html')
-
 #Initialize the Database
 db.create_all()
 
