@@ -180,11 +180,14 @@ function postJSON(id, num)
 			data: userData,
 			contentType: "application/json",
 			dataType: "json",
-			complete: function(data){
+			success: function(data){
 				document.getElementById("enabled").style.display = "block";
 				document.getElementById("disabled").style.display = "none";
 				alert("You have successfully signed up! Please Login!");
 				window.location = "index.html";
+			},
+			error: function	(data){
+				alert("Sign Up failed! Bad Information!")
 			}
 		});		
 	}
