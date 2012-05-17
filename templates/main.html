@@ -77,7 +77,7 @@
 			<div class="container">
 				<div class="well">
 					<h2>My Gold Stars</h2> <br />
-					<h6>THESE are stars from people you have impacted or had a positive effect on</h6>
+					<h6>THESE ARE STARS FROM PEOPLE YOU HAVE IMPACTED OR HAD A POSITIVE EFFECT ON</h6>
 					
 					<table id="starsyougave" class="table table-striped" style="width:100%;">
 						<tbody data-bind="foreach: stars">
@@ -85,10 +85,10 @@
 								<td>YOU</td>
 								<td data-bind="text: category"></td>
 								<td data-bind="text: issuerfullName"></td>
-								<td><button data-bind = "value: id" class="btn btn-primary btn-mini">Description</button></td>
+								<td><button data-bind="value: id" class="btn btn-primary btn-mini"  onclick="showDescription(this.value)">Description</button></td>
 							</tr>
 							<tr>
-								<td><div data-bind="value: id, text: description" style="display: none"></div></td>
+								<td><div data-bind="attr: { id: id }, text: description" style="display: none"></div></td>
 							</tr>
 						</tbody>
 					</table>
@@ -108,10 +108,10 @@
 								<td data-bind="text: ownerfullName"></td>
 								<td data-bind="text: category"></td>
 								<td>YOU</td>
-								<td><button data-bind = "value: id" class="btn btn-primary btn-mini" onclick="showDescription()">Description</button></td>			
+								<td><button data-bind="value: id" class="btn btn-primary btn-mini" onclick="showDescription(this.value)">Description</button></td>			
 							</tr>
 							<tr>
-								<td><div style = "display:none" data-bind="value: id, text: description"></div></td>
+								<td><div style = "display:none" data-bind="attr: { id: id }, text: description"></div></td>
 							</tr>
 						</tbody>												
 					</table>

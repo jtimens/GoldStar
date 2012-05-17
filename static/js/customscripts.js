@@ -266,10 +266,8 @@ function showselect(id)
 	var e = document.getElementById(id);
 	alert(e.options[e.selectedIndex].value);
 }
-
-
-
-
-
-
-
+function showDescription(divid)
+{
+	console.log(divid);
+	$('#' + divid).toggle();
+}
