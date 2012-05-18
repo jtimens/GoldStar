@@ -168,34 +168,20 @@ function postJSON(id, num)
 
 	if (num == 0)
 	{
-		//document.getElementById("enabled").style.display = "none";
-		//document.getElementById("disabled").style.display = "block";
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
 		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
+		var URL = "api/user"
 		$.ajax({
-			type: "POST",
-			url: "/api/user",
-			data: userData,
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data){
-				//document.getElementById("enabled").style.display = "block";
-				//document.getElementById("disabled").style.display = "none";
-				alert("You have successfully signed up! Please Login!");
-				window.location = "index.html";
-			}/*,
-			error: function	(data){
-				console.log(data);
-				alert("Sign Up failed! Bad Information!");
-			}
-			*/
-			//complete: function(data){
-			//	document.getElementById("enabled").style.display = "block";
-			//	document.getElementById("disabled").style.display = "none";
-			//}
-		});		
+ 			type: 'POST',
+  			url: URL,
+  			data: userData,
+  			success: function(data){alert('You have successfully created an account!');},
+  			error: function(data){alert('Account Creation Failed!');toggleLoginView(this.id);},
+  			contentType: "application/json",
+			dataType: "json"
+		});
 	}
 	else if (num == 1)
 	{
