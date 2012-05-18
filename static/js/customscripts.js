@@ -174,16 +174,35 @@ function postJSON(id, num)
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
 		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
-		$.ajax({
-			type: "POST",
-			url: "/api/user",
-			data: userData,
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data){
-				//document.getElementById("enabled").style.display = "block";
-				//document.getElementById("disabled").style.display = "none";
+		var q = JSON.stringify({"filters": [{"name": "email", "op": "eq", "val": em}]});
+		$.getJSON('api/user?q=' + q, function(data){
+			if(jQuery.isEmptyObject(data.objects))
+			{
+				$.ajax({
+					type: "POST",
+					url: "/api/user",
+					data: userData,
+					contentType: "application/json",
+					dataType: "json",
+					success: function(data){
+						//document.getElementById("enabled").style.display = "block";
+						//document.getElementById("disabled").style.display = "none";
+						alert("You have successfully signed up! Please Login!");
+						window.location = "index.html";
+					},
+					error: function	(data){
+						alert("Sign Up failed! Bad Information!");
+					}
+					//complete: function(data){
+					//	document.getElementById("enabled").style.display = "block";
+					//	document.getElementById("disabled").style.display = "none";
+					//}
+				});
+			}
+			else
+			{
 				alert("You have successfully signed up! Please Login!");
+<<<<<<< HEAD
 				window.location = "index.html";
 			}
 			//error: function	(data){
@@ -193,6 +212,9 @@ function postJSON(id, num)
 			//	document.getElementById("enabled").style.display = "block";
 			//	document.getElementById("disabled").style.display = "none";
 			//}
+=======
+			}
+>>>>>>> aa6d2014d482f020f2642496b01bee4b1c15b08c
 		});		
 	}
 	else if (num == 1)
@@ -203,19 +225,27 @@ function postJSON(id, num)
 		sessionStorage.starName = starName;
 		e = document.getElementById("select2");
 		var e2 = e.options[e.selectedIndex].value;
-		var e3 = document.getElementById("select3").value;
-		var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
-		$.ajax({
-			type: "POST",
-			url: "/api/star",
-			data: userData,
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data){
-				sessionStorage.starID = data.id;
-				giveGoldStar("innergive3");
-			}
-		});
+		if(e2 != '-1')
+		{
+			var e3 = document.getElementById("select3").value;
+			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+			$.ajax({
+				type: "POST",
+				url: "/api/star",
+				data: userData,
+				contentType: "application/json",
+				dataType: "json",
+				success: function(data){
+					sessionStorage.starID = data.id;
+					giveGoldStar("innergive3");
+				}
+			});
+		}
+		else
+		{
+			alert("Please fill out all values in the form!");
+		}
+		
 	}
 }
 function getJSON(num)

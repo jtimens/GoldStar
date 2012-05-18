@@ -4,9 +4,10 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('#GETJSON').click(function(){
-					var url = "api/user/1"
-					$.getJSON(url, function(data){
-						console.log(data);
+					var em = "Dukebdfan@comcast.net";
+					var q = JSON.stringify({"filters": [{"name": "email", "op": "eq", "val": em}]});
+					$.getJSON('api/user?q=' + q, function(data){
+						console.log(jQuery.isEmptyObject(data.objects));
 					});
 				});
 			});
