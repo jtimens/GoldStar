@@ -174,26 +174,35 @@ function postJSON(id, num)
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
 		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
-		$.ajax({
-			type: "POST",
-			url: "/api/user",
-			data: userData,
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data){
-				//document.getElementById("enabled").style.display = "block";
-				//document.getElementById("disabled").style.display = "none";
-				alert("You have successfully signed up! Please Login!");
-				window.location = "index.html";
-			},
-			error: function	(data){
-				console.log(data);
-				alert("Sign Up failed! Bad Information!");
+		var q = JSON.stringify({"filters": [{"name": "email", "op": "eq", "val": em}]});
+		$.getJSON('api/user?q=' + q, function(data){
+			if(jQuery.isEmptyObject(data.objects))
+			{
+				$.ajax({
+					type: "POST",
+					url: "/api/user",
+					data: userData,
+					contentType: "application/json",
+					dataType: "json",
+					success: function(data){
+						//document.getElementById("enabled").style.display = "block";
+						//document.getElementById("disabled").style.display = "none";
+						alert("You have successfully signed up! Please Login!");
+						window.location = "index.html";
+					},
+					error: function	(data){
+						alert("Sign Up failed! Bad Information!");
+					}
+					//complete: function(data){
+					//	document.getElementById("enabled").style.display = "block";
+					//	document.getElementById("disabled").style.display = "none";
+					//}
+				});
 			}
-			//complete: function(data){
-			//	document.getElementById("enabled").style.display = "block";
-			//	document.getElementById("disabled").style.display = "none";
-			//}
+			else
+			{
+				alert("You have successfully signed up! Please Login!");
+			}
 		});		
 	}
 	else if (num == 1)
