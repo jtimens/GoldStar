@@ -62,7 +62,7 @@ function login()
 	{
 		alert("Update your browser to use this site.");
 	}
-	
+
 }
 function userLogout()
 {
@@ -73,9 +73,9 @@ function toggleLoginView(id)
 {
 	document.getElementById("index1").style.display = 'none';
 	document.getElementById("index2").style.display = 'none';
-	
+
 	e = document.getElementById(id);
-	
+
 	if (e.id == "login1")
 		document.getElementById("index2").style.display = 'block';
 	if (e.id == "login2")
@@ -86,9 +86,9 @@ function toggleView(id)
 	document.getElementById("gold1").style.display = 'none';
 	document.getElementById("gold2").style.display = 'none';
 	document.getElementById("gold3").style.display = 'none';
-	
+
 	e = document.getElementById(id).id;
-	
+
 	if (e == "gg")
 	{
 		document.getElementById("gold1").style.display = 'block';
@@ -103,9 +103,9 @@ function toggleView(id)
 }
 function toggleInnerView(id)
 {
-	
+
 	e = document.getElementById(id);
-	
+
 	if (e.id == "btnshow1")
 	{
 		document.getElementById("tbl1").style.display = 'block';
@@ -165,7 +165,7 @@ function resetView()
 }
 function postJSON(id, num)
 {
-	
+
 	if (num == 0)
 	{
 		//document.getElementById("enabled").style.display = "none";
@@ -174,47 +174,26 @@ function postJSON(id, num)
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
 		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
-		var q = JSON.stringify({"filters": [{"name": "email", "op": "eq", "val": em}]});
-		$.getJSON('api/user?q=' + q, function(data){
-			if(jQuery.isEmptyObject(data.objects))
-			{
-				$.ajax({
-					type: "POST",
-					url: "/api/user",
-					data: userData,
-					contentType: "application/json",
-					dataType: "json",
-					success: function(data){
-						//document.getElementById("enabled").style.display = "block";
-						//document.getElementById("disabled").style.display = "none";
-						alert("You have successfully signed up! Please Login!");
-						window.location = "index.html";
-					},
-					error: function	(data){
-						alert("Sign Up failed! Bad Information!");
-					}
-					//complete: function(data){
-					//	document.getElementById("enabled").style.display = "block";
-					//	document.getElementById("disabled").style.display = "none";
-					//}
-				});
-			}
-			else
-			{
+		$.ajax({
+			type: "POST",
+			url: "/api/user",
+			data: userData,
+			contentType: "application/json",
+			dataType: "json",
+			success: function(data){
+				//document.getElementById("enabled").style.display = "block";
+				//document.getElementById("disabled").style.display = "none";
 				alert("You have successfully signed up! Please Login!");
-<<<<<<< HEAD
 				window.location = "index.html";
+			},
+			error: function	(data){
+				console.log(data);
+				alert("Sign Up failed! Bad Information!");
 			}
-			//error: function	(data){
-			//	alert("Sign Up failed! Bad Information!");
-			//}
 			//complete: function(data){
 			//	document.getElementById("enabled").style.display = "block";
 			//	document.getElementById("disabled").style.display = "none";
 			//}
-=======
-			}
->>>>>>> aa6d2014d482f020f2642496b01bee4b1c15b08c
 		});		
 	}
 	else if (num == 1)
@@ -225,27 +204,19 @@ function postJSON(id, num)
 		sessionStorage.starName = starName;
 		e = document.getElementById("select2");
 		var e2 = e.options[e.selectedIndex].value;
-		if(e2 != '-1')
-		{
-			var e3 = document.getElementById("select3").value;
-			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
-			$.ajax({
-				type: "POST",
-				url: "/api/star",
-				data: userData,
-				contentType: "application/json",
-				dataType: "json",
-				success: function(data){
-					sessionStorage.starID = data.id;
-					giveGoldStar("innergive3");
-				}
-			});
-		}
-		else
-		{
-			alert("Please fill out all values in the form!");
-		}
-		
+		var e3 = document.getElementById("select3").value;
+		var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+		$.ajax({
+			type: "POST",
+			url: "/api/star",
+			data: userData,
+			contentType: "application/json",
+			dataType: "json",
+			success: function(data){
+				sessionStorage.starID = data.id;
+				giveGoldStar("innergive3");
+			}
+		});
 	}
 }
 function getJSON(num)
@@ -289,7 +260,7 @@ function getJSON(num)
 			ko.applyBindings(userData,document.getElementById('gold2'));
 			ko.applyBindings(userData,document.getElementById('gold3'));
 		});
-		
+
 	}
 }
 function limitText(limitField, limitNum)
