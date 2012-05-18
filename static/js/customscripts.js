@@ -185,11 +185,12 @@ function postJSON(id, num)
 				//document.getElementById("disabled").style.display = "none";
 				alert("You have successfully signed up! Please Login!");
 				window.location = "index.html";
-			},
+			}/*,
 			error: function	(data){
 				console.log(data);
 				alert("Sign Up failed! Bad Information!");
 			}
+			*/
 			//complete: function(data){
 			//	document.getElementById("enabled").style.display = "block";
 			//	document.getElementById("disabled").style.display = "none";
