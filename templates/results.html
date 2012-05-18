@@ -19,7 +19,7 @@
 		<div class="container">
 			<div class="well">
 				<p id = "successfulStar"></p>
-				<p>Are you sure?</p>
+				<p>Click Submit if this is correct, or Cancel to go back.</p>
 				<button class="btn btn-info btn-small" onclick="redirectToMain()">Submit</button>
 				<button class="btn btn-info btn-small" onclick="undo()">Cancel</button>
 			</div>
@@ -32,7 +32,7 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				$('#successfulStar').html('Congratulations!  You successfully gave a star to ' + sessionStorage.starName);
+				$('#successfulStar').html('You are giving a star to ' + sessionStorage.starName);
 			});
 			function redirectToMain()
 			{
