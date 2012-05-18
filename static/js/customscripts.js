@@ -213,19 +213,27 @@ function postJSON(id, num)
 		sessionStorage.starName = starName;
 		e = document.getElementById("select2");
 		var e2 = e.options[e.selectedIndex].value;
-		var e3 = document.getElementById("select3").value;
-		var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
-		$.ajax({
-			type: "POST",
-			url: "/api/star",
-			data: userData,
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data){
-				sessionStorage.starID = data.id;
-				giveGoldStar("innergive3");
-			}
-		});
+		if(e2 != '-1')
+		{
+			var e3 = document.getElementById("select3").value;
+			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+			$.ajax({
+				type: "POST",
+				url: "/api/star",
+				data: userData,
+				contentType: "application/json",
+				dataType: "json",
+				success: function(data){
+					sessionStorage.starID = data.id;
+					giveGoldStar("innergive3");
+				}
+			});
+		}
+		else
+		{
+			alert("Please fill out all values in the form!");
+		}
+		
 	}
 }
 function getJSON(num)
