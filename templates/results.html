@@ -32,10 +32,11 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				$('#successfulStar').html('You are giving a star to ' + sessionStorage.starName);
+				$('#successfulStar').html('You are giving a star to ' + sessionStorage.starName + '.');
 			});
 			function redirectToMain()
 			{
+				alert("You successfully gave a star to "+sessionStorage.starName+"! Click OK to redirect to main.");
 				window.location = "main.html";
 			}
 			function undo()
