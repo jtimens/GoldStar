@@ -179,16 +179,23 @@ function postJSON(id, num)
   			url: URL,
   			data: myJSON,
   			contentType: "application/json",
+			success: function(data, textStatus, jqXHR){
+				alert('You have successfully created an account!');
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				alert('There was an error.  Make sure there are no numbers in your First and Last name or try using a different email address.');
+			},
   			complete: function(jdata){
+				toggleLoginView("login1");
   			}
 		});
-		var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
-		var URL = '/api/user?q=' + q;
-		$.getJSON(URL, function(jdata){
-			if(jdata.objects.length)
-				alert('You have successfully created an account!');
-				toggleLoginView("login1");
-		});
+		// var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
+		// var URL = '/api/user?q=' + q;
+		// $.getJSON(URL, function(jdata){
+			// if(jdata.objects.length)
+				
+				// toggleLoginView("login1");
+		// });
   		//alert('You have successfully created an account!');
 	}
 	else if (num == 1)
