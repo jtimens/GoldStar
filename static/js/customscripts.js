@@ -170,7 +170,7 @@ function postJSON(id, num)
 	{
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
-		var em = $("#Email").val(); 
+		var em = $("#Email").val();
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		var myJSON = userData;
 		var URL = "/api/user";
@@ -179,15 +179,16 @@ function postJSON(id, num)
   			url: URL,
   			data: myJSON,
   			contentType: "application/json",
-  			success: function(jdata){
-  				alert('You have successfully created an account!');
-  			},
-  			error: function(jdata){
-  				console.log(jdata);
-  				//alert('Account Creation Failed!');
-  				//toggleLoginView(this.id);
+  			complete: function(jdata){
   			}
 		});
+		var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
+		var URL = '/api/user?q=' + q;
+		$.getJSON(URL, function(jdata){
+			if(jdata.objects.length)
+				alert('You have successfully created an account!');
+		});
+  		//alert('You have successfully created an account!');
 	}
 	else if (num == 1)
 	{

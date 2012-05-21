@@ -9,7 +9,7 @@ import datetime
 app = Flask(__name__)
 app.config['DEBUG'] = True
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://zoubpmfsdtxwoq:3G0ELHUf2BcAOSF1hUxDceKsQL@ec2-23-23-234-187.compute-1.amazonaws.com/resource44881'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sql'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testdb.sqlite'
 db = flask.ext.sqlalchemy.SQLAlchemy(app)
 
 # User Table Exception and Validation handling
@@ -159,7 +159,7 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
 #Creates the API
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
-manager.create_api(Star, methods=['GET', 'POST', 'DELETE'], validation_exceptions=[starValidation])
+manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
 

@@ -1,25 +1,16 @@
 <html>
 	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('#GETJSON').click(function(){
 					var em = "Dukebdfan@comcast.net";
-					var userData = JSON.stringify({"firstName":"Jay","lastName":"Ostinowsky","email":em});
-					console.log(userData);
-					var URL = "/api/user"
-					/*$.post(URL, userData,function(data){
-						alert("You have successfully signed up! Please Login!");
-					}, "json");*/
-					$.ajax({
-			 			type: 'POST',
-			  			url: URL,
-			  			data: userData,
-			  			success: function(data){alert('success');},
-			  			error: function(data){console.log(data);},
-			  			contentType: "application/json",
-						dataType: "json"
-					});
+					var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
+			  		var URL = '/api/user?q=' + q;
+			  		$.getJSON(URL, function(jdata){
+			  			console.log(URL);
+			  			console.log(jdata.objects.length);
+			  		});
 				});
 			});
 		</script>
