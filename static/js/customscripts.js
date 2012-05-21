@@ -171,16 +171,22 @@ function postJSON(id, num)
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val(); 
-		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
-		var URL = "api/user"
+		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		var myJSON = userData;
+		var URL = "/api/user";
 		$.ajax({
  			type: 'POST',
   			url: URL,
-  			data: userData,
-  			success: function(data){alert('You have successfully created an account!');},
-  			error: function(data){alert('Account Creation Failed!');toggleLoginView(this.id);},
+  			data: myJSON,
   			contentType: "application/json",
-			dataType: "json"
+  			success: function(jdata){
+  				alert('You have successfully created an account!');
+  			},
+  			error: function(jdata){
+  				console.log(jdata);
+  				//alert('Account Creation Failed!');
+  				//toggleLoginView(this.id);
+  			}
 		});
 	}
 	else if (num == 1)
@@ -198,7 +204,6 @@ function postJSON(id, num)
 			url: "/api/star",
 			data: userData,
 			contentType: "application/json",
-			dataType: "json",
 			success: function(data){
 				sessionStorage.starID = data.id;
 				giveGoldStar("innergive3");
