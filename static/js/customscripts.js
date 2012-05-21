@@ -187,7 +187,7 @@ function postJSON(id, num)
 		$.getJSON(URL, function(jdata){
 			if(jdata.objects.length)
 				alert('You have successfully created an account!');
-				toggleLoginView("login2");
+				toggleLoginView("login1");
 		});
   		//alert('You have successfully created an account!');
 	}
