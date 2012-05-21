@@ -6,21 +6,22 @@
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
-	<body onLoad="setTimeout('redirectToMain()', 4000)">
+	<body>
 		<div class="navbar" style="text-align:center">
 			<div class="navbar-inner" style="text-align:center">
 				<div class="container" style="text-align:center">
 					<img src="../static/img/goldstar.png" width="20" height="20" />
 					<button disabled="disabled" class="btn btn-large btn-inverse">Gold Star</button>
 					<img src="../static/img/goldstar.png" width="20" height="20" />
-					</div>
 				</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="well">
-				<p>Redirecting to Main in 5 Seconds!</p>
-				<p>If page does not automatically redirect, <a href="main.html">click here</a> to manually redirect.</p>
+				<p id = "successfulStar"></p>
+				<p>Click Submit if this is correct, or Cancel to go back.</p>
+				<button class="btn btn-info btn-small" onclick="redirectToMain()">Submit</button>
+				<button class="btn btn-info btn-small" onclick="undo()">Cancel</button>
 			</div>
 		</div>
 	
@@ -30,9 +31,24 @@
 		<script src="../static/js/customscripts.js"></script>
 		
 		<script type="text/javascript">
+			$(function(){
+				$('#successfulStar').html('You are giving a star to ' + sessionStorage.starName + '.');
+			});
 			function redirectToMain()
 			{
+				alert("You successfully gave a star to "+sessionStorage.starName+"! Click OK to redirect to main.");
 				window.location = "main.html";
+			}
+			function undo()
+			{
+				var URL = '/api/star/' + sessionStorage.starID;
+				$.ajax({
+    				url: URL,
+    				type: 'DELETE',
+    				success: function(result) {
+        				window.history.back();
+    				}
+				});
 			}
 		</script>
 	</body>

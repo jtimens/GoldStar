@@ -4,10 +4,13 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('#GETJSON').click(function(){
-					var url = "api/user/1"
-					$.getJSON(url, function(data){
-						console.log(data);
-					});
+					var em = "Dukebdfan@comcast.net";
+					var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
+			  		var URL = '/api/user?q=' + q;
+			  		$.getJSON(URL, function(jdata){
+			  			console.log(URL);
+			  			console.log(jdata.objects.length);
+			  		});
 				});
 			});
 		</script>

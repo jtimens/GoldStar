@@ -56,13 +56,13 @@ function login()
 				else
 					alert("Email not found.");
 			}
-		})
+		});
 	}
 	else
 	{
 		alert("Update your browser to use this site.");
 	}
-	
+
 }
 function userLogout()
 {
@@ -73,9 +73,9 @@ function toggleLoginView(id)
 {
 	document.getElementById("index1").style.display = 'none';
 	document.getElementById("index2").style.display = 'none';
-	
+
 	e = document.getElementById(id);
-	
+
 	if (e.id == "login1")
 		document.getElementById("index2").style.display = 'block';
 	if (e.id == "login2")
@@ -86,9 +86,9 @@ function toggleView(id)
 	document.getElementById("gold1").style.display = 'none';
 	document.getElementById("gold2").style.display = 'none';
 	document.getElementById("gold3").style.display = 'none';
-	
+
 	e = document.getElementById(id).id;
-	
+
 	if (e == "gg")
 	{
 		document.getElementById("gold1").style.display = 'block';
@@ -103,9 +103,9 @@ function toggleView(id)
 }
 function toggleInnerView(id)
 {
-	
+
 	e = document.getElementById(id);
-	
+
 	if (e.id == "btnshow1")
 	{
 		document.getElementById("tbl1").style.display = 'block';
@@ -147,7 +147,6 @@ function toggleInnerView(id)
 function giveGoldStar(id)
 {
 	e = document.getElementById(id);
-	
 	if (e.id == "innergive1")
 		document.getElementById("give2").style.display = 'block';
 	if (e.id == "innergive2")
@@ -166,33 +165,37 @@ function resetView()
 }
 function postJSON(id, num)
 {
-	
+
 	if (num == 0)
 	{
-		document.getElementById("enabled").style.display = "none";
-		document.getElementById("disabled").style.display = "block";
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
-		var em = $("#Email").val(); 
-
-		var userData = JSON.stringify({"firstName":fn,"lastName":ln,"email":em});
+		var em = $("#Email").val();
+		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		var myJSON = userData;
+		var URL = "/api/user";
 		$.ajax({
-			type: "POST",
-			url: "/api/user",
-			data: userData,
-			contentType: "application/json",
-			dataType: "json",
-			complete: function(data){
-				document.getElementById("enabled").style.display = "block";
-				document.getElementById("disabled").style.display = "none";
-				window.location = "index.html";
-			}
-		});		
+ 			type: 'POST',
+  			url: URL,
+  			data: myJSON,
+  			contentType: "application/json",
+  			complete: function(jdata){
+  			}
+		});
+		var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
+		var URL = '/api/user?q=' + q;
+		$.getJSON(URL, function(jdata){
+			if(jdata.objects.length)
+				alert('You have successfully created an account!');
+		});
+  		//alert('You have successfully created an account!');
 	}
 	else if (num == 1)
 	{
 		var e = document.getElementById("select1");
 		var e1 = e.options[e.selectedIndex].value;
+		starName = e.options[e.selectedIndex].text;
+		sessionStorage.starName = starName;
 		e = document.getElementById("select2");
 		var e2 = e.options[e.selectedIndex].value;
 		var e3 = document.getElementById("select3").value;
@@ -202,10 +205,11 @@ function postJSON(id, num)
 			url: "/api/star",
 			data: userData,
 			contentType: "application/json",
-			dataType: "json",
-			complete: function(data){
-				 giveGoldStar("innergive3");}
-			});
+			success: function(data){
+				sessionStorage.starID = data.id;
+				giveGoldStar("innergive3");
+			}
+		});
 	}
 }
 function getJSON(num)
@@ -221,7 +225,7 @@ function getJSON(num)
 			ko.applyBindings(jdata,document.getElementById('give1'));			
 		});
 	}
-	if (num == 1) //shouldnt be accessible now because the button disappears when the page loads.
+	if (num == 1)
 	{
 		var userUrl = "/api/user/"+sessionStorage.userID;
 		$.getJSON(userUrl, function(jdata)
@@ -234,6 +238,14 @@ function getJSON(num)
 					else
 						star.issuerfullName = "";
 			};
+			for(var i in jdata.issued){
+					var star = jdata.issued[i];
+					var user = userList[star.owner_id];
+					if(user)
+						star.ownerfullName = user.firstName + " " + user.lastName;											
+					else
+						star.ownerfullName = "";
+			};
 			jdata.stars = ko.observableArray(jdata.stars);
 			jdata.issued = ko.observableArray(jdata.issued);
 			userData = jdata;
@@ -241,7 +253,7 @@ function getJSON(num)
 			ko.applyBindings(userData,document.getElementById('gold2'));
 			ko.applyBindings(userData,document.getElementById('gold3'));
 		});
-		
+
 	}
 }
 function limitText(limitField, limitNum)
@@ -255,10 +267,8 @@ function showselect(id)
 	var e = document.getElementById(id);
 	alert(e.options[e.selectedIndex].value);
 }
-
-
-
-
-
-
-
+function showDescription(divid)
+{
+	console.log(divid);
+	$('#' + divid).toggle();
+}

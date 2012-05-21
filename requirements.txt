@@ -48,3 +48,4 @@ rsa==3.0.1
 simplejson==2.5.2
 uWSGI==1.2.3
 wsgiref==0.1.2
+simplejson
