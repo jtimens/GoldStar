@@ -153,6 +153,7 @@ function giveGoldStar(id)
 		document.getElementById("give3").style.display = 'block';
 	if (e.id == "innergive3")
 	{
+
 		window.location = "results.html";
 	}
 }
@@ -168,6 +169,7 @@ function postJSON(id, num)
 
 	if (num == 0)
 	{
+		var noerr = true;
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val();
@@ -184,19 +186,18 @@ function postJSON(id, num)
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				alert('There was an error.  Make sure there are no numbers in your First and Last name or try using a different email address.');
+				noerr = false;
 			},
   			complete: function(jdata){
-				toggleLoginView("login1");
+  				if (noerr == true){
+  					toggleLoginView("login1");
+  				}
+  				else{
+  					toggleLoginView("login2");
+  				}
+				
   			}
 		});
-		// var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
-		// var URL = '/api/user?q=' + q;
-		// $.getJSON(URL, function(jdata){
-			// if(jdata.objects.length)
-				
-				// toggleLoginView("login1");
-		// });
-  		//alert('You have successfully created an account!');
 	}
 	else if (num == 1)
 	{
