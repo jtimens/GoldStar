@@ -37,6 +37,7 @@ class Star(db.Model):
 	@validates('description')
 	def validate_description(self, key, string):
 		e = ""
+		string = string.strip()
 		if len(string) > 120:
 			e = "Description Length is too long"
 		if len(e) > 0:
@@ -49,6 +50,7 @@ class Star(db.Model):
 	@validates('category')
 	def validate_category(self, key, string):
 		e = ""
+		string = string.strip()
 		if len(string) > 100:
 			e = "Category Length is too long"
 		if len(e) > 0:
@@ -98,6 +100,7 @@ class User(db.Model):
 	#Validates the First Name
 	@validates('firstName')
 	def validate_firstName(self, key, string):
+		string = string.strip()
 		if not string.isalpha() or not len(string):
 			exception = userValidation()
 			exception.errors = dict(firstName = 'Invalid First Name')
@@ -107,6 +110,7 @@ class User(db.Model):
 	#Validates the Last Name
 	@validates('lastName')
 	def validate_lastName(self, key, string):
+		string = string.strip()
 		if not string.isalpha() or not len(string):
 			exception = userValidation()
 			exception.errors = dict(lastName = 'Invalid Last Name')
@@ -117,14 +121,15 @@ class User(db.Model):
 	@validates('email')
 	def validate_email(self, key, string):
 		e = ""
+		string = string.strip()
 		if not "@" in string:
-			e = u"Invalid Email"
+			e = u"There is no @ in the email"
 		if not "." in string:
-			e = u"Invalid Email"
+			e = u"There is no . in the email"
 		elif len(string) == 0:
 			e = u"No Email Entered"
 		elif User.query.filter_by(email = unicode(string)).count() > 0:
-			e = u"User already exists"
+			e = u"Email is already being used"
 		if len(e) != 0:
 			exception = userValidation()
 			exception.errors = dict(email = e)

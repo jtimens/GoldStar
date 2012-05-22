@@ -185,7 +185,13 @@ function postJSON(id, num)
 				alert('You have successfully created an account!');
 			},
 			error: function(jqXHR, textStatus, errorThrown){
-				alert('There was an error.  Make sure there are no numbers in your First and Last name or try using a different email address.');
+				var err = jQuery.parseJSON(jqXHR.responseText);
+				if(err.validation_errors.firstName)
+					alert(err.validation_errors.firstName);
+				else if(err.validation_errors.lastName)
+					alert(err.validation_errors.lastName);
+				else if(err.validation_errors.email)
+					alert(err.validation_errors.email);
 				noerr = false;
 			},
   			complete: function(jdata){
