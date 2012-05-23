@@ -34,6 +34,7 @@ function login()
 	else if (!(sessionStorage.userID) && canUseStorage())
 	{
 		var em = document.getElementById('txtemail').value;
+		em = em.toLowerCase();
 		var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
 		var URL = '/api/user?q=' + q;
 		$.getJSON(URL, function(jdata){
@@ -193,6 +194,7 @@ function postJSON(id, num)
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val();
+		em = em.toLowerCase();
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
 		var myJSON = userData;
 		var URL = "/api/user";
