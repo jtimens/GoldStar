@@ -92,7 +92,6 @@ function toggleView(id)
 	if (e == "gg")
 	{
 		document.getElementById("gold1").style.display = 'block';
-		resetView();
 	}
 	else if (e == "ms")
 		document.getElementById("gold2").style.display = 'block';
@@ -103,13 +102,13 @@ function toggleView(id)
 }
 function toggleInnerView(id)
 {
-
-	e = document.getElementById(id);
+	document.getElementById("tbl1").style.display = 'block';
+	document.getElementById("give1").style.display = 'block';
+	giveGoldStar(0);
+	/*e = document.getElementById(id);
 
 	if (e.id == "btnshow1")
 	{
-		document.getElementById("tbl1").style.display = 'block';
-		document.getElementById("give1").style.display = 'block';
 	}
 	else if (e.id == "btnshow2" || e.id == "btnhide2")
 	{
@@ -142,28 +141,29 @@ function toggleInnerView(id)
 		}	
 	}
 	else
-		window.location = 'main.html';
+		window.location = 'main.html';*/
 }
 function giveGoldStar(id)
 {
+	
 	e = document.getElementById(id);
-	if (e.id == "innergive1")
-		document.getElementById("give2").style.display = 'block';
-	if (e.id == "innergive2")
-		document.getElementById("give3").style.display = 'block';
-	if (e.id == "innergive3")
+	//if (e.id == "innergive1")
+	document.getElementById("give2").style.display = 'block';
+	//if (e.id == "innergive2")
+	document.getElementById("give3").style.display = 'block';
+	if (e != null && e.id == "innergive3")
 	{
 
 		window.location = "results.html";
 	}
 }
-function resetView()
+/*function resetView()
 {
 	document.getElementById("give3").style.display = 'none';
 	document.getElementById("give2").style.display = 'none';
 	document.getElementById("give1").style.display = 'none';
 	document.getElementById("tbl1").style.display = 'none';
-}
+}*/
 function postJSON(id, num)
 {
 

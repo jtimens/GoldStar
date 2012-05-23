@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="user-scalable=yes,width=device-width">
-		<title>Gold Star</title>
+		<title>Gold Stars</title>
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../static/css/bootstrap-responsive.min.css" rel="stylesheet">
 	</head>
@@ -13,9 +13,9 @@
 					<img class="pull-left" style="margin-top:3px;" width="30" height="30" src="../static/img/goldstar.png" />
 					<img class="pull-right" style="margin-top:3px;" width="30" height="30" src="../static/img/goldstar.png" />
 					<div style="text-align:center;">
-						<button id="gg" class="btn btn-small" onclick="toggleView(this.id)">Give</button>
-						<button id="ms" class="btn btn-small" onclick="toggleView(this.id)">Got</button>
-						<button id="as" class="btn btn-small" onclick="toggleView(this.id)">Given</button>
+						<button id="gg" class="btn btn-small" onclick="toggleView(this.id)">Give A Star</button>
+						<button id="ms" class="btn btn-small" onclick="toggleView(this.id)">My Stars</button>
+						<button id="as" class="btn btn-small" onclick="toggleView(this.id)">Issued Stars</button>
 						<!-- <button id="storage" class="btn btn-small" onclick="canUseStorage()">Test for HTML5</button> -->
 					</div>
 				</div>
@@ -24,13 +24,13 @@
 		<div id="gold1" style="display:block;">
 			<div class="container">
 				<div class="well">
-					<h2> Give Gold Star </h2> <br />
+					<h2> Give Gold Stars</h2> <br />
 					<p id="userDisplay">Hello <span data-bind="text:firstName" id="name" style="text-align:right;"></span></p>
 					<p>Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a></p>
 					<h6>HERE YOU CAN GIVE A GOLD STAR TO SOMEONE WHO HAS HAD A POSITIVE IMPACT ON YOU</h6>
-					<p> <button id="btnshow1" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Begin</button></p>
-					<div id="tbl1" style="display:none;">
-						<div id="give1" style="display:none;">
+					<!--<p> <button id="btnshow1" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Begin</button></p>-->
+					<div id="tbl1" style="display:block;">
+						<div id="give1" style="display:block;">
 							<h6>CHOOSE A PERSON TO GIVE A STAR TO</h6>
 							<p>
 <!-- 									<select id="select1" data-bind="foreach: objects">
@@ -44,10 +44,10 @@
 											<!-- /ko -->
 										<!-- /ko -->
 									</select>
-									<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>
+									<!--<p><button type="submit" id="innergive1" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Who</button></p>-->
 							</p>
 						</div>
-						<div id="give2" style="display:none;">
+						<div id="give2" style="display:block;">
 							<h6>CHOOSE WHAT THE PERSON DID</h6>
 							<p> 
 								<select id="select2">
@@ -60,9 +60,11 @@
 									<option value="Inspired">Inspired</option>
 								</select> <!-- <button onclick="showselect('select2')">showSelValue</button> -->
 							</p>
-							<p> <button id="innergive2" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Why</button></p>
+							<!--<p> 
+								<button id="innergive2" class="btn btn-info btn-small" onclick="giveGoldStar(this.id)">Choose Why</button>
+							</p>-->
 						</div>
-						<div id="give3" style="display:none;">
+						<div id="give3" style="display:block;">
 							<h6>CHOOSE TO COMMENT (120 character limit)</h6>
 							<p>
 								<textarea id="select3" onKeyDown="limitText(this.id, 120);" onKeyUp="limitText(this.id, 120);" placeholder="Type Here..." style="width:100%;height:65px;resize:none"></textarea><br />
@@ -126,6 +128,7 @@
 			$(function(){
 				getJSON(0); 
 				getJSON(1);
+				//toggleInnerView(0);
 			})
 		</script>
 	</body>
