@@ -34,7 +34,18 @@ function login()
 	else if (!(sessionStorage.userID) && canUseStorage())
 	{
 		var em = document.getElementById('txtemail').value;
-		$.getJSON('/api/user', function(jdata){
+		var q = '{"filters": [{"name":"email","op":"eq","val":"'+em+'"}]}';
+		var URL = '/api/user?q=' + q;
+		$.getJSON(URL, function(jdata){
+			if(jdata.objects.length)
+			{
+				sessionStorage.userID = jdata.objects[0].id;
+				window.location = "main.html";
+			}
+			else
+				alert("Email not found.");	
+		});
+		/*$.getJSON('/api/user', function(jdata){
 			var i = 0;
 			var rv = false;
 			if (jdata.objects.length == 0)
@@ -55,12 +66,12 @@ function login()
 				if(rv)
 				{
 					//document.getElementById("madeaccount").style.display = "none";
-					window.location = "main.html";
+					
 				}	
 				else
 					alert("Email not found.");
 			}
-		});
+		});*/
 	}
 	else
 	{
