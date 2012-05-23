@@ -81,8 +81,12 @@ function login()
 }
 function userLogout()
 {
-	sessionStorage.clear();
-	window.location = 'index.html';
+	var r = confirm("Are you sure you want to logout?");
+	if (r == true)
+	{
+		sessionStorage.clear();
+		window.location = 'index.html';
+	}
 }
 function toggleLoginView(id)
 {
@@ -284,7 +288,7 @@ function getJSON(num)
 			jdata.stars = ko.observableArray(jdata.stars);
 			jdata.issued = ko.observableArray(jdata.issued);
 			userData = jdata;
-			ko.applyBindings(userData,document.getElementById('userDisplay'));
+			ko.applyBindings(userData,document.getElementById('userNameNav'));
 			ko.applyBindings(userData,document.getElementById('gold2'));
 			ko.applyBindings(userData,document.getElementById('gold3'));
 		});

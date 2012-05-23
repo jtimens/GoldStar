@@ -10,7 +10,8 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
-					<img class="pull-left" style="margin-top:3px;" width="30" height="30" src="../static/img/goldstar.png" />
+					<img class="pull-left" style="margin-top:3px; margin-right:3px" width="30" height="30" src="../static/img/goldstar.png" />
+					<a id="userNameNav" class="brand" href="#"> Hello <span data-bind="text:firstName" id="name" style="text-align:right;"></span></a>
 					<img class="pull-right" style="margin-top:3px;" width="30" height="30" src="../static/img/goldstar.png" />
 					<div style="text-align:center;">
 						<button id="gg" class="btn btn-small" onclick="toggleView(this.id)">Give A Star</button>
@@ -25,8 +26,8 @@
 			<div class="container">
 				<div class="well">
 					<h2> Give Gold Stars</h2> <br />
-					<p id="userDisplay">Hello <span data-bind="text:firstName" id="name" style="text-align:right;"></span></p>
-					<p>Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to switch users</a></p>
+					<!-- <p id="userDisplay">Hello <span data-bind="text:firstName" id="name" style="text-align:right;"></span></p> -->
+					<p>Is this not displaying your name? <a onclick="userLogout()" href="#">Click here to logout</a></p>
 					<h6>HERE YOU CAN GIVE A GOLD STAR TO SOMEONE WHO HAS HAD A POSITIVE IMPACT ON YOU</h6>
 					<!--<p> <button id="btnshow1" class="btn btn-info btn-small" onclick="toggleInnerView(this.id)">Click Here to Begin</button></p>-->
 					<div id="tbl1" style="display:block;">
