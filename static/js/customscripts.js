@@ -27,7 +27,11 @@ function redirect(id)
 }
 function login()
 {
-	if (canUseStorage())
+	if(sessionStorage.userID && canUseStorage())
+	{
+		window.location = "main.html";
+	}
+	else if (!(sessionStorage.userID) && canUseStorage())
 	{
 		var em = document.getElementById('txtemail').value;
 		$.getJSON('/api/user', function(jdata){
@@ -182,6 +186,7 @@ function postJSON(id, num)
   			data: myJSON,
   			contentType: "application/json",
 			success: function(data, textStatus, jqXHR){
+				sessionStorage.userID = data.id;
 				alert('You have successfully created an account!');
 			},
 			error: function(jqXHR, textStatus, errorThrown){
@@ -196,7 +201,7 @@ function postJSON(id, num)
 			},
   			complete: function(jdata){
   				if (noerr == true){
-  					toggleLoginView("login1");
+  					login();
   				}
   				else{
   					toggleLoginView("login2");
