@@ -46,33 +46,6 @@ function login()
 			else
 				alert("Email not found.");	
 		});
-		/*$.getJSON('/api/user', function(jdata){
-			var i = 0;
-			var rv = false;
-			if (jdata.objects.length == 0)
-			{
-				alert("no users.");
-			}
-			else
-			{
-				for(i=0;i<jdata.objects.length;++i)
-				{
-					var jsonEmail = jdata.objects[i].email;
-					if (em.toLowerCase() == jsonEmail.toLowerCase())
-					{
-						rv = true;
-						sessionStorage.userID = jdata.objects[i].id;
-					}
-				}
-				if(rv)
-				{
-					//document.getElementById("madeaccount").style.display = "none";
-					
-				}	
-				else
-					alert("Email not found.");
-			}
-		});*/
 	}
 	else
 	{
@@ -126,43 +99,6 @@ function toggleInnerView(id)
 	document.getElementById("tbl1").style.display = 'block';
 	document.getElementById("give1").style.display = 'block';
 	giveGoldStar(0);
-	/*e = document.getElementById(id);
-
-	if (e.id == "btnshow1")
-	{
-	}
-	else if (e.id == "btnshow2" || e.id == "btnhide2")
-	{
-		if (e.id == "btnshow2")
-		{
-			document.getElementById("btnhide2").style.display = 'block';
-			document.getElementById("tbl2").style.display = 'block';
-			e.style.display = 'none';
-		}
-		else
-		{
-			document.getElementById("btnshow2").style.display = 'block';
-			document.getElementById("tbl2").style.display = 'none';
-			e.style.display = 'none';
-		}	
-	}
-	else if (e.id == "btnshow3" || e.id == "btnhide3")
-	{
-		if (e.id == "btnshow3")
-		{
-			document.getElementById().style.display = 'block';
-			document.getElementById("tbl3").style.display = 'block';
-			e.style.display = 'none';
-		}
-		else
-		{
-			document.getElementById("btnshow3").style.display = 'block';
-			document.getElementById("tbl3").style.display = 'none';
-			e.style.display = 'none';
-		}	
-	}
-	else
-		window.location = 'main.html';*/
 }
 function giveGoldStar(id)
 {
@@ -178,13 +114,6 @@ function giveGoldStar(id)
 		window.location = "main.html";
 	}
 }
-/*function resetView()
-{
-	document.getElementById("give3").style.display = 'none';
-	document.getElementById("give2").style.display = 'none';
-	document.getElementById("give1").style.display = 'none';
-	document.getElementById("tbl1").style.display = 'none';
-}*/
 function postJSON(id, num)
 {
 
@@ -259,16 +188,22 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{	
+			var users = []
 			for(var i in jdata.objects){
 				var currentUser = jdata.objects[i];
 				userList[currentUser.id] = currentUser;				
+				users.push(currentUser.firstName + " " + currentUser.lastName);				
 			}
-			ko.applyBindings(jdata,document.getElementById('give1'));			
+			// ko.applyBindings(jdata,document.getElementById('give1'));			
+			$( "#select1" ).autocomplete({
+				source: users
+			});				
 		});
 	}
 	if (num == 1)
 	{
 		var userUrl = "/api/user/"+sessionStorage.userID;
+		var starMasterList = ko.observableArray();
 		$.getJSON(userUrl, function(jdata)
 		{
 			for(var i in jdata.stars){
@@ -278,6 +213,8 @@ function getJSON(num)
 						star.issuerfullName = user.firstName + " " + user.lastName;											
 					else
 						star.issuerfullName = "";
+					star.ownerfullName = "You"
+					starMasterList.push(star)
 			};
 			for(var i in jdata.issued){
 					var star = jdata.issued[i];
@@ -286,13 +223,15 @@ function getJSON(num)
 						star.ownerfullName = user.firstName + " " + user.lastName;											
 					else
 						star.ownerfullName = "";
-			};
-			jdata.stars = ko.observableArray(jdata.stars);
-			jdata.issued = ko.observableArray(jdata.issued);
+					star.issuerfullName = "You"
+					starMasterList.push(star)
+			};			
+
+			jdata.stars = starMasterList;
 			userData = jdata;
 			ko.applyBindings(userData,document.getElementById('userNameNav'));
 			ko.applyBindings(userData,document.getElementById('gold2'));
-			ko.applyBindings(userData,document.getElementById('gold3'));
+			// ko.applyBindings(userData,document.getElementById('gold3'));
 		});
 
 	}
