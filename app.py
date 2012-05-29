@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session, flash, g
+from flaskext.oauth import OAuth
 import flask.ext.sqlalchemy
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -8,9 +9,24 @@ import datetime
 # Create the app for Flask
 app = Flask(__name__)
 app.config['DEBUG'] = True
+SECRET_KEY = 'development key'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://zoubpmfsdtxwoq:3G0ELHUf2BcAOSF1hUxDceKsQL@ec2-23-23-234-187.compute-1.amazonaws.com/resource44881'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testdb.sqlite'
 db = flask.ext.sqlalchemy.SQLAlchemy(app)
+TWITTER_APP_ID = '8YsjtlJjL8kRaGDv1SZjmQ'
+TWITTER_APP_SECRET_ID = 'QVAWDUstIpIHWhZegr5CqQm1XJHWtBIzOacQdXzP7o'
+
+app.secret_key = SECRET_KEY
+oauth = OAuth()
+
+twitter = oauth.remote_app('twitter',
+	base_url = 'http://api.twitter.com/1/',
+	request_token_url = 'https://api.twitter.com/oauth/request_token',
+	access_token_url = 'https://api.twitter.com/oauth/access_token',
+	authorize_url = 'https://api.twitter.com/oauth/authorize',
+	consumer_key = TWITTER_APP_ID,
+	consumer_secret = TWITTER_APP_SECRET_ID
+	)
 
 # User Table Exception and Validation handling
 class userValidation(Exception):
@@ -94,7 +110,9 @@ class User(db.Model):
 	firstName = db.Column(db.Unicode)#, nullable = False)
 	lastName = db.Column(db.Unicode)#, nullable = False)
 	email = db.Column((db.Unicode), unique=True)#, nullable = False)
-	
+	twitterUser = db.Column(db.Unicode)
+	oauth_token = db.Column(db.Unicode)
+	oauth_secret = db.Column(db.Unicode)
 	#Validation defs which validate 1 parameter of the table at a time
 
 	#Validates the First Name
@@ -136,6 +154,35 @@ class User(db.Model):
 			raise exception
 		return unicode(string)
 
+#Twitter Auth
+@app.before_request
+def before_request():
+	g.user = None
+	if 'user_id' in session:
+		g.user = User.query.get(session['user_id'])
+
+@app.after_request
+def after_request(response):
+	#db.session.remove()
+	return response
+
+@twitter.tokengetter
+def get_twitter_token():
+	user = g.user
+	if user is not None:
+		return user.oauth_token, user.oauth_secret
+
+@app.route('/login')
+def login():
+	return twitter.authorize(callback=url_for('oauth_authorized', 
+		next = request.args.get('next') or request.referrer or None))
+
+@app.route('/oauth_authorized')
+@twitter.authorized_handler
+def oauth_authorized(resp):
+	if resp is not None:
+		print resp['screen_name']
+	return redirect(url_for('index.html'))
 
 #The main index of the Gold Star App
 @app.route('/')
@@ -165,6 +212,7 @@ manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starVal
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
 
-app.run('0.0.0.0')
+if __name__ == '__main__':
+	app.run('0.0.0.0')
 
 
