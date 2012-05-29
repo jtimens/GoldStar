@@ -147,6 +147,10 @@ def index_route():
 @app.route('/main.html')
 def main_route():
 	return render_template('main.html')
+	
+@app.route('/mobileview.html')
+def mobileview_route():
+	return render_template('mobileview.html')
 
 #Redirect which has a lot of server requests
 @app.route('/results.html')
