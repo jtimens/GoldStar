@@ -23,7 +23,8 @@ twitter = oauth.remote_app('twitter',
 	base_url = 'http://api.twitter.com/1/',
 	request_token_url = 'https://api.twitter.com/oauth/request_token',
 	access_token_url = 'https://api.twitter.com/oauth/access_token',
-	authorize_url = 'https://api.twitter.com/oauth/authorize',
+	#authorize_url = 'https://api.twitter.com/oauth/authorize',
+	authorize_url='http://api.twitter.com/oauth/authenticate',
 	consumer_key = TWITTER_APP_ID,
 	consumer_secret = TWITTER_APP_SECRET_ID
 	)
@@ -163,7 +164,7 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-	#db.session.remove()
+	db.session.remove()
 	return response
 
 @twitter.tokengetter
@@ -180,9 +181,23 @@ def login():
 @app.route('/oauth_authorized')
 @twitter.authorized_handler
 def oauth_authorized(resp):
+	if resp is None:
+		flash(u'You denied the request to sign in.')
 	if resp is not None:
+		user = User.query.filter_by(twitterUser=resp['screen_name']).first()
+		if user is None:
+			user = User()
+			user.twitterUser = unicode(resp['screen_name'])
+			db.session.add(user)
+		user.firstName = u'Jay'
+		user.lastName = u'Ostinowsky'
+		user.email = u'Dukebdfan@comcast.net'	
+		user.oauth_token = unicode(resp['oauth_token'])
+		user.oauth_secret = unicode(resp['oauth_token_secret'])
+		db.session.commit()
+		session['user_id'] = user.id
 		print resp['screen_name']
-	return redirect(url_for('index.html'))
+	return redirect('/index.html')
 
 #The main index of the Gold Star App
 @app.route('/')
@@ -203,6 +218,14 @@ def mobileview_route():
 @app.route('/results.html')
 def result_route():
 	return render_template('results.html')
+
+@app.route('/tweet', methods = ['POST'])
+def tweet():
+	if g.user is None:
+		return redirect('/login')
+	status = u'@juggler2009 test tag testing 1 2'
+	resp = twitter.post('statuses/update.json', data = {'status': status})
+	return redirect('/index.html')
 
 #Initialize the Database
 db.create_all()
