@@ -229,8 +229,6 @@ def tweet():
 @app.route('/')
 @app.route('/index.html')
 def index_route():
-	"""if g.user is None:
-		return redirect('/login')"""
 	return render_template('index.html')
 
 #Displays the entire Gold Star App
@@ -257,7 +255,7 @@ def login():
 		if bcrypt.hashpw(password, user.password) == user.password:
 			login_user(user)
 			print "Logged In successfully"
-			return redirect("/index.html")
+			return redirect("/index.html" + "?id=" + str(user.id))
 	return render_template("login.html", form=form)
 
 @app.route("/logout")
@@ -268,7 +266,8 @@ def logout():
 
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
-manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
+manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
+#manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
