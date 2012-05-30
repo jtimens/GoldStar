@@ -266,8 +266,8 @@ def logout():
 
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
-manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
-#manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
+#manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
+manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
