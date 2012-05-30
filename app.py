@@ -203,6 +203,8 @@ def oauth_authorized(resp):
 @app.route('/')
 @app.route('/index.html')
 def index_route():
+	"""if g.user is None:
+		return redirect('/login')"""
 	return render_template('index.html')
 
 #Displays the entire Gold Star App
