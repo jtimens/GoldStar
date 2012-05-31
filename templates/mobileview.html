@@ -14,25 +14,31 @@
 					<a class="brand">Hello Bob!</a>
 					<ul class="nav pull-right">
 						
-						<li><a href="#"><button class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
-						<li><button class="btn" onclick="showModal();">Show Modal</button></li>
+						<li><a href="#"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
 					<!--  -->
 				</div>
 			</div>
 		</div>
-		<div class="modal" id="myModal" style="display:none">
-  <div class="modal-header">
-    <button class="close" data-dismiss="modal">Close</button>
-    <h3>Give a Star</h3>
-  </div>
-  <div class="modal-body">
-    <p>Enter all dat info.</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn">Close this sum bitch</a>
-    <a href="#" class="btn btn-primary">Save yo motha fuckin shit bitch</a>
-  </div>
-</div>
+		<div class="modal" id="myModal" style="display:none;background-color:yellow;">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">X</button>
+				<h3>Give a Star</h3>
+			</div>
+			<div class="modal-body">
+				<h4>Who</h4>
+				<input type="text" class="input-medium" placeholder="Name of Person" />
+				<h4>Did</h4>
+				<input type="text" class="input-medium" placeholder="Name of Verb" />
+				<h4>Description</h4>
+				<textarea style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<h4>Hashtag</h4>
+				<input type="text" class="input-medium" placeholder="Name of Event" />
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;">Cancel</a>
+				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
+			</div>
+		</div>
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
 			<li style="width:33%; text-align:center" ><a href="#tab1" data-toggle="tab"> <i class="icon-globe"></i> </a></li>
@@ -209,13 +215,6 @@
 				</div>
 				<h4>Rock Stars</h4>
 				<div class="well" style="background-color:green">
-					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
-						<h4>Bob Influenced Sally</h4> 
-						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
-						<h6>13 minutes ago </h6>	
-				</div>
-				<h4>Fag Stars</h4>
-				<div class="well" style="background-color:pink">
 					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
 						<h4>Bob Influenced Sally</h4> 
 						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
