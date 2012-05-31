@@ -4,3 +4,7 @@ tmp/
 *.pyc
 db.sql
 gs/
+lib/
+bin/
+include/
+local/
