@@ -12,8 +12,10 @@
 		<div class="navbar" style="width:100%; padding-left:0px; padding-right:0px;">
 			<div class="navbar-inner" style="width:100%; padding-left:0px; padding-right:0px;">
 				<div class="container" style="width:100%; padding-left:0px; padding-right:0px;">
-					<div style="text-align:center; width:100%;padding-left:0px; padding-right:0px; padding-top:1em; margin:0.5em;">
+					<div style="text-align:center; width:100%;padding-left:0px; padding-right:0px; padding-top:1em;">
+							
 							<img src="../static/img/goldstar.png" width="30" height="30" /><span style="font-size:2em; padding:1em;">Gold Star</span><img src="../static/img/goldstar.png" width="30" height="30" />
+
 					</div>
 				</div>
 			</div>
@@ -28,8 +30,8 @@
 		<div style="width:100%">
 			<form action="{{ url_for('login') }}" method="post">
 			  {{ form.hidden_tag() }}
-			  <div style="float:left;width:40%;">&nbsp;</div>	
-			  <div id="container" style="float:left;width:35%;">
+			  	
+			  <div id="container" style="float:left;width:100%;text-align:center;" >
 				
 					<div>
 						{{ form.username.label }}{{ form.username }}
@@ -41,8 +43,7 @@
 				  	<!--<td colspan="3" style="text-align:center;">{{ form.submit }}</td>-->
 				</div>
 			    
-			    
-				
+			  	
 			</form>
 			<br/>
 			<br/>
