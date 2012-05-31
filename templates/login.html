@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head><title>Login</title>
 
 
@@ -27,9 +28,9 @@
 		<div style="width:100%">
 			<form action="{{ url_for('login') }}" method="post">
 			  {{ form.hidden_tag() }}
-			  <div id="container">
-			  	<div style="margin:auto;width:15%">
-			  	<div style="margin:auto;width:5%;">
+			  <div style="float:left;width:40%;">&nbsp;</div>	
+			  <div id="container" style="float:left;width:35%;">
+				
 					<div>
 						{{ form.username.label }}{{ form.username }}
 					</div>
@@ -37,15 +38,18 @@
 						{{ form.password.label }}{{ form.password }}
 					</div>
 					<button type="submit" class="btn btn-warning">Login</button>
+				  	<!--<td colspan="3" style="text-align:center;">{{ form.submit }}</td>-->
 				</div>
-				</div>
-			      	<!--<td colspan="3" style="text-align:center;">{{ form.submit }}</td>-->
+			    
+			    
 				
 			</form>
 			<br/>
 			<br/>
+			<div style="clear:both"></div>
 			<div style="width:100%; text-align:center;"><a href="#">Don't have an account?</a></div>
 			
 		</div>
+
 </body>
 </html>
