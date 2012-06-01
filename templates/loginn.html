@@ -1,19 +1,5 @@
 <!doctype html>
 <html>
-<<<<<<< HEAD
-<head><title>Login</title></head>
-<body>
-<form action="{{ url_for('login') }}" method="post">
-  {{ form.hidden_tag() }}
-  <table class="centered">
-    <tbody>
-      <tr><td>{{ form.username.label }}</td><td>{{ form.username }}</td></tr>
-      <tr><td>{{ form.password.label }}</td><td>{{ form.password }}</td></tr>
-      <tr><td></td><td>{{ form.submit }}</td></tr>
-    </tbody>
-   </table>
-</form>
-=======
 <head><title>Login</title>
 
 
@@ -43,6 +29,7 @@
 			  {{ form.hidden_tag() }}
 			  <div id="container">
 			  	<div style="margin:auto;width:15%">
+			  	<div style="margin:auto;width:5%;">
 					<div>
 						{{ form.username.label }}{{ form.username }}
 					</div>
@@ -60,6 +47,5 @@
 			<div style="width:100%; text-align:center;"><a href="#">Don't have an account?</a></div>
 			
 		</div>
->>>>>>> ff8685c1f18c48b1d7a1f070062112bbb05d920d
 </body>
 </html>
