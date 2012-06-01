@@ -285,6 +285,7 @@ manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starVal
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
 
+
 if __name__ == '__main__':
 	app.run('0.0.0.0')
 
