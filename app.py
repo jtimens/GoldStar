@@ -270,7 +270,7 @@ def login():
 		if bcrypt.hashpw(password, user.password) == user.password:
 			login_user(user)
 			print "Logged In successfully"
-			return redirect("/index.html" + "?id=" + str(user.id))
+			return render_template("main.html", loginID = user.id)
 	return render_template("login.html", form=form)
 
 @app.route("/logout")

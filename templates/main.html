@@ -74,16 +74,21 @@
 		<script src="../static/js/bootstrap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				try{
-				$( "#select2" ).autocomplete({
-							source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
+				sessionStorage.userID = {{ loginID }};
+				alert(sessionStorage.userID);
+				try
+				{
+					$( "#select2" ).autocomplete({
+						source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
 					});				
-			}catch(ex){
-				alert(ex.message);
-			}
+				}
+				catch(ex)
+				{
+					alert(ex.message);
+				}
 				getJSON(0); 
 				getJSON(1);
-			})
+			});
 		</script>
 	</body>
 	
