@@ -74,9 +74,9 @@
 		<script src="../static/js/bootstrap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				if(!(sessionStorage.userID))
+				if(sessionStorage.userID);
+				else
 					sessionStorage.userID = {{ loginID }};
-				alert(sessionStorage.userID);
 				try
 				{
 					$( "#select2" ).autocomplete({

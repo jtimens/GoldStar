@@ -124,7 +124,6 @@ function postJSON(id, num)
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val();
 		var pw = $("#PWord").val();
-		console.log(pw);
 		em = em.toLowerCase();
 		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'", "password":"'+pw+'"}';
 		var myJSON = userData;
@@ -150,7 +149,18 @@ function postJSON(id, num)
 			},
   			complete: function(jdata){
   				if (noerr == true){
-  					login();
+  					//login();
+  					myJSON = '{"email":"'+em+'", "password":"'+pw+'"}'
+  					$.ajax({
+						type: 'POST',
+						url: '/login',
+						data: myJSON,
+						contentType: "application/json",
+						success:function(data, textStatus,jqXHR){
+							sessionStorage.userID = data.id;
+							login();
+						}
+					});
   				}
   				else{
   					toggleLoginView("login2");

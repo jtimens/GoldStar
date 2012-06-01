@@ -2,7 +2,7 @@ import flask.ext.restless
 import datetime
 import bcrypt
 import flask.ext.sqlalchemy
-from flask import Flask, render_template, request, redirect, url_for, session, flash, g
+from flask import Flask, render_template, request, redirect, url_for, session, flash, g, jsonify
 from flaskext.oauth import OAuth
 from flask.ext.login import current_user, login_user, LoginManager, UserMixin, login_required, logout_user
 from flask.ext.wtf import PasswordField, SubmitField, TextField, Form
@@ -248,7 +248,7 @@ def index_route():
 #Displays the entire Gold Star App
 @app.route('/main.html')
 def main_route():
-	return render_template('main.html')
+	return render_template('main.html', loginID = current_user.get_id())
 	
 @app.route('/mobileview.html')
 def mobileview_route():
@@ -263,7 +263,7 @@ def result_route():
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
 	form = LoginForm()
-	if form.validate_on_submit():
+	if form.validate_on_submit() and request.method == 'POST':
 		username, password = form.username.data, form.password.data
 		username = username.lower()
 		user = User.query.filter_by(email = username).one()
@@ -271,6 +271,13 @@ def login():
 			login_user(user)
 			print "Logged In successfully"
 			return render_template("main.html", loginID = user.id)
+	elif request.method == 'POST':
+		loginINFO = request.json
+		user = User.query.filter_by(email = unicode(loginINFO['email'])).one()
+		if bcrypt.hashpw(loginINFO['password'], user.password) == user.password:
+			login_user(user)
+			print "Logged In successfully"
+			return jsonify(dict(id = user.id))
 	return render_template("login.html", form=form)
 
 @app.route("/logout")
