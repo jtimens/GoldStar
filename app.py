@@ -42,6 +42,7 @@ class userValidation(Exception):
 class starValidation(Exception):
 	pass
 
+
 #Star Table that stores Star information between two users
 class Star(db.Model):
 
@@ -51,6 +52,7 @@ class Star(db.Model):
 	created = db.Column(db.DateTime, default = datetime.datetime.now())
 	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	hashtag = db.Column(db.Unicode)
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 	#Validation defs which validate 1 parameter of the table at a time
