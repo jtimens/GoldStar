@@ -289,6 +289,6 @@ manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starVal
 
 
 if __name__ == '__main__':
-	app.run('0.0.0.0')
+	app.run(host='0.0.0.0')
 
 
