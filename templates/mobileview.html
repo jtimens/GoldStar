@@ -5,6 +5,24 @@
 		<title>Gold Star</title>
 		<link href="../static/css/bootstrap.css" rel="stylesheet"/>
 		<link href="../static/css/bootstrap-responsive.css" rel="stylesheet"/>
+		<style type="text/css">
+		.modalheader
+		{
+			background-image: linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -o-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -moz-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -webkit-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -ms-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+
+			background-image: -webkit-gradient(
+				linear,
+				left bottom,
+				left top,
+				color-stop(0.49, rgb(255,237,76)),
+				color-stop(0.06, rgb(245,241,159))
+				);
+		}
+		</style>
 	</head>
 	<body>
 	
@@ -13,24 +31,25 @@
 				<div class="container" >
 					<a class="brand">Hello Bob!</a>
 					<ul class="nav pull-right">
-						<li class="divider-vertical"></li>
-						<li><a href="#"><img width="20px" height="20px" style="margin-top:3px" src=../static/img/goldstar.png /></a></li>
-					</ul>
+						
+						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
+					<!--  -->
 				</div>
 			</div>
 		</div>
+		
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
-			<li style="width:33%; text-align:center" ><a href="#tab1" data-toggle="tab">Event</a></li>
-			<li style="width:33%; text-align:center" class="active"><a href="#tab2" data-toggle="tab">Me</a></li>
-			<li style="width:33%; text-align:center"><a href="#tab3" data-toggle="tab">Leaderboard</a></li>
+			<li style="width:33%; text-align:center" ><a href="#tab1" data-toggle="tab"> <i class="icon-globe"></i> </a></li>
+			<li style="width:33%; text-align:center" class="active"><a href="#tab2" data-toggle="tab"> <i class="icon-user"></i> </a></li>
+			<li style="width:33%; text-align:center"><a href="#tab3" data-toggle="tab"> <i class="icon-th-list"></i> </a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane" id="tab1">
 				<div style="text-align:center;margin-bottom:9px;">
-					<input type="text" class="input-medium search-query" placeholder="Search" style="width:80%;"><br />					
+					<input type="text" class="input-medium search-query" placeholder="Type Here To Search For An Event" style="width:80%;"><br />					
 				</div>
-				<h1 style="text-align:center; margin: 5px 5px 5px 5px">Currently viewing activity at the [<em>insert conference here</em>]</h1>
+				<!-- <h1 style="text-align:center; margin: 5px 5px 5px 5px">Currently viewing activity at the [<em>insert conference here</em>]</h1> -->
 				<div class="well">					
 						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
 						<h4>Bob Influenced Sally</h4> 
@@ -59,7 +78,7 @@
 					</select><br />
 					
 				</div>
-				<h1 style="text-align:center; margin: 5px 5px 5px 5px">Currently viewing your activity at the [<em>insert conference here</em>]</h1>
+				<!-- <h1 style="text-align:center; margin: 5px 5px 5px 5px">currently viewing your activity at the [<em>insert conference here</em>]</h1> -->
 				<div class="well">					
 						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
 						<h4>Bob Influenced Sally</h4> 
@@ -76,31 +95,162 @@
 						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
 						<h4>Bob Influenced Sally</h4> 
 						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
-						<h6>13 minutes ago </h6>					
+						<h6>13 minutes ago </h6>	
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+				<div style="clear:both"></div>
+					<hr />
+						<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>
+						
 				</div>
 				
 			</div>
 			<div class="tab-pane" id="tab3">
-				<div class="well">
-					<h1>Blue Giants</h1>
+			<h4>Super Stars</h4>
+				<div class="well" style="background-color:red">
+					
+					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>	
 				</div>
-				<div class="well">
-					<h1>Red Giants</h1>
+				<h4>Mega Stars</h4>
+				<div class="well" style="background-color:blue">
+					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>	
 				</div>
-				<div class="well">
-					<h1>Yellow Dwarfs</h1>
-				</div>
-				<div class="well">
-					<h1>White Dwarves</h1>
+				<h4>Rock Stars</h4>
+				<div class="well" style="background-color:green">
+					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
+						<h4>Bob Influenced Sally</h4> 
+						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
+						<h6>13 minutes ago </h6>	
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal" id="myModal" style="display:none">
+			<div class="modal-header" style="background-color:rgb(255,237,76);" >
+				<button class="close" data-dismiss="modal">Close</button>
+				<h3>Give a Star</h3>
+			</div>
+			<div class="modal-body modalheader">
+				<table style="width:98%">
+					<tr>
+						<td><h4>Who</h4><input   type="text" class="input-medium" placeholder="Person" /></td>
+						<td><h4>Did</h4><input  type="text" class="input-small" placeholder="Verb" /></td>
+					</tr>
+				</table>
+				<div style="clear:both"></div>
+				<h4>Description</h4>
+				<textarea style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<h4>Hashtag</h4>
+				<input  style="width:98%" type="text" class="input-medium" placeholder="Event" />
+			</div>
+			<div class="modal-footer" style="background-color:#FFF79A">
+				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;">Cancel</a>
+				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
+			</div>
+		</div>
 		
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
 		<script src="../static/js/mobileviewjs.js"></script>
+		<script src="../static/js/bootstrap-modal.js"></script>
 		<script src="../static/js/knockout-2.1.0.js"></script>		
 		<script src="../static/js/bootstrap.js"></script>
 	</body>

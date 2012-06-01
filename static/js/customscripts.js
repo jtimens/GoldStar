@@ -59,7 +59,7 @@ function userLogout()
 	if (r == true)
 	{
 		sessionStorage.clear();
-		window.location = 'logout';
+		window.location = 'index.html';
 	}
 }
 function toggleLoginView(id)
