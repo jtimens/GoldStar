@@ -1,38 +1,16 @@
-import flask.ext.restless
-import datetime
-import bcrypt
+from flask import Flask, render_template
 import flask.ext.sqlalchemy
-from flask import Flask, render_template, request, redirect, url_for, session, flash, g
-from flaskext.oauth import OAuth
-from flask.ext.login import current_user, login_user, LoginManager, UserMixin, login_required, logout_user
-from flask.ext.wtf import PasswordField, SubmitField, TextField, Form
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
-
+import flask.ext.restless
+import datetime
 
 # Create the app for Flask
 app = Flask(__name__)
 app.config['DEBUG'] = True
-SECRET_KEY = 'development key'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://zoubpmfsdtxwoq:3G0ELHUf2BcAOSF1hUxDceKsQL@ec2-23-23-234-187.compute-1.amazonaws.com/resource44881'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testdb.sqlite'
 db = flask.ext.sqlalchemy.SQLAlchemy(app)
-TWITTER_APP_ID = '8YsjtlJjL8kRaGDv1SZjmQ'
-TWITTER_APP_SECRET_ID = 'QVAWDUstIpIHWhZegr5CqQm1XJHWtBIzOacQdXzP7o'
-
-app.secret_key = SECRET_KEY
-oauth = OAuth()
-
-twitter = oauth.remote_app('twitter',
-	base_url = 'http://api.twitter.com/1/',
-	request_token_url = 'https://api.twitter.com/oauth/request_token',
-	access_token_url = 'https://api.twitter.com/oauth/access_token',
-	#authorize_url = 'https://api.twitter.com/oauth/authorize',
-	authorize_url='http://api.twitter.com/oauth/authenticate',
-	consumer_key = TWITTER_APP_ID,
-	consumer_secret = TWITTER_APP_SECRET_ID
-	)
-
 
 # User Table Exception and Validation handling
 class userValidation(Exception):
@@ -110,35 +88,14 @@ class Star(db.Model):
 		return int(string)
 
 #User Table which stores user information and links to stars
-class User(db.Model, UserMixin):
+class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
-	userName = db.Column(db.Unicode)
-	password = db.Column(db.Unicode)
 	firstName = db.Column(db.Unicode)#, nullable = False)
 	lastName = db.Column(db.Unicode)#, nullable = False)
 	email = db.Column((db.Unicode), unique=True)#, nullable = False)
-	twitterUser = db.Column(db.Unicode)
-	oauth_token = db.Column(db.Unicode)
-	oauth_secret = db.Column(db.Unicode)
+	
 	#Validation defs which validate 1 parameter of the table at a time
-
-	#Encrypts Password
-	@validates('password')
-	def validate_password(self, key, string):
-		return unicode(bcrypt.hashpw(string, bcrypt.gensalt()))
-
-	#Validates User Name	
-	@validates('userName')
-	def validate_userName(self, key, string):
-		e=""
-		if User.query.filter_by(userName = unicode(string)).count() > 0:
-			e = "Username is already being used!"
-		if len(e):
-			exception = userValidation()
-			exception.errors = dict(userName = e)
-			raise exception
-		return unicode(string.strip())
 
 	#Validates the First Name
 	@validates('firstName')
@@ -179,64 +136,6 @@ class User(db.Model, UserMixin):
 			raise exception
 		return unicode(string)
 
-class LoginForm(Form):
-	username = TextField('username')
-	password = PasswordField('password')
-	submit = SubmitField('Login')
-
-login_manager = LoginManager()
-login_manager.setup_app(app)
-
-
-#Initialize the Database
-db.create_all()
-#Creates an API manager
-manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
-
-@login_manager.user_loader
-def load_user(userid):
-	return User.query.get(userid)
-
-#Twitter Authorizations
-@app.before_request
-def before_request():
-	g.user = None
-	if 'user_id' in session:
-		g.user = User.query.get(session['user_id'])
-
-@app.after_request
-def after_request(response):
-	db.session.remove()
-	return response
-
-@twitter.tokengetter
-def get_twitter_token():
-	user = g.user
-	if user is not None:
-		return user.oauth_token, user.oauth_secret
-
-@app.route('/twit')
-def twit():
-	return twitter.authorize(callback=url_for('oauth_authorized', 
-		next = request.args.get('next') or request.referrer or None))
-
-@app.route('/oauth_authorized')
-@twitter.authorized_handler
-def oauth_authorized(resp):
-	if resp is None:
-		flash(u'You denied the request to sign in.')
-	if resp is not None:
-		print resp['screen_name']
-	return redirect('/index.html')
-
-@app.route('/tweet', methods = ['POST'])
-def tweet():
-	if g.user is None:
-		return redirect('/twit')
-	status = u'@juggler2009 test tag testing 1 2'
-	resp = twitter.post('statuses/update.json', data = {'status': status})
-	return redirect('/index.html')
-
 
 #The main index of the Gold Star App
 @app.route('/')
@@ -258,34 +157,18 @@ def mobileview_route():
 def result_route():
 	return render_template('results.html')
 
-#Flask Login Information
-@app.route('/login', methods = ['POST', 'GET'])
-def login():
-	form = LoginForm()
-	if form.validate_on_submit():
-		username, password = form.username.data, form.password.data
-		user = User.query.filter_by(userName = username).one()
-		if bcrypt.hashpw(password, user.password) == user.password:
-			login_user(user)
-			print "Logged In successfully"
-			return redirect("/index.html" + "?id=" + str(user.id))
-	return render_template("login.html", form=form)
+#Initialize the Database
+db.create_all()
 
-@app.route("/logout")
-@login_required
-def logout():
-	logout_user()
-	return redirect('/index.html')
+#Creates an API manager
+manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
-auth_func = lambda: current_user.is_authenticated()
 #Creates the API
-#manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
-manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
+manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
 
-if __name__ == '__main__':
-	app.run('0.0.0.0')
+app.run('0.0.0.0')
 
 
