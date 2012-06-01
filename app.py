@@ -115,7 +115,6 @@ class Star(db.Model):
 class User(db.Model, UserMixin):
 
 	id = db.Column(db.Integer, primary_key = True)
-	userName = db.Column(db.Unicode)
 	password = db.Column(db.Unicode)
 	firstName = db.Column(db.Unicode)#, nullable = False)
 	lastName = db.Column(db.Unicode)#, nullable = False)
@@ -266,7 +265,8 @@ def login():
 	form = LoginForm()
 	if form.validate_on_submit():
 		username, password = form.username.data, form.password.data
-		user = User.query.filter_by(userName = username).one()
+		username = username.lower()
+		user = User.query.filter_by(email = username).one()
 		if bcrypt.hashpw(password, user.password) == user.password:
 			login_user(user)
 			print "Logged In successfully"
@@ -284,8 +284,6 @@ auth_func = lambda: current_user.is_authenticated()
 #manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
-#manager.create_api(User, methods=['GET', 'POST'])
-#manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
 
 
 if __name__ == '__main__':

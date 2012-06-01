@@ -123,8 +123,10 @@ function postJSON(id, num)
 		var fn = $("#FName").val(); 
 		var ln = $("#LName").val(); 
 		var em = $("#Email").val();
+		var pw = $("#PWord").val();
+		console.log(pw);
 		em = em.toLowerCase();
-		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'"}';
+		var userData = '{"firstName":"'+fn+'","lastName":"'+ln+'","email":"'+em+'", "password":"'+pw+'"}';
 		var myJSON = userData;
 		var URL = "/api/user";
 		$.ajax({
