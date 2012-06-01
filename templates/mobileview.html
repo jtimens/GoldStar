@@ -32,42 +32,12 @@
 					<a class="brand">Hello Bob!</a>
 					<ul class="nav pull-right">
 						
-						<li><a href="#"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
+						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
 					<!--  -->
 				</div>
 			</div>
 		</div>
-		<div class="modal" id="myModal" style="display:none">
-			<div class="modal-header" style="background-color:rgb(255,237,76);" >
-				<button class="close" data-dismiss="modal">Close</button>
-				<h3>Give a Star</h3>
-			</div>
-			<div class="modal-body modalheader">
-				<table style="width:98%">
-					<tr>
-						<th>Who</th>
-						<th>Did</th>
-					</tr>
-					<tr>
-						<td><input  style="float:left;" type="text" class="input-medium" placeholder="Person" /></td>
-						<td><input style="float:right;" type="text" class="input-small" placeholder="Verb" /></td>
-					</tr>
-				</table>
-				<h4>Who</h4><h4>Did</h4>
-				<div style="clear:both"></div>
-				
-				
-				<div style="clear:both"></div>
-				<h4>Description</h4>
-				<textarea style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
-				<h4>Hashtag</h4>
-				<input  style="width:98%" type="text" class="input-medium" placeholder="Event" />
-			</div>
-			<div class="modal-footer" style="background-color:#FFF79A">
-				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;">Cancel</a>
-				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
-			</div>
-		</div>
+		
 	<div class="tabbable">
 		<ul class="nav nav-tabs">
 			<li style="width:33%; text-align:center" ><a href="#tab1" data-toggle="tab"> <i class="icon-globe"></i> </a></li>
@@ -252,6 +222,29 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal" id="myModal" style="display:none">
+			<div class="modal-header" style="background-color:rgb(255,237,76);" >
+				<button class="close" data-dismiss="modal">Close</button>
+				<h3>Give a Star</h3>
+			</div>
+			<div class="modal-body modalheader">
+				<table style="width:98%">
+					<tr>
+						<td><h4>Who</h4><input   type="text" class="input-medium" placeholder="Person" /></td>
+						<td><h4>Did</h4><input  type="text" class="input-small" placeholder="Verb" /></td>
+					</tr>
+				</table>
+				<div style="clear:both"></div>
+				<h4>Description</h4>
+				<textarea style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<h4>Hashtag</h4>
+				<input  style="width:98%" type="text" class="input-medium" placeholder="Event" />
+			</div>
+			<div class="modal-footer" style="background-color:#FFF79A">
+				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;">Cancel</a>
+				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
+			</div>
+		</div>
 		
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
