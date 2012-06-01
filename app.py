@@ -20,6 +20,7 @@ class userValidation(Exception):
 class starValidation(Exception):
 	pass
 
+
 #Star Table that stores Star information between two users
 class Star(db.Model):
 
@@ -29,6 +30,7 @@ class Star(db.Model):
 	created = db.Column(db.DateTime, default = datetime.datetime.now())
 	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	hashtag = db.Column(db.Unicode)
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 	#Validation defs which validate 1 parameter of the table at a time
@@ -91,6 +93,10 @@ class Star(db.Model):
 class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key = True)
+
+
+	password = db.Column(db.Unicode)
+
 	firstName = db.Column(db.Unicode)#, nullable = False)
 	lastName = db.Column(db.Unicode)#, nullable = False)
 	email = db.Column((db.Unicode), unique=True)#, nullable = False)
@@ -157,8 +163,24 @@ def mobileview_route():
 def result_route():
 	return render_template('results.html')
 
+
 #Initialize the Database
 db.create_all()
+
+#Flask Login Information
+@app.route('/login', methods = ['POST', 'GET'])
+def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		username, password = form.username.data, form.password.data
+		username = username.lower()
+		user = User.query.filter_by(email = username).one()
+		if bcrypt.hashpw(password, user.password) == user.password:
+			login_user(user)
+			print "Logged In successfully"
+			return render_template("main.html", loginID = user.id)
+	return render_template("login.html", form=form)
+
 
 #Creates an API manager
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
@@ -166,11 +188,11 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 #Creates the API
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
+
 #manager.create_api(User, methods=['GET', 'POST'])
 #manager.create_api(Star, methods=['GET', 'POST', 'DELETE'])
 
 if __name__ == '__main__':
 	app.run('0.0.0.0')
-
 
 
