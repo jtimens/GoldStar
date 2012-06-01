@@ -74,7 +74,8 @@
 		<script src="../static/js/bootstrap.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				sessionStorage.userID = {{ loginID }};
+				if(!(sessionStorage.userID))
+					sessionStorage.userID = {{ loginID }};
 				alert(sessionStorage.userID);
 				try
 				{
