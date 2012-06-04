@@ -1,9 +1,9 @@
 class starObject:
-	giver = "none"
-	reciever = "none"
-	reason = "none"
+	issuer = None
+	owner = None
+	reason = None
 
 	def __init__(self, g, r, rsn):
-		self.giver = g
-		self.reciever = r
+		self.issuer = g
+		self.owner = r
 		self.reason = rsn

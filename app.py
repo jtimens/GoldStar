@@ -265,37 +265,48 @@ def result_route():
 #Flask Login Information
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
-	form = LoginForm()
-	if form.validate_on_submit() and request.method == 'POST':
-		username, password = form.username.data, form.password.data
-		username = username.lower()
-		user = User.query.filter_by(email = username).one()
-		if bcrypt.hashpw(password, user.password) == user.password:
-			login_user(user)
-			print "Logged In successfully"
-			return render_template("main.html", loginID = user.id)
-	elif request.method == 'POST':
-		loginINFO = request.json
-		user = User.query.filter_by(email = unicode(loginINFO['email'])).one()
-		if bcrypt.hashpw(loginINFO['password'], user.password) == user.password:
-			login_user(user)
-			print "Logged In successfully"
-			return jsonify(dict(id = user.id))
-	return render_template("login.html", form=form)
+	try:
+		form = LoginForm()
+		if form.validate_on_submit() and request.method == 'POST':
+			username, password = form.username.data, form.password.data
+			username = username.lower()
+			user = User.query.filter_by(email = username).one()
+			if bcrypt.hashpw(password, user.password) == user.password:
+				login_user(user)
+				print "Logged In successfully"
+				return render_template("mobileview.html", loginID = user.id)
+		elif request.method == 'POST':
+			loginINFO = request.json
+			user = User.query.filter_by(email = unicode(loginINFO['email'])).one()
+			if bcrypt.hashpw(loginINFO['password'], user.password) == user.password:
+				login_user(user)
+				print "Logged In successfully"
+				return jsonify(dict(id = user.id))
+		return render_template("mobileview.html", form=form)
+	except Exception as ex:
+		return render_template("login.html",form=form)
 
 #user page
 @app.route('/user/<int:userID>')
 def userPage(userID):
-	u = User.query.filter_by(id = userID).one()
-	thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
-	return render_template("users.html", user = thisUser)
+	try:
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		return render_template("users.html", user = thisUser)
+	except Exception as ex:
+		return render_template("error.html")
 
 #starLanding Page
 @app.route('/star/<int:starID>')
 def starPage(starID):
-	thisStar = StarObject.starObject("Bob Dole", "Jimi Hendrix", "LSD")
-	return render_template("star.html", star = thisStar)
-
+	try:
+		s = Star.query.filter_by(id = starID).one()
+		issuer = User.query.filter_by(id = s.issuer_id).one()
+		owner = User.query.filter_by(id = s.owner_id).one()
+		thisStar = StarObject.starObject(issuer.firstName + ' ' + issuer.lastName, owner.firstName + ' ' + owner.lastName, s.description)
+		return render_template("star.html", star = thisStar)
+	except Exception as ex:
+		return render_template("error.html")
 
 @app.route("/logout")
 @login_required
