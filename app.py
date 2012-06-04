@@ -305,6 +305,11 @@ def starPage(starID):
 	except Exception as ex:
 		return render_template("error.html")
 
+#createAccountPage
+@app.route('/signup')
+def createUser():
+	return render_template("signup.html")
+
 @app.route("/logout")
 @login_required
 def logout():

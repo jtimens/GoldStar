@@ -76,7 +76,7 @@ function loadStars(divToFill)
 				itemHTML += 		'<span style="font-size:0.8em">13 minutes ago </span> <br/>'
 				itemHTML += 	'</div>'
 				itemHTML += 	'<a href="#">'
-				itemHTML += 		'<div style="float:right; height:100%; width:20%;position:relative;">'
+				itemHTML += 		'<div style="float:right; height:90%; width:20%;position:relative; padding-top:1.5em;">'
 				itemHTML += 				'<div class="iconDiv">'
 				itemHTML += 				'	<i class="icon-chevron-right pull-right"></i>'
 				itemHTML += 			'	</div>	'					
