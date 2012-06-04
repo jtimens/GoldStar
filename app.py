@@ -281,6 +281,7 @@ def login():
 				return jsonify(dict(id = current_user.get_id()))
 	except Exception as ex:
 		print ex.message
+		flash('Invalid username and password')
 	return render_template("login.html", form=form)
 
 #user page

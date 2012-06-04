@@ -49,7 +49,7 @@ function sendUserInfoToServer()
 							contentType: "application/json",
 							success:function(data, textStatus,jqXHR){
 								sessionStorage.userID = data.id;
-								login();
+								window.location = "mobileview.html";
 							}
 						});
 	  				}
