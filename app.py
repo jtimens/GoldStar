@@ -242,7 +242,6 @@ def tweet():
 
 
 #The main index of the Gold Star App
-@app.route('/')	
 @app.route('/index.html')
 def index_route():
 	return render_template('index.html')
@@ -252,21 +251,19 @@ def index_route():
 def main_route():
 	return render_template('main.html', loginID = current_user.get_id())
 	
-
+@app.route('/')
 @app.route('/mobileview.html')
 def mobileview_route():
-	return render_template('mobileview.html')
-
-#Redirect which has a lot of server requests
-@app.route('/results.html')
-def result_route():
-	return render_template('results.html')
+	if current_user.is_authenticated():
+		return render_template('mobileview.html', loginID = current_user.get_id())
+	else:
+		return redirect('login')
 
 #Flask Login Information
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
+	form = LoginForm()
 	try:
-		form = LoginForm()
 		if form.validate_on_submit() and request.method == 'POST':
 			username, password = form.username.data, form.password.data
 			username = username.lower()
@@ -274,17 +271,17 @@ def login():
 			if bcrypt.hashpw(password, user.password) == user.password:
 				login_user(user)
 				print "Logged In successfully"
-				return render_template("mobileview.html", loginID = user.id)
+				return redirect('mobileview.html')
 		elif request.method == 'POST':
 			loginINFO = request.json
 			user = User.query.filter_by(email = unicode(loginINFO['email'])).one()
 			if bcrypt.hashpw(loginINFO['password'], user.password) == user.password:
 				login_user(user)
 				print "Logged In successfully"
-				return jsonify(dict(id = user.id))
-		return render_template("login.html", form=form)
+				return jsonify(dict(id = current_user.get_id()))
 	except Exception as ex:
-		return render_template("login.html",form=form)
+		print ex.message
+	return render_template("login.html", form=form)
 
 #user page
 @app.route('/user/<int:userID>')
@@ -312,11 +309,10 @@ def starPage(starID):
 @login_required
 def logout():
 	logout_user()
-	return redirect('/index.html')
+	return redirect('/')
 
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
-#manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation])
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
