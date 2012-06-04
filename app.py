@@ -8,6 +8,8 @@ from flask.ext.login import current_user, login_user, LoginManager, UserMixin, l
 from flask.ext.wtf import PasswordField, SubmitField, TextField, Form
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
+import userPageUser
+import StarObject
 
 
 # Create the app for Flask
@@ -279,6 +281,19 @@ def login():
 			print "Logged In successfully"
 			return jsonify(dict(id = user.id))
 	return render_template("login.html", form=form)
+
+#user page
+@app.route('/user/<int:userId>')
+def userPage(userId):
+	thisUser = userPageUser.userPageUser("Hellen", "Keller")
+	return render_template("users.html", user = thisUser)
+
+#starLanding Page
+@app.route('/star/<int:starID>')
+def starPage(starID):
+	thisStar = StarObject.starObject("Bob Dole", "Jimi Hendrix", "LSD")
+	return render_template("star.html", star = thisStar)
+
 
 @app.route("/logout")
 @login_required
