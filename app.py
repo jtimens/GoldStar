@@ -282,7 +282,7 @@ def login():
 				login_user(user)
 				print "Logged In successfully"
 				return jsonify(dict(id = user.id))
-		return render_template("mobileview.html", form=form)
+		return render_template("login.html", form=form)
 	except Exception as ex:
 		return render_template("login.html",form=form)
 
