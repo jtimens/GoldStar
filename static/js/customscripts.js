@@ -23,13 +23,13 @@ function redirect(id)
 	else if (page == "awardedStars")
 		window.location = "awardedStar.html";
 	else
-		window.location = "main.html";
+		window.location = "mobileview.html";
 }
 function login()
 {
 	if(sessionStorage.userID && canUseStorage())
 	{
-		window.location = "main.html";
+		window.location = "mobileview.html";
 	}
 	else if (!(sessionStorage.userID) && canUseStorage())
 	{
@@ -41,7 +41,7 @@ function login()
 			if(jdata.objects.length)
 			{
 				sessionStorage.userID = jdata.objects[0].id;
-				window.location = "main.html";
+				window.location = "mobileview.html";
 			}
 			else
 				alert("Email not found.");	
