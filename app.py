@@ -284,7 +284,7 @@ def login():
 	return render_template("login.html", form=form)
 
 #user page
-@app.route('/user/<int:userID>')
+@app.route('/users/<int:userID>')
 def userPage(userID):
 	try:
 		u = User.query.filter_by(id = userID).one()
