@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="user-scalable=yes,width=device-width">
+		<title>Gold Star</title>
+		<link href="../static/css/bootstrap.css" rel="stylesheet"/>
+		<link href="../static/css/bootstrap-responsive.css" rel="stylesheet"/>
+		<style type="text/css">
+		.modalheader
+		{
+			background-image: linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -o-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -moz-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -webkit-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: -ms-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+
+			background-image: -webkit-gradient(
+				linear,
+				left bottom,
+				left top,
+				color-stop(0.49, rgb(255,237,76)),
+				color-stop(0.06, rgb(245,241,159))
+				);
+		}
+		</style>
+			{% block cssStyle %}{% endblock %}
+	</head>
+	<body>
+	
+		<div class="navbar" >
+			<div class="navbar-inner" >
+				<div class="container" >
+					<a class="brand">Hello Bob!</a>
+					<ul class="nav pull-right">
+						
+						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
+					<!--  -->
+				</div>
+			</div>
+		</div>
+		
+
+	<div class="modal" id="myModal" style="display:none">
+			<div class="modal-header" style="background-color:rgb(255,237,76);" >
+				<button class="close" data-dismiss="modal">Close</button>
+				<h3>Give a Star</h3>
+			</div>
+			<div class="modal-body modalheader">
+				<table style="width:98%">
+					<tr>
+						<td><h4>Who</h4><input   type="text" class="input-medium" placeholder="Person" /></td>
+						<td><h4>Did</h4><input  type="text" class="input-small" placeholder="Verb" /></td>
+					</tr>
+				</table>
+				<div style="clear:both"></div>
+				<h4>Description</h4>
+				<textarea style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<h4>Hashtag</h4>
+				<input  style="width:98%" type="text" class="input-medium" placeholder="Event" />
+			</div>
+			<div class="modal-footer" style="background-color:#FFF79A">
+				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;">Cancel</a>
+				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
+			</div>
+		</div>
+		
+		<div id="MainContent">
+			{% for message in get_flashed_messages() %}
+  				  <div class=flash>{{ message }}</div>
+ 			{% endfor %}
+  			{% block body %}{% endblock %}
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
+		<script src="../static/js/mobileviewjs.js"></script>
+		<script src="../static/js/bootstrap-modal.js"></script>
+		<script src="../static/js/knockout-2.1.0.js"></script>		
+		<script src="../static/js/bootstrap.js"></script>
+			{% block scripts %}{% endblock %}
+	</body>
+</html>
