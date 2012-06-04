@@ -314,7 +314,7 @@ def createUser():
 
 #feedback page
 @app.route('/feedback')
-def createUser():
+def feedback():
 	return render_template("feedback.html")
 
 @app.route("/logout")
