@@ -28,7 +28,15 @@
 		<div style="width:100%">
 			<form action="{{ url_for('login') }}" method="post">
 			  {{ form.hidden_tag() }}
-			  	
+			  	{% with messages = get_flashed_messages() %}
+				  {% if messages %}
+				    <ul style="color:red">
+				    {% for message in messages %}
+				      <li>{{ message }}</li>
+				    {% endfor %}
+				    </ul>
+				  {% endif %}
+				{% endwith %}
 			  <div id="container" style="float:left;width:100%;text-align:center;" >
 				
 					<div>

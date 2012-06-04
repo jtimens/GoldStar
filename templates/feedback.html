@@ -1,0 +1,28 @@
+{%extends "layout.html"%}
+{% block cssStyle%}
+	<style type="text/css">
+		.iconDiv {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			width: 50%;
+			height: 30%;
+			margin: auto;
+		}
+		</style>
+{%endblock%}
+{% block body%}		
+
+			As this is in Beta, please let us know what you think
+			<br/>
+			<INPUT class="NavButton" onclick="NavTo('mailto:mdewey@problemsolutions.net&subject=Gold Star Feedback')" type="button" value="Send Link to a friend">
+
+
+
+{% endblock%}
+{% block scripts%}
+
+		<script language="javascript">function NavTo(url){ window.location = url }</script>
+
+{%endblock%}

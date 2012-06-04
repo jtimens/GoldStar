@@ -311,6 +311,12 @@ def starPage(starID):
 def createUser():
 	return render_template("signup.html")
 
+
+#feedback page
+@app.route('/feedback')
+def createUser():
+	return render_template("feedback.html")
+
 @app.route("/logout")
 @login_required
 def logout():
