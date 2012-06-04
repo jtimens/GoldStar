@@ -157,6 +157,20 @@
 			</div>
 		</div>
 	</div>
-{% endblock%}
-{% block script%}
-{%endblock%}
+{% endblock %}
+{% block scripts %}
+<script>
+	$(function(){
+	try
+	{
+		$( "#modalViewVerb" ).autocomplete({
+			source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
+		});				
+	}
+	catch(ex)
+	{
+		alert(ex.message);
+	}
+})
+</script>
+{% endblock %}

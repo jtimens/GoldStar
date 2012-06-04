@@ -64,11 +64,6 @@ $('a[data-toggle="tab"]').on('shown', function (e) {
 function loadMyStars()
 {
 			//getJson of stars here
-			var userUrl = "/api/user/"+sessionStorage.userID;
-			$.getJSON(userUrl, function(jdata)
-			{
-				console.log(jdata);
-			}
 			for (var i=0; i < 10; i++)
 			{
 			var itemHTML = '';
@@ -96,4 +91,10 @@ function loadMyStars()
 function showModal()
 {
 	$('#myModal').modal('show');
+}
+function resetModalView(){
+		$('#modalViewUser').val("");
+		$('#modalViewVerb').val("");
+		$('#modalViewEvent').val("");
+		$('#modalViewTextarea').val("");
 }

@@ -5,6 +5,7 @@
 		<title>Gold Star</title>
 		<link href="../static/css/bootstrap.css" rel="stylesheet"/>
 		<link href="../static/css/bootstrap-responsive.css" rel="stylesheet"/>
+		<link href="../static/css/jquery-ui-1.8.20.custom.css" rel="stylesheet"/>
 		<style type="text/css">
 		.modalheader
 		{
@@ -30,10 +31,10 @@
 		<div class="navbar" >
 			<div class="navbar-inner" >
 				<div class="container" >
-					<a class="brand">Hello <a class="brand" href="/users/1">Bob!</a></a>
+					<a class="brand">Hello<a class="brand" href="/users/1">Bob!</a></a>
 					<ul class="nav pull-right">
 						
-						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
+						<li><a href="#myModalview"><button onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
 					<!--  -->
 				</div>
 			</div>
@@ -48,18 +49,18 @@
 			<div class="modal-body modalheader">
 				<table style="width:98%">
 					<tr>
-						<td><h4>Who</h4><input   type="text" class="input-medium" placeholder="Person" /></td>
-						<td><h4>Did</h4><input  type="text" class="input-small" placeholder="Verb" /></td>
+						<td><h4>Who</h4><input id="modalViewUser" type="text" class="input-medium" placeholder="Person" /></td>
+						<td><h4>Did</h4><input id="modalViewVerb" type="text" class="input-small" placeholder="Verb" /></td>
 					</tr>
 				</table>
 				<div style="clear:both"></div>
 				<h4>Description</h4>
-				<textarea style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<textarea id="modalViewTextarea" style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
 				<h4>Hashtag</h4>
-				<input  style="width:98%" type="text" class="input-medium" placeholder="Event" />
+				<input id="modalViewEvent" style="width:98%" type="text" class="input-medium" placeholder="Event" />
 			</div>
 			<div class="modal-footer" style="background-color:#FFF79A">
-				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;">Cancel</a>
+				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;" onclick="resetModalView()">Cancel</a>
 				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
 			</div>
 		</div>
@@ -77,6 +78,41 @@
 		<script src="../static/js/knockout-2.1.0.js"></script>		
 		<script src="../static/js/bootstrap.js"></script>
 		<script src="../static/js/customscripts.js"></script>
-			{% block scripts %}{% endblock %}
+		<script>
+			$(function(){
+				try
+				{
+					$( "#modalViewVerb" ).autocomplete({
+						source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
+					});				
+				}
+				catch(ex)
+				{
+					alert(ex.message);
+				}
+				try
+				{
+					$( "#modalViewUser" ).autocomplete({
+						source: ["Matthew Graham", "Jay Ostinowsky"],
+					});				
+				}
+				catch(ex)
+				{
+					alert(ex.message);
+				}
+				try
+				{
+					$( "#modalViewEvent" ).autocomplete({
+						source: ["Event1","Event2","Event3","Event4","Event5","Event6"],
+					});				
+				}
+				catch(ex)
+				{
+					alert(ex.message);
+				}
+			})
+		</script>
+			{% block scripts %}
+			{% endblock %}
 	</body>
 </html>
