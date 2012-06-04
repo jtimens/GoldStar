@@ -21,12 +21,12 @@ function loadCurrentStars()
 	if (_currentTab == "myStars")
 	{
 		console.log("loading myStars");
-		loadStars("myStarList");	
+		loadMyStars("myStarList");	
 	}
 	else if (_currentTab == "event")
 	{
 		console.log("loading event");
-		loadStars("eventStarList");	
+		// loadStars("eventStarList");	
 	}
 	if (_currentTab == "leader")
 	{
@@ -61,9 +61,8 @@ $('a[data-toggle="tab"]').on('shown', function (e) {
     loadCurrentStars();
 });
 
-function loadStars(divToFill)
+function loadMyStars()
 {
-			console.log("filling " + divToFill);
 			//getJson of stars here
 			for (var i=0; i < 10; i++)
 			{
@@ -84,7 +83,7 @@ function loadStars(divToFill)
 				itemHTML += 	'</a>'
 				itemHTML += '</div>	'		
 				itemHTML += 	'<div style="clear:both"></div>'
-				$("#"+divToFill).append(itemHTML);
+				$("#myStarList").append(itemHTML);
 			}		
 }
 
