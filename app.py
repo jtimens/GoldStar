@@ -242,7 +242,7 @@ def tweet():
 
 
 #The main index of the Gold Star App
-
+@app.route('/')	
 @app.route('/index.html')
 def index_route():
 	return render_template('index.html')
@@ -252,7 +252,7 @@ def index_route():
 def main_route():
 	return render_template('main.html', loginID = current_user.get_id())
 	
-@app.route('/')	
+
 @app.route('/mobileview.html')
 def mobileview_route():
 	return render_template('mobileview.html')
