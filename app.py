@@ -284,9 +284,10 @@ def login():
 	return render_template("login.html", form=form)
 
 #user page
-@app.route('/user/<int:userId>')
-def userPage(userId):
-	thisUser = userPageUser.userPageUser("Hellen", "Keller")
+@app.route('/user/<int:userID>')
+def userPage(userID):
+	u = User.query.filter_by(id = userID).one()
+	thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
 	return render_template("users.html", user = thisUser)
 
 #starLanding Page
