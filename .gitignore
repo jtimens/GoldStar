@@ -8,3 +8,4 @@ lib/
 bin/
 include/
 local/
+testdb.*
