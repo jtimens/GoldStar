@@ -263,8 +263,8 @@ def mobileview_route():
 		p = page.Page("Gold Star!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
-		return render_template('mobileview.html', loginID = current_user.get_id(), page = p, user = thisUser)
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, current_user.get_id())
+		return render_template('mobileview.html', page = p, user = thisUser)
 	else:
 		return redirect('login')
 
@@ -295,7 +295,7 @@ def login():
 	userID = current_user.get_id()
 	if userID !=  None:
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,0)
 	else:
 		thisUser = None
 	return render_template("login.html", form=form, page = p, user = thisUser)
@@ -305,17 +305,14 @@ def login():
 def userPage(userID):
 	try:
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
 		p = page.Page("Check out this user!", False)
-		userID = current_user.get_id()
-		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
 		return render_template("users.html", user = thisUser, page = p)
 	except Exception as ex:
 		p = page.Page("Oops!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
 		return render_template("error.html", page = p, user = thisUser)
 
 #starLanding Page
@@ -329,22 +326,25 @@ def starPage(starID):
 		p = page.Page("Check out this star!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, u.id)
 		return render_template("star.html", star = thisStar, page = p, user = thisUser)
 	except Exception as ex:
 		p = page.Page("Oops!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, user = thisUser)
-		return render_template("error.html",page = p)
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,0 )
+		return render_template("error.html",page = p,user = thisUser)
 
 #createAccountPage
 @app.route('/signup')
 def createUser():
 	p = page.Page("Sign Up!", True)
-	userID = current_user.get_id()
-	u = User.query.filter_by(id = userID).one()
-	thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+	try:
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, 0)
+	except Exception as ex:
+		thisUser = none
 	return render_template("signup.html", page = p, user = thisUser)
 
 
@@ -354,7 +354,7 @@ def feedback():
 	p = page.Page("Feedback!", False)
 	userID = current_user.get_id()
 	u = User.query.filter_by(id = userID).one()
-	thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+	thisUser = userPageUser.userPageUser(u.firstName, u.lastName, u.id)
 	return render_template("feedback.html", page = p, user = thisUser)
 
 @app.route("/logout")

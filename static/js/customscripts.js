@@ -264,3 +264,9 @@ function showDescription(divid)
 	//console.log(divid);
 	$('#' + divid).toggle();
 }
+
+//modal functionality
+function showModal()
+{
+	$('#myModal').modal('show');
+}
