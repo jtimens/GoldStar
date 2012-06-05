@@ -304,19 +304,23 @@ def login():
 @app.route('/users/<int:userID>')
 def userPage(userID):
 	try:
+		#get info for other user
 		u = User.query.filter_by(id = userID).one()
 		starsIssued = Star.query.filter_by(issuer_id = userID).count()
 		starsReceived = Star.query.filter_by(owner_id = userID).count()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
-		thisUser.addStarsCount(starsIssued, starsReceived)
+		otherUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
+		otherUser.addStarsCount(starsIssued, starsReceived)
+		#get info for this user
+		me = User.query.filter_by(id = current_user.get_id()).one()
+		thisUser = userPageUser.userPageUser(me.firstName, me.lastName, me.id)
 		p = page.Page("Check out this user!", False)
-		return render_template("users.html", user = thisUser, page = p)
+		return render_template("users.html", user = thisUser, page = p, theOtherUser = otherUser)
 	except Exception as ex:
-		p = page.Page("Oops!", False)
-		userID = current_user.get_id()
-		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
-		return render_template("error.html", page = p, user = thisUser)
+			p = page.Page("Oops!", False)
+			userID = current_user.get_id()
+			u = User.query.filter_by(id = userID).one()
+			thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
+			return render_template("error.html", page = p, user = thisUser)
 
 #starLanding Page
 @app.route('/star/<int:starID>')
