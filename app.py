@@ -381,7 +381,7 @@ def getLeaderboard():
 	leaderList = []
 	Leaderboards = User.query.order_by(User.stars).limit(25)
 	for i in Leaderboards:
-		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars)))
+		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars), id=i.id))
 	return jsonify(dict(leaders = leaderList))
 
 @app.route('/leaderboard/<string:hashtag>')
