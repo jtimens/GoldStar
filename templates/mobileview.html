@@ -76,13 +76,21 @@
 			</div>
 			<div class="tab-pane active" id="myStarsTab">
 				<div style="text-align:center">
-					<select style="width:80%">
+					<select style="width:80%" id="myFeedFilter">
 						<option selected>All</option>
 						<option>Given</option>
 						<option>Received</option>
 					</select><br />
 					
 				</div>
+				<div class="hero-unit">
+					<div class="well"><i>
+						<div id="emptyListMessage">
+						</div>
+					</i>
+					</div>
+				</div>
+				
 				<div id="myStarList">
 
 				</div>
@@ -160,6 +168,18 @@
 
 {% endblock %}
 {% block scripts %}
+<script type="text/javascript">
+	$(function()
+	{
+		if (canUseStorage())
+		{
+			sessionStorage.userID = {{user.ID}}
+			//alert(localStorage.userID)
+			pageInit();
+		}
+		
+	})
+</script>
 <script>
 	$(function(){
 	try
@@ -175,15 +195,5 @@
 })
 </script>
 <script src="../static/js/mobileviewjs.js"></script>
-<script type="text/javascript">
-	$(function()
-	{
-		if (canUseStorage())
-		{
-			localStorage.userID = {{loginID}}
-			alert(localStorage.userID)
-		}
-		
-	})
-</script>
+
 {% endblock %}
