@@ -332,7 +332,7 @@ def starPage(starID):
 		p = page.Page("Oops!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,0 )
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,u.id )
 		return render_template("error.html",page = p,user = thisUser)
 
 #createAccountPage
