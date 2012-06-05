@@ -2,6 +2,7 @@ import flask.ext.restless
 import datetime
 import bcrypt
 import flask.ext.sqlalchemy
+from leader import Leaders
 from flask import Flask, render_template, request, redirect, url_for, session, flash, g, jsonify
 from flaskext.oauth import OAuth
 from flask.ext.login import current_user, login_user, LoginManager, UserMixin, login_required, logout_user
@@ -305,7 +306,10 @@ def login():
 def userPage(userID):
 	try:
 		u = User.query.filter_by(id = userID).one()
+		starsIssued = Star.query.filter_by(issuer_id = userID).count()
+		starsReceived = Star.query.filter_by(owner_id = userID).count()
 		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
+		thisUser.addStarsCount(starsIssued, starsReceived)
 		p = page.Page("Check out this user!", False)
 		return render_template("users.html", user = thisUser, page = p)
 	except Exception as ex:
@@ -362,6 +366,14 @@ def feedback():
 def logout():
 	logout_user()
 	return redirect('/')
+
+@app.route('/getLeaderboard')
+def getLeaderboard():
+	leaderList = []
+	Leaderboards = User.query.order_by(User.stars).limit(25)
+	for i in Leaderboards:
+		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars)))
+	return jsonify(dict(leaders = leaderList))
 
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
