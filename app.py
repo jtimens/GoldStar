@@ -99,9 +99,7 @@ class Star(db.Model):
 	def validate_owner_id(self, key, string):
 		e=""
 		string = str(string)
-		if not string.isdigit():
-			e = "Digits are only allowed for the ID"
-		if str(self.issuer_id) == string:
+		if str(self.issuer_email) == string:
 			e = "Can't give yourself a star"
 		if len(e):
 			exception = starValidation()
@@ -114,8 +112,6 @@ class Star(db.Model):
 	def validate_issuer_id(self, key, string):
 		e=""
 		string = str(string)
-		if not string.isdigit():
-			e = "Digits are only allowed for the ID"
 		if len(e):
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
@@ -404,7 +400,7 @@ auth_func = lambda: current_user.is_authenticated()
 #Creates the API
 #manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func, 
-	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued'])
+	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued','email'])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
 

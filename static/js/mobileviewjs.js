@@ -117,13 +117,13 @@ function displayLeaderBoard()
 		 			}
 
 			 		var itemHTML = '';
-					itemHTML += '<div class="well" style="height:4em; margin-bottom:0;">'				
+					itemHTML += '<a href="/users/' + val.id + '"><div class="well" style="height:4em; margin-bottom:0;">'				
 					itemHTML += 	'<div style="float:left; width:80%;">'
 					itemHTML += 	'	<img class="pull-left" width="40" height="40" style="padding-right:1em;" src="../static/img/goldstar.png" />'
-					itemHTML += 		'<span font-size:1.2em;><a href="/users/' + val.id + '">' + val.firstName + ' '+ val.lastName +'</a> </span> <br/>';
+					itemHTML += 		'<span font-size:1.2em;>' + val.firstName + ' '+ val.lastName +' </span> <br/>';
 					itemHTML += 		'<span style="font-size:1em"><i>Stars:' + val.starCount + '</i> </span> <br/>'
 					itemHTML += 	'</div>'
-					itemHTML += '</div>	'		
+					itemHTML += '</div></a>	'		
 					itemHTML += 	'<div style="clear:both"></div>'
 					//checks if the empty message is still there
 					if ($(divToChange).html().indexOf('<div class="well-small"') >= 0 )
