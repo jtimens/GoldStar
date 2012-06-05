@@ -171,15 +171,19 @@ function postJSON(id, num)
 	}
 	else if (num == 1)
 	{
-		var e = document.getElementById("select1");
-		if(confirm('Are you sure you want to give a star to ' + e.options[e.selectedIndex].text))
+		//var e = document.getElementById("select1");
+		if(confirm('Are you sure you want to give a star to ' + $('#modalViewUser').text() + '?'))
 		{
-			var e1 = e.options[e.selectedIndex].value;
-			starName = e.options[e.selectedIndex].text;
+			//var e1 = e.options[e.selectedIndex].value;
+			//starName = e.options[e.selectedIndex].text;
+			var e1 = $('#modalViewUser').val();
+			var starName = $('#modalViewUser').val();
 			sessionStorage.starName = starName;
-			e = document.getElementById("select2");
-			var e2 = e.options[e.selectedIndex].value;
-			var e3 = document.getElementById("select3").value;
+			//e = document.getElementById("select2");
+			//var e2 = e.options[e.selectedIndex].value;
+			//var e3 = document.getElementById("select3").value;
+			var e2 = ('#modalViewVerb').val();
+			var e3 = ('#modalViewTextarea').text();
 			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
 			$.ajax({
 				type: "POST",
@@ -188,7 +192,7 @@ function postJSON(id, num)
 				contentType: "application/json",
 				success: function(data){
 					sessionStorage.starID = data.id;
-					giveGoldStar("innergive3");
+					alert("You successfully gave a star!");
 				}
 			});
 		}
@@ -200,16 +204,20 @@ function getJSON(num)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{	
-			var users = []
+			var users = new Array()
 			for(var i in jdata.objects){
 				var currentUser = jdata.objects[i];
-				userList[currentUser.id] = currentUser;				
-				users.push(currentUser.firstName + " " + currentUser.lastName);				
+				//userList[currentUser.id] = currentUser;				
+				//users.push(currentUser.firstName + " " + currentUser.lastName);
+				{
+					users.push('{ label: "'+ currentUser.firstName + ' ' + currentUser.lastName + '", value: "' + currentUser.id + '"}')
+				}
+					
 			}
 			// ko.applyBindings(jdata,document.getElementById('give1'));			
-			$( "#select1" ).autocomplete({
-				source: users
-			});				
+			$( "#modalViewUser" ).autocomplete({
+				source: [users]
+			});		
 		});
 	}
 	if (num == 1)
