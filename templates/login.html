@@ -12,7 +12,7 @@
 				<div class="container" style="width:100%; padding-left:0px; padding-right:0px;">
 					<div style="text-align:center; width:100%;padding-left:0px; padding-right:0px; padding-top:1em;">
 							
-							<img src="../static/img/goldstar.png" width="30" height="30" /><span style="font-size:2em; padding:1em;">Gold Star</span><img src="../static/img/goldstar.png" width="30" height="30" />
+							<img src="../static/img/goldstar.png" style="margin-bottom:10px; margin-right:20px;" width="25" height="25" /><span style="font-size:2em; ">Gold Star</span><img src="../static/img/goldstar.png" style="margin-bottom:10px; margin-left:20px;" width="25" height="25" />
 
 					</div>
 				</div>
@@ -40,10 +40,10 @@
 			  <div id="container" style="float:left;width:100%;text-align:center;" >
 				
 					<div>
-						{{ form.username.label }}{{ form.username }}
+						Email<br />{{ form.username }}
 					</div>
 					<div>
-						{{ form.password.label }}{{ form.password }}
+						Password<br />{{ form.password }}
 					</div>
 					<button type="submit" class="btn btn-warning">Login</button>
 				  	<!--<td colspan="3" style="text-align:center;">{{ form.submit }}</td>-->
@@ -53,7 +53,7 @@
 			</form>
 			<br/>
 			<br/>
-			<div style="clear:both"></div>
+			<div style="clear:both"></div><br />
 			<div style="width:100%; text-align:center;"><a href="/signup">Don't have an account?</a></div>
 			
 		</div>
