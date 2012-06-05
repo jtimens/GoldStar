@@ -8,6 +8,7 @@ from flask.ext.login import current_user, login_user, LoginManager, UserMixin, l
 from flask.ext.wtf import PasswordField, SubmitField, TextField, Form
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
+from threading import Thread
 import userPageUser
 import StarObject
 import page
@@ -59,7 +60,8 @@ class Star(db.Model):
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 	#Validation defs which validate 1 parameter of the table at a time
-
+	def models_committed(self,changes):
+		print "got here"
 	#Validates the Description
 	@validates('description')
 	def validate_description(self, key, string):
