@@ -158,5 +158,17 @@
 		</div>
 	</div>
 {% endblock%}
-{% block script%}
+{% block scripts%}
+<script src="../static/js/mobileviewjs.js"></script>
+<script type="text/javascript">
+	$(function()
+	{
+		if (canUseStorage())
+		{
+			localStorage.userID = {{loginID}}
+			alert(localStorage.userID)
+		}
+		
+	})
+</script>
 {%endblock%}

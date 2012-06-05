@@ -12,6 +12,7 @@ function sendUserInfoToServer()
 		var confirmedPassword = $("#PWordAgain").val();
 		if (pw == confirmedPassword)
 		{
+			$("#signupbtnenable").attri('disabled', 'disabled');
 				//send to Server and sign up
 				//lowercase email address
 			em = em.toLowerCase();

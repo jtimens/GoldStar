@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="user-scalable=yes,width=device-width">
-		<title>Gold Star</title>
+		<title>{{page.title}}</title>
 		<link href="../static/css/bootstrap.css" rel="stylesheet"/>
 		<link href="../static/css/bootstrap-responsive.css" rel="stylesheet"/>
 		<style type="text/css">
@@ -30,11 +30,14 @@
 		<div class="navbar" >
 			<div class="navbar-inner" >
 				<div class="container" >
-					<a class="brand">Hello <a class="brand" href="/users/1">Bob!</a></a>
+					{% if not page.hideStarButton %}
+					<a class="brand">Hello <a class="brand" href="/users/1">{{user.firstName}}!</a></a>
+					
 					<ul class="nav pull-right">
 						
-						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse"><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
-					<!--  -->
+						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse" ><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
+					</ul>
+					{%endif%}
 				</div>
 			</div>
 		</div>
@@ -72,7 +75,6 @@
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js"></script>
-		<script src="../static/js/mobileviewjs.js"></script>
 		<script src="../static/js/bootstrap-modal.js"></script>
 		<script src="../static/js/knockout-2.1.0.js"></script>		
 		<script src="../static/js/bootstrap.js"></script>
