@@ -2,19 +2,21 @@
 //global varibles
 var _currentTab;
 
-//on doc ready
-$(function()
+//on doc ready for mobile view
+function pageInit()
 {
 	//sets _currentTab to default value
 	if (_currentTab == null)
 	{
 		_currentTab = "myStars";
 	}
-
+	//attach event to select
+	$("#myFeedFilter").change(displayMyStars);
 	//load objects
 	loadCurrentStars();
 
-});
+
+}
 
 function loadCurrentStars()
 {
@@ -61,17 +63,48 @@ $('a[data-toggle="tab"]').on('shown', function (e) {
     loadCurrentStars();
 });
 
-function loadMyStars()
+function displayMyStars()
 {
-			//getJson of stars here
-			// var userUrl = "/api/user/"+sessionStorage.userID;
-			// $.getJSON(userUrl, function(jdata)
-			// {
-			// 	console.log(jdata);
-			// }
+	//get user item from sessionStorage 
+	var user = JSON.parse(sessionStorage.getItem("userObject"));
 
-			for (var i=0; i < 10; i++)
-			{
+
+ 	// check to see what list item is selected
+ 	var myFeedFilterSelectedItem = $("#myFeedFilter").val();
+
+ 	//create empty message
+ 	var emptyMessage = "Oops! something went wrong!";
+
+ 	//make array of stars
+ 	var starArray = []
+ 	if (myFeedFilterSelectedItem == "All")
+ 	{
+ 		console.log("displaying all");
+		emptyMessage = "No stars! You need involvement..."	
+ 	}
+ 	else if( myFeedFilterSelectedItem == "Given")
+ 	{
+ 		console.log("displaying Given");
+ 		starArray = user.stars;
+ 		emptyMessage = "No stars given, go out and meet some people!"
+ 	}
+ 	else if (myFeedFilterSelectedItem == "Received")
+ 	{
+ 		console.log("displaying received");
+ 		starArray = user.issued;
+ 		emptyMessage = "No stars received, Try to be more awesome ;-)!"
+ 	}
+ 	//check for length first
+ 	if (starArray.length == 0 )
+ 	{
+ 		$("#myStarList").html("");
+ 		$("#emptyListMessage").html(emptyMessage);
+ 	}
+ 	else
+ 	{
+	 	// loop through starArray
+	 	for (var i=0; i < 10; i++)
+		{
 			var itemHTML = '';
 				itemHTML += '<div class="well" style="height:4em; margin-bottom:0;">'				
 				itemHTML += 	'<div style="float:left; width:80%;">'
@@ -90,17 +123,22 @@ function loadMyStars()
 				itemHTML += '</div>	'		
 				itemHTML += 	'<div style="clear:both"></div>'
 				$("#myStarList").append(itemHTML);
-			}		
+		}	
+ 	}
+ 		
+
 }
 
-//modal functionality
-function showModal()
+function loadMyStars()
 {
-	$('#myModal').modal('show');
+			//getJson of stars here
+			var userUrl = "/api/user/" + sessionStorage.userID;
+			$.getJSON(userUrl, function(jdata)
+			 {
+			 	sessionStorage.setItem("userObject", JSON.stringify(jdata));
+			 	displayMyStars();				
+			 });
+
+			
 }
-function resetModalView(){
-		$('#modalViewUser').val("");
-		$('#modalViewVerb').val("");
-		$('#modalViewEvent').val("");
-		$('#modalViewTextarea').val("");
-}
+
