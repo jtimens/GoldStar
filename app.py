@@ -2,7 +2,6 @@ import flask.ext.restless
 import datetime
 import bcrypt
 import flask.ext.sqlalchemy
-from leader import Leaders
 from flask import Flask, render_template, request, redirect, url_for, session, flash, g, jsonify
 from flaskext.oauth import OAuth
 from flask.ext.login import current_user, login_user, LoginManager, UserMixin, login_required, logout_user
