@@ -2,6 +2,7 @@ import flask.ext.restless
 import datetime
 import bcrypt
 import flask.ext.sqlalchemy
+import operator
 from flask import Flask, render_template, request, redirect, url_for, session, flash, g, jsonify
 from flaskext.oauth import OAuth
 from flask.ext.login import current_user, login_user, LoginManager, UserMixin, login_required, logout_user
@@ -59,6 +60,13 @@ class Star(db.Model):
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 	#Validation defs which validate 1 parameter of the table at a time
+
+	@validates('hashtag')
+	def validate_hashtag(self, key, string):
+		string = string.lower()
+		if '#' not in string:
+			string = '#' + string
+		return unicode(string)
 
 	#Validates the Description
 	@validates('description')
@@ -323,9 +331,7 @@ def userPage(userID):
 def starPage(starID):
 	try:
 		s = Star.query.filter_by(id = starID).one()
-		issuer = User.query.filter_by(id = s.issuer_id).one()
-		owner = User.query.filter_by(id = s.owner_id).one()
-		thisStar = StarObject.starObject(issuer.firstName + ' ' + issuer.lastName, owner.firstName + ' ' + owner.lastName, s.description)
+		thisStar = StarObject.starObject(str(s.issuer.firstName + ' ' + s.issuer.lastName), str(s.owner.firstName + ' ' + s.owner.lastName), s.description)
 		p = page.Page("Check out this star!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
@@ -336,7 +342,7 @@ def starPage(starID):
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
 		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,u.id )
-		return render_template("error.html",page = p,user = thisUser)
+		return render_template("error.html", page = p,user = thisUser)
 
 #createAccountPage
 @app.route('/signup')
@@ -373,6 +379,22 @@ def getLeaderboard():
 	for i in Leaderboards:
 		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars)))
 	return jsonify(dict(leaders = leaderList))
+
+@app.route('/leaderboard/<string:hashtag>')
+def specificLeaderboard(hashtag):
+	hashtag = '#' + hashtag.lower()
+	try:
+		event = Star.query.filter_by(hashtag = hashtag).order_by(Star.owner_id).all()
+		print event
+		return 'hi'
+	except Exception as ex:
+		print ex.message
+		p = page.Page("Oops!", False)
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,u.id )
+		return render_template("error.html", page = p,user = thisUser)
+
 
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
