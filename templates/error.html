@@ -1,10 +1,14 @@
 {%extends "layout.html"%}
 {% block cssStyle%}
 {%endblock%}
-{% block body%}			Error page!
-			<h4>
-				You fail!
-			</h4>
+{% block body%}
+	<div class="hero-unit">
+		<div class="well">
+			<h1>Error!</h1>
+			<p>There was an error rendering the page =(</p>
+		</div>
+	</div>
+	<p>Click <a href="#" onclick="javascript:window.history(-1)">here</a> to go back.</p>
 {% endblock%}
 {% block script%}
 {%endblock%}
