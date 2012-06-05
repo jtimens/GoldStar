@@ -15,7 +15,6 @@ function pageInit()
 	//load objects
 	loadCurrentStars();
 
-
 }
 
 function loadCurrentStars()
