@@ -278,3 +278,9 @@ function showModal()
 {
 	$('#myModal').modal('show');
 }
+function resetModalView(){
+		$('#modalViewUser').val("");
+		$('#modalViewVerb').val("");
+		$('#modalViewEvent').val("");
+		$('#modalViewTextarea').val("");
+}

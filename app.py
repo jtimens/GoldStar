@@ -305,7 +305,10 @@ def login():
 def userPage(userID):
 	try:
 		u = User.query.filter_by(id = userID).one()
+		starsIssued = Star.query.filter_by(issuer_id = userID).count()
+		starsReceived = Star.query.filter_by(owner_id = userID).count()
 		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
+		thisUser.addStarsCount(starsIssued, starsReceived)
 		p = page.Page("Check out this user!", False)
 		return render_template("users.html", user = thisUser, page = p)
 	except Exception as ex:
@@ -332,7 +335,7 @@ def starPage(starID):
 		p = page.Page("Oops!", False)
 		userID = current_user.get_id()
 		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,0 )
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,u.id )
 		return render_template("error.html",page = p,user = thisUser)
 
 #createAccountPage
@@ -363,11 +366,19 @@ def logout():
 	logout_user()
 	return redirect('/')
 
+@app.route('/getLeaderboard')
+def getLeaderboard():
+	leaderList = []
+	Leaderboards = User.query.order_by(User.stars).limit(25)
+	for i in Leaderboards:
+		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars)))
+	return jsonify(dict(leaders = leaderList))
+
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
 #manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func, 
-	include_columns=['firstName', 'lastName', 'twitterUser', 'stars', 'issued'])
+	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued'])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
 
