@@ -10,6 +10,7 @@ from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
 import userPageUser
 import StarObject
+import page
 
 
 # Create the app for Flask
@@ -242,20 +243,28 @@ def tweet():
 
 
 #The main index of the Gold Star App
+#OLD Login screen
 @app.route('/index.html')
 def index_route():
-	return render_template('index.html')
+	p = page.Page("Gold Star!", False)
+	return render_template('index.html', page = p)
 
 #Displays the entire Gold Star App
+#OLD GIVE A STAR SCREEN
 @app.route('/main.html')
 def main_route():
-	return render_template('main.html', loginID = current_user.get_id())
+	p = page.Page("Gold Star!", False)
+	return render_template('main.html', loginID = current_user.get_id(), page = p)
 	
 @app.route('/')
 @app.route('/mobileview.html')
 def mobileview_route():
 	if current_user.is_authenticated():
-		return render_template('mobileview.html', loginID = current_user.get_id())
+		p = page.Page("Gold Star!", False)
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		return render_template('mobileview.html', loginID = current_user.get_id(), page = p, user = thisUser)
 	else:
 		return redirect('login')
 
@@ -282,7 +291,14 @@ def login():
 	except Exception as ex:
 		print ex.message
 		flash('Invalid username or password')
-	return render_template("login.html", form=form)
+	p = page.Page("Log in!", False)
+	userID = current_user.get_id()
+	if userID !=  None:
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+	else:
+		thisUser = None
+	return render_template("login.html", form=form, page = p, user = thisUser)
 
 #user page
 @app.route('/users/<int:userID>')
@@ -290,9 +306,17 @@ def userPage(userID):
 	try:
 		u = User.query.filter_by(id = userID).one()
 		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
-		return render_template("users.html", user = thisUser)
+		p = page.Page("Check out this user!", False)
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		return render_template("users.html", user = thisUser, page = p)
 	except Exception as ex:
-		return render_template("error.html")
+		p = page.Page("Oops!", False)
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		return render_template("error.html", page = p, user = thisUser)
 
 #starLanding Page
 @app.route('/star/<int:starID>')
@@ -302,20 +326,36 @@ def starPage(starID):
 		issuer = User.query.filter_by(id = s.issuer_id).one()
 		owner = User.query.filter_by(id = s.owner_id).one()
 		thisStar = StarObject.starObject(issuer.firstName + ' ' + issuer.lastName, owner.firstName + ' ' + owner.lastName, s.description)
-		return render_template("star.html", star = thisStar)
+		p = page.Page("Check out this star!", False)
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+		return render_template("star.html", star = thisStar, page = p, user = thisUser)
 	except Exception as ex:
-		return render_template("error.html")
+		p = page.Page("Oops!", False)
+		userID = current_user.get_id()
+		u = User.query.filter_by(id = userID).one()
+		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, user = thisUser)
+		return render_template("error.html",page = p)
 
 #createAccountPage
 @app.route('/signup')
 def createUser():
-	return render_template("signup.html")
+	p = page.Page("Sign Up!", True)
+	userID = current_user.get_id()
+	u = User.query.filter_by(id = userID).one()
+	thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+	return render_template("signup.html", page = p, user = thisUser)
 
 
 #feedback page
 @app.route('/feedback')
 def feedback():
-	return render_template("feedback.html")
+	p = page.Page("Feedback!", False)
+	userID = current_user.get_id()
+	u = User.query.filter_by(id = userID).one()
+	thisUser = userPageUser.userPageUser(u.firstName, u.lastName)
+	return render_template("feedback.html", page = p, user = thisUser)
 
 @app.route("/logout")
 @login_required

@@ -157,6 +157,7 @@
 			</div>
 		</div>
 	</div>
+
 {% endblock %}
 {% block scripts %}
 <script>
@@ -172,5 +173,17 @@
 		alert(ex.message);
 	}
 })
+</script>
+<script src="../static/js/mobileviewjs.js"></script>
+<script type="text/javascript">
+	$(function()
+	{
+		if (canUseStorage())
+		{
+			localStorage.userID = {{loginID}}
+			alert(localStorage.userID)
+		}
+		
+	})
 </script>
 {% endblock %}

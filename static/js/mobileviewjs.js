@@ -64,6 +64,12 @@ $('a[data-toggle="tab"]').on('shown', function (e) {
 function loadMyStars()
 {
 			//getJson of stars here
+			// var userUrl = "/api/user/"+sessionStorage.userID;
+			// $.getJSON(userUrl, function(jdata)
+			// {
+			// 	console.log(jdata);
+			// }
+
 			for (var i=0; i < 10; i++)
 			{
 			var itemHTML = '';
