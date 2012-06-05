@@ -54,11 +54,11 @@ class Star(db.Model):
 	description = db.Column(db.Unicode)
 	category = db.Column(db.Unicode)
 	created = db.Column(db.DateTime, default = datetime.datetime.now())
-	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	issuer_email = db.Column(db.Unicode, db.ForeignKey('user.email'))
+	owner_email = db.Column(db.Unicode, db.ForeignKey('user.email'))
 	hashtag = db.Column(db.Unicode)
-	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
-	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
+	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.email')
+	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.email")
 	#Validation defs which validate 1 parameter of the table at a time
 
 	@validates('hashtag')
@@ -381,7 +381,7 @@ def getLeaderboard():
 	leaderList = []
 	Leaderboards = User.query.order_by(User.stars).limit(25)
 	for i in Leaderboards:
-		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars)))
+		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars), id=i.id))
 	return jsonify(dict(leaders = leaderList))
 
 @app.route('/leaderboard/<string:hashtag>')
@@ -404,7 +404,7 @@ auth_func = lambda: current_user.is_authenticated()
 #Creates the API
 #manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func, 
-	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued'])
+	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued','email'])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
 
