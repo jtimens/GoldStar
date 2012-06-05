@@ -54,11 +54,11 @@ class Star(db.Model):
 	description = db.Column(db.Unicode)
 	category = db.Column(db.Unicode)
 	created = db.Column(db.DateTime, default = datetime.datetime.now())
-	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	issuer_email = db.Column(db.Unicode, db.ForeignKey('user.email'))
+	owner_email = db.Column(db.Unicode, db.ForeignKey('user.email'))
 	hashtag = db.Column(db.Unicode)
-	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
-	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
+	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_email==User.email')
+	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_email==User.email")
 	#Validation defs which validate 1 parameter of the table at a time
 
 	@validates('hashtag')
@@ -99,9 +99,7 @@ class Star(db.Model):
 	def validate_owner_id(self, key, string):
 		e=""
 		string = str(string)
-		if not string.isdigit():
-			e = "Digits are only allowed for the ID"
-		if str(self.issuer_id) == string:
+		if str(self.issuer_email) == string:
 			e = "Can't give yourself a star"
 		if len(e):
 			exception = starValidation()
@@ -114,8 +112,7 @@ class Star(db.Model):
 	def validate_issuer_id(self, key, string):
 		e=""
 		string = str(string)
-		if not string.isdigit():
-			e = "Digits are only allowed for the ID"
+		
 		if len(e):
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
@@ -312,19 +309,23 @@ def login():
 @app.route('/users/<int:userID>')
 def userPage(userID):
 	try:
+		#get info for other user
 		u = User.query.filter_by(id = userID).one()
-		starsIssued = Star.query.filter_by(issuer_id = userID).count()
-		starsReceived = Star.query.filter_by(owner_id = userID).count()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
-		thisUser.addStarsCount(starsIssued, starsReceived)
+		# starsIssued = Star.query.filter_by(issuer_id = userID).count()
+		# starsReceived = Star.query.filter_by(owner_id = userID).count()
+		otherUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
+		#otherUser.addStarsCount(starsIssued, starsReceived)
+		#get info for this user
+		me = User.query.filter_by(id = current_user.get_id()).one()
+		thisUser = userPageUser.userPageUser(me.firstName, me.lastName, me.id)
 		p = page.Page("Check out this user!", False)
-		return render_template("users.html", user = thisUser, page = p)
+		return render_template("users.html", user = thisUser, page = p, theOtherUser = otherUser)
 	except Exception as ex:
-		p = page.Page("Oops!", False)
-		userID = current_user.get_id()
-		u = User.query.filter_by(id = userID).one()
-		thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
-		return render_template("error.html", page = p, user = thisUser)
+			p = page.Page("Oops!", False)
+			userID = current_user.get_id()
+			u = User.query.filter_by(id = userID).one()
+			thisUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
+			return render_template("error.html", page = p, user = thisUser)
 
 #starLanding Page
 @app.route('/star/<int:starID>')
@@ -377,7 +378,7 @@ def getLeaderboard():
 	leaderList = []
 	Leaderboards = User.query.order_by(User.stars).limit(25)
 	for i in Leaderboards:
-		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars)))
+		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars), id=i.id))
 	return jsonify(dict(leaders = leaderList))
 
 @app.route('/leaderboard/<string:hashtag>')
@@ -400,7 +401,7 @@ auth_func = lambda: current_user.is_authenticated()
 #Creates the API
 #manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func, 
-	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued'])
+	include_columns=['id','firstName', 'lastName', 'twitterUser', 'stars', 'issued','email'])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
 
 
