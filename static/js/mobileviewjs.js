@@ -69,6 +69,7 @@ function loadMyStars()
 			// {
 			// 	console.log(jdata);
 			// }
+
 			for (var i=0; i < 10; i++)
 			{
 			var itemHTML = '';
@@ -96,4 +97,10 @@ function loadMyStars()
 function showModal()
 {
 	$('#myModal').modal('show');
+}
+function resetModalView(){
+		$('#modalViewUser').val("");
+		$('#modalViewVerb').val("");
+		$('#modalViewEvent').val("");
+		$('#modalViewTextarea').val("");
 }

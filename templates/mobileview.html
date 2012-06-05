@@ -157,8 +157,23 @@
 			</div>
 		</div>
 	</div>
-{% endblock%}
-{% block scripts%}
+
+{% endblock %}
+{% block scripts %}
+<script>
+	$(function(){
+	try
+	{
+		$( "#modalViewVerb" ).autocomplete({
+			source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
+		});				
+	}
+	catch(ex)
+	{
+		alert(ex.message);
+	}
+})
+</script>
 <script src="../static/js/mobileviewjs.js"></script>
 <script type="text/javascript">
 	$(function()
@@ -171,4 +186,4 @@
 		
 	})
 </script>
-{%endblock%}
+{% endblock %}
