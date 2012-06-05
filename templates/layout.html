@@ -54,18 +54,30 @@
 				<table style="width:98%">
 					<tr>
 						<td><h4>Who</h4><input id="modalViewUser" type="text" class="input-medium" placeholder="Person" /></td>
-						<td><h4>Did</h4><input id="modalViewVerb" type="text" class="input-small" placeholder="Verb" /></td>
+						<td>
+							<h4>Did</h4>
+							<select class="input-small" id ="modalViewVerb">
+								<option name="-1" selected>Select One</option>
+								<option name="Influenced">Influenced</option>
+								<option name="Impressed">Impressed</option>
+								<option name="Persuaded">Persuaded</option>
+								<option name="Helped">Helped</option>
+								<option name="Inspired">Inspired</option>
+								<option name="Guided">Guided</option>
+							</select>
+							<!--<input id="modalViewVerb" type="text" class="input-small" placeholder="Verb" /> -->
+						</td>
 					</tr>
 				</table>
 				<div style="clear:both"></div>
 				<h4>Description</h4>
-				<textarea id="modalViewTextarea" style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<textarea id="modalViewTextarea" onKeyDown="limitText(this.id, 100);" onKeyUp="limitText(this.id, 100);" style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
 				<h4>Hashtag</h4>
 				<input id="modalViewEvent" style="width:98%" type="text" class="input-medium" placeholder="Event" />
 			</div>
 			<div class="modal-footer modalgradient" >
 				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;" onclick="resetModalView()">Cancel</a>
-				<a href="#" class="btn btn-success" style="width:33%; float:right;" onclick="postJSON({{ user.ID }}, 1);">Give</a>
+				<a href="#" class="btn btn-success" style="width:33%; float:right;" onclick="if(noGiveStarErrors()){postJSON({{ user.ID }}, 1);}">Give</a>
 			</div>
 		</div>
 		
@@ -82,6 +94,24 @@
 		<script src="../static/js/bootstrap.js"></script>
 		<script src="../static/js/customscripts.js"></script>
 		<script>
+			function noGiveStarErrors(){
+				var noErrors = true;
+				if (document.getElementById("modalViewUser").name == ""){
+					alert("Cannot identify Name.  Please make sure you are using a name from the drop down menu.");
+					noErrors = false;
+				}
+				e = document.getElementById("modalViewVerb");
+				var e2 = e.options[e.selectedIndex].value;
+				if (e2 == "Select One"){
+					alert("Please select a verb.");
+					noErrors = false;
+				}
+				if(noErrors)
+					return true;
+				else
+					return false;
+			
+			}
 			$(function(){
 				try
 				{
