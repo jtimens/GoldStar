@@ -56,7 +56,7 @@
 						<td><h4>Who</h4><input id="modalViewUser" type="text" class="input-medium" placeholder="Person" /></td>
 						<td>
 							<h4>Did</h4>
-							<select class="input-small" id ="modalViewVerb">
+							<select style="width:100px;" id ="modalViewVerb">
 								<option name="-1" selected>Select One</option>
 								<option name="Influenced">Influenced</option>
 								<option name="Impressed">Impressed</option>
@@ -113,16 +113,6 @@
 			
 			}
 			$(function(){
-				try
-				{
-					$( "#modalViewVerb" ).autocomplete({
-						source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
-					});				
-				}
-				catch(ex)
-				{
-					alert(ex.message);
-				}
 				try
 				{
 					$( "#modalViewEvent" ).autocomplete({
