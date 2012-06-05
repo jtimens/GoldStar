@@ -147,7 +147,24 @@
 				
 			</div>
 			<div class="tab-pane" id="leaderBoardTab">
-			
+			<table style="width:100%; ">
+		
+			<tr>
+				<td style="text-align:left"><i>Hashtag</i><br />					<input type="text" class="input-medium search-query" placeholder="Search by hashtag" style="width:80%;" id="AllStarEventHashTag"><br />					</td>
+				<td style="text-align:left"> 
+				<i>Did</i><br/>	
+					<select style="width:80%" id="myFeedFilter">
+						<option selected>All</option>
+						<option>Influenced</option>
+						<option>Helped</option>
+						<option>Guided</option>
+						<option>Impressed</option>
+						<option>Persuaded</option>
+						<option>Inspired</option>
+					</select></td>
+			</tr>
+			</table>
+
 			<h4>Top Stars</h4>
 				<div class="well tier5" id="tier5">
 					<div class="well-small" style="background-color:#ffffbb">
@@ -201,24 +218,7 @@
 					</div>			
 			
 	 			</div>
-	 			<!-- <img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
-						<h4>Bob</h4> 
-						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
-						<h6>20 Stars</h6>
-						<div style="clear:both"></div>
-						<hr />
-					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
-						<h4>Bob</h4> 
-						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
-						<h6>20 Stars</h6>
-						<div style="clear:both"></div>
-						<hr />	
-					<img class="pull-left" width="30" height="30" style="margin:4px 4px 4px 4px;" src="../static/img/goldstar.png" />
-						<h4>Bob</h4> 
-						<a href="#"><i class="icon-chevron-right pull-right"></i></a>
-						<h6>20 Stars</h6>
-						<div style="clear:both"></div>
-						<hr /> -->
+	 			
 			</div>
 		</div>
 	</div>
@@ -231,7 +231,6 @@
 		if (canUseStorage())
 		{
 			sessionStorage.userID = {{user.ID}}
-			//alert(localStorage.userID)
 			pageInit();
 		}
 		
