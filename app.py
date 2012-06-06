@@ -99,7 +99,7 @@ class Star(db.Model):
 	def validate_owner_id(self, key, string):
 		e=""
 		string = str(string)
-		if str(self.issuer_email) == string:
+		if str(self.issuer_id) == string:
 			e = "Can't give yourself a star"
 		if len(e):
 			exception = starValidation()
