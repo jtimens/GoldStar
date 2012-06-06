@@ -85,7 +85,30 @@ function displayLeaderBoard()
 		 	$("#tier2").html(defaultDiv);	
 		 	$("#tier1").html(defaultDiv);	
 		 	$("#tier0").html(defaultDiv);	
-		 	//TODO: get color and names finilized layout and Organize into catrgories
+		 	
+		 	/*----------------------------------matts stuff----------------------------------*/
+		 	e = data.leaders;
+		 	numberOfUsers = data.leaders.length;
+		 	var userArrAll = [];
+		 	for(var i = 0; i < numberOfUsers; ++i){
+		 		userArrAll[userArrAll.length] = {Name: e[i].firstName + " " + e[i].lastName, numOfStars: e[i].starCount};
+		 	}
+
+		 	console.log(userArrAll);
+
+		 	var userArrHasStar = [];
+		 	//weed out people with 0 stars
+		 	for(var j = 0; j < userArrAll.length; ++j){
+		 		if (userArrAll[j].numOfStars > 0){
+		 			userArrHasStar[userArrHasStar.length] = userArrAll[j];
+		 		}
+		 	}
+		 	
+		 	console.log(userArrHasStar);
+
+		 	/*-------------------------------end of matts stuff------------------------------*/
+
+
 		 	
 		 	$.each(data.leaders, function(i, val)
 		 		{
