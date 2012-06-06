@@ -106,6 +106,10 @@
 					alert("Please select a verb.");
 					noErrors = false;
 				}
+				if (document.getElementById("modalViewEvent").value == ""){
+					alert("Please use a hashtag.");
+					noErrors = false;
+				}
 				if(noErrors)
 					return true;
 				else

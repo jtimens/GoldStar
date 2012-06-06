@@ -184,7 +184,8 @@ function postJSON(id, num)
 			//var e3 = document.getElementById("select3").value;
 			//var e2 = $('#modalViewVerb').val();
 			var e3 = $('#modalViewTextarea').val();
-			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+			var e4 = $('#modalViewEvent').val();
+			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'","hashtag":"'+e4+'"}';
 			//alert(userData);
 			$.ajax({
 				type: "POST",
