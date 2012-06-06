@@ -199,7 +199,7 @@ function postJSON(id, num)
 					window.location = "/";
 				},
 				error: function(jqXHR, textStatus, errorThrown){
-					alert(errorThrown + " " + textStatus + " " + jqXHR);
+					window.location = "/error";
 				}
 			});
 		}
