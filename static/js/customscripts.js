@@ -184,9 +184,8 @@ function postJSON(id, num)
 			//var e3 = document.getElementById("select3").value;
 			//var e2 = $('#modalViewVerb').val();
 			var e3 = $('#modalViewTextarea').val();
-			var e4 = $('#modalViewEvent').val();
-			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'","hashtag":"'+e4+'"}';
-			//alert(userData);
+			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+			alert(userData);
 			$.ajax({
 				type: "POST",
 				url: "/api/star",
@@ -200,7 +199,7 @@ function postJSON(id, num)
 					window.location = "/";
 				},
 				error: function(jqXHR, textStatus, errorThrown){
-					window.location = "/error";
+					alert(errorThrown + " " + textStatus + " " + jqXHR);
 				}
 			});
 		}
@@ -216,8 +215,8 @@ function getJSON(num)
 		{	
 			for(var i in jdata.objects){
 				var currentUser = jdata.objects[i];
-				userList[currentUser.id] = currentUser;				
-				users.push(currentUser.firstName + " " + currentUser.lastName);
+				//userList[currentUser.id] = currentUser;				
+				//users.push(currentUser.firstName + " " + currentUser.lastName);
 				if (sessionStorage.userID != currentUser.id)
 				{
 					usersHidden.push(currentUser.id);
@@ -239,9 +238,6 @@ function getJSON(num)
 						}
 					}
 					//alert(document.getElementById("modalViewUser").name);					
-				},
-				search: function(event, ui){
-					document.getElementById("modalViewUser").name = "";
 				}
 			});
 		});

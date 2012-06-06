@@ -86,31 +86,7 @@ function displayLeaderBoard()
 		 	$("#tier2").html(defaultDiv);	
 		 	$("#tier1").html(defaultDiv);	
 		 	$("#tier0").html(defaultDiv);	
-		 	
-		 	/*----------------------------------matts stuff----------------------------------*/
-		 	e = data.leaders;
-		 	numberOfUsers = data.leaders.length;
-		 	var userArrAll = [];
-		 	for(var i = 0; i < numberOfUsers; ++i){
-		 		userArrAll[userArrAll.length] = {Name: e[i].firstName + " " + e[i].lastName, numOfStars: e[i].starCount};
-		 	}
-
-		 	console.log(userArrAll);
-
-		 	var userArrHasStar = [];
-		 	//weed out people with 0 stars
-		 	for(var j = 0; j < userArrAll.length; ++j){
-		 		if (userArrAll[j].numOfStars > 0){
-		 			userArrHasStar[userArrHasStar.length] = userArrAll[j];
-		 		}
-		 	}
-		 	
-		 	console.log(userArrHasStar);
-
-		 	/*-------------------------------end of matts stuff------------------------------*/
-
-
-		 	
+		 	 	
 		 	$.each(data.leaders, function(i, val)
 		 		{
 		 			var divToChange = "#"
@@ -160,6 +136,18 @@ function displayLeaderBoard()
 		 });
 }
 
+function compareStarArrayByDate(a,b)
+{
+	a = new Date(a.created);
+	b = new Date(b.created);
+	return (
+            isFinite(a.valueOf()) &&
+            isFinite(b.valueOf()) ?
+            (a>b)-(a<b) :
+            NaN
+        );
+}
+
 function displayMyStars()
 {
 	//get user item from sessionStorage 
@@ -177,6 +165,13 @@ function displayMyStars()
  	if (myFeedFilterSelectedItem == "All")
  	{
  		//console.log("displaying all");
+ 		//create starArray
+ 		starArray = user.issued.concat(user.stars);
+ 		console.log(user.issued)
+ 		starArray.sort(compareStarArrayByDate)
+ 		console.log(starArray)
+ 		//sort array
+
 		emptyMessage = "No stars! You need involvement..."	
  	}
  	else if( myFeedFilterSelectedItem == "Given")
@@ -184,7 +179,7 @@ function displayMyStars()
  		//console.log("displaying Given");
  		starArray = user.issued;
  		emptyMessage = "No stars given, go out and meet some people!"
- 	}
+ 	} 
  	else if (myFeedFilterSelectedItem == "Received")
  	{
  		//console.log("displaying received");
@@ -211,7 +206,7 @@ function displayMyStars()
 				var issuerName = userList[val.issuer_id].firstName + ' ' + userList[val.issuer_id].lastName ;
 				var issuerID = val.issuer_id;
 				var hashtag = (val.hashtag != null) ? val.hashtag : "somewhere";
-				var timestamp = new Date(val.created).toDateString();
+				var timestamp = new Date(val.created);
 				var itemHTML = getItemHTML(ownerID, ownerName, verb, issuerID, issuerName, hashtag, timestamp);
 				$("#myStarList").append(itemHTML);	
 			}
@@ -230,7 +225,7 @@ function getItemHTML(ownerID, ownerName, verb, issuerID, issuerName, hashtag, ti
 		itemHTML += 	'	<img class="pull-left" width="40" height="40" style="padding-right:1em;" src="../static/img/goldstar.png" />'
 		itemHTML += 		'<span font-size:1.2em;><a href="/users/'+ownerID+'">' + ownerName+ '</a> '+verb+' <a href="/users/'+issuerID+'">'+ issuerName + '</a></span> <br/>'
 		//itemHTML += 		'<span style="font-size:1.0em;">at <a href="#" >' + hashtag + '</a></span><br/>'
-		itemHTML += 		'<span style="font-size:1.0em;">at' + hashtag + '</span><br/>'
+		itemHTML += 		'<span style="font-size:1.0em;">at ' + hashtag + '</span><br/>'
 		itemHTML += 		'<span style="font-size:0.8em">'+timestamp+' </span> <br/>'
 		itemHTML += 	'</div>'
 		itemHTML += 	'<a href="#">'
