@@ -380,15 +380,15 @@ def models_committed(sender,changes):
 			s = change[0]
 			users = query.filter(User.id.in_([s.owner_id,s.issuer_id]))
 			owner_name = ''
-			owner_email =''
+			issuer_email =''
 			issuer_name = ''
 			for user in users:
 				if user.id == s.owner_id:
-					owner_email = user.email
 					owner_name = str(makeName(user.firstName,user.lastName,user.email))		
 				else:
+					issuer_email = user.email
 					issuer_name = str(makeName(user.firstName,user.lastName,user.email))
-			startThread(owner_name,owner_email,"interacted",issuer_name)
+			startThread(issuer_name,issuer_email,"interacted",owner_name)
 def makeName(userFirstName, userLastName, userEmail):
 	fullName = "{0} {1}({2})".format(str(userFirstName), str(userLastName), str(userEmail))
 	return fullName
