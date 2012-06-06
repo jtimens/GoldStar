@@ -185,7 +185,7 @@ function postJSON(id, num)
 			//var e2 = $('#modalViewVerb').val();
 			var e3 = $('#modalViewTextarea').val();
 			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
-			alert(userData);
+			//alert(userData);
 			$.ajax({
 				type: "POST",
 				url: "/api/star",

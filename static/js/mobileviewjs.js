@@ -183,6 +183,8 @@ function displayLeaderBoard()
 
 
 		 	
+
+		 	 	
 		 	/*$.each(data.leaders, function(i, val)
 		 		{
 		 			var divToChange = "#"
