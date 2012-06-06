@@ -7,21 +7,21 @@
 		<link href="../static/css/bootstrap-responsive.css" rel="stylesheet"/>
 		<link href="../static/css/jquery-ui-1.8.20.custom.css" rel="stylesheet"/>
 		<style type="text/css">
-		.modalheader
+		.modalgradient
 		{
-			background-image: linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
-			background-image: -o-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
-			background-image: -moz-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
-			background-image: -webkit-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
-			background-image: -ms-linear-gradient(bottom, rgb(255,237,76) 49%, rgb(245,241,159) 6%);
+			background-image: linear-gradient(bottom, rgb(255,244,120) 0%, rgb(250,255,99) 55%);
+			background-image: -o-linear-gradient(bottom, rgb(255,244,120) 0%, rgb(250,255,99) 55%);
+			background-image: -moz-linear-gradient(bottom, rgb(255,244,120) 0%, rgb(250,255,99) 55%);
+			background-image: -webkit-linear-gradient(bottom, rgb(255,244,120) 0%, rgb(250,255,99) 55%);
+			background-image: -ms-linear-gradient(bottom, rgb(255,244,120) 0%, rgb(250,255,99) 55%);
 
 			background-image: -webkit-gradient(
 				linear,
 				left bottom,
 				left top,
-				color-stop(0.49, rgb(255,237,76)),
-				color-stop(0.06, rgb(245,241,159))
-				);
+				color-stop(0, rgb(255,244,120)),
+				color-stop(0.55, rgb(250,255,99))
+			);
 		}
 		</style>
 			{% block cssStyle %}{% endblock %}
@@ -34,10 +34,10 @@
 					<!--  -->
 					{% if not page.hideStarButton %}
 
-					<a class="brand">Hello <a class="brand" href="/users/{{ user.ID }}">{{user.firstName}}!</a></a>					
+					<a class="brand">Hello <a class="underline brand" href="/users/{{ user.ID }}">{{user.firstName}}!</a></a>					
 					<ul class="nav pull-right">
 						
-						<li><a href="#myModalview"><button  onclick="showModal();" class="btn btn-inverse" ><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
+						<li><a href="#myModalview"><button  onclick="showModal(); getJSON(0);" class="btn btn-inverse" ><img width="23px" height="20px" src=../static/img/goldstar.png /></button></a></li>
 					</ul>
 					{%endif%}
 				</div>
@@ -46,11 +46,11 @@
 		
 
 	<div class="modal" id="myModal" style="display:none">
-			<div class="modal-header" style="background-color:rgb(255,237,76);" >
+			<div class="modal-header modalgradient" >
 				<button class="close" data-dismiss="modal">Close</button>
 				<h3>Give a Star</h3>
 			</div>
-			<div class="modal-body modalheader">
+			<div class="modal-body modalgradient">
 				<table style="width:98%">
 					<tr>
 						<td><h4>Who</h4><input id="modalViewUser" type="text" class="input-medium" placeholder="Person" /></td>
@@ -63,9 +63,9 @@
 				<h4>Hashtag</h4>
 				<input id="modalViewEvent" style="width:98%" type="text" class="input-medium" placeholder="Event" />
 			</div>
-			<div class="modal-footer" style="background-color:#FFF79A">
+			<div class="modal-footer modalgradient" >
 				<a href="#" class="btn btn-danger" data-dismiss="modal" style="width:33%; float:left;" onclick="resetModalView()">Cancel</a>
-				<a href="#" class="btn btn-success" style="width:33%; float:right;">Give</a>
+				<a href="#" class="btn btn-success" style="width:33%; float:right;" onclick="postJSON({{ user.ID }}, 1);">Give</a>
 			</div>
 		</div>
 		
@@ -87,16 +87,6 @@
 				{
 					$( "#modalViewVerb" ).autocomplete({
 						source: ["Influenced","Helped","Guided","Impressed","Persuaded","Inspired"],
-					});				
-				}
-				catch(ex)
-				{
-					alert(ex.message);
-				}
-				try
-				{
-					$( "#modalViewUser" ).autocomplete({
-						source: ["Matthew Graham", "Jay Ostinowsky"],
 					});				
 				}
 				catch(ex)
