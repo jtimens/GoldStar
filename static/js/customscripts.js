@@ -238,6 +238,9 @@ function getJSON(num)
 						}
 					}
 					//alert(document.getElementById("modalViewUser").name);					
+				},
+				search: function(event, ui){
+					document.getElementById("modalViewUser").name = "NoID";
 				}
 			});
 		});
