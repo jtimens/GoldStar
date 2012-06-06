@@ -53,7 +53,7 @@ class Star(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	description = db.Column(db.Unicode)
 	category = db.Column(db.Unicode)
-	created = db.Column(db.DateTime, default = datetime.datetime.now())
+	created = db.Column(db.DateTime, default = datetime.datetime.now)
 	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	hashtag = db.Column(db.Unicode)
