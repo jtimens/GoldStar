@@ -215,8 +215,8 @@ function getJSON(num)
 		{	
 			for(var i in jdata.objects){
 				var currentUser = jdata.objects[i];
-				//userList[currentUser.id] = currentUser;				
-				//users.push(currentUser.firstName + " " + currentUser.lastName);
+				userList[currentUser.id] = currentUser;				
+				users.push(currentUser.firstName + " " + currentUser.lastName);
 				if (sessionStorage.userID != currentUser.id)
 				{
 					usersHidden.push(currentUser.id);

@@ -1,6 +1,7 @@
 
 //global varibles
 var _currentTab;
+var userList = {};
 
 //on doc ready for mobile view
 function pageInit()
@@ -158,13 +159,13 @@ function displayMyStars()
  	else if( myFeedFilterSelectedItem == "Given")
  	{
  		//console.log("displaying Given");
- 		starArray = user.stars;
+ 		starArray = user.issued;
  		emptyMessage = "No stars given, go out and meet some people!"
  	}
  	else if (myFeedFilterSelectedItem == "Received")
  	{
  		//console.log("displaying received");
- 		starArray = user.issued;
+ 		starArray = user.stars;
  		emptyMessage = "No stars received, Try to be more awesome ;-)!"
  	}
  	//check for length first
@@ -172,36 +173,53 @@ function displayMyStars()
  	{
  		$("#myStarList").html("");
  		$("#emptyListMessage").html(emptyMessage);
+ 		$("#emptyListMessageContainer").css("display","block");
  	}
  	else
  	{
+ 		$("#myStarList").html("");	
+ 		$("#emptyListMessageContainer").css("display","none");
 	 	//loop through array
 	 	$.each(starArray, function(i, val)
 			{
-				console.log(val);
-				var itemHTML = '';
-				itemHTML += '<div class="well" style="height:4em; margin-bottom:0;">'				
-				itemHTML += 	'<div style="float:left; width:80%;">'
-				itemHTML += 	'	<img class="pull-left" width="40" height="40" style="padding-right:1em;" src="../static/img/goldstar.png" />'
-				itemHTML += 		'<span font-size:1.2em;><a href="#">Person One</a> Influenced <a href="#" >Person Two</a></span> <br/>'
-				itemHTML += 		'<span style="font-size:1.0em;">at <a href="#" >#MosEisley</a></span><br/>'
-				itemHTML += 		'<span style="font-size:0.8em">13 minutes ago </span> <br/>'
-				itemHTML += 	'</div>'
-				itemHTML += 	'<a href="#">'
-				itemHTML += 		'<div style="float:right; height:90%; width:20%;position:relative; padding-top:1.5em;">'
-				itemHTML += 				'<div class="iconDiv">'
-				itemHTML += 				'	<i class="icon-chevron-right pull-right"></i>'
-				itemHTML += 			'	</div>	'					
-				itemHTML += 		'</div>	'	
-				itemHTML += 	'</a>'
-				itemHTML += '</div>	'		
-				itemHTML += 	'<div style="clear:both"></div>'
+				var ownerName =  userList[val.owner_id].firstName + ' ' + userList[val.owner_id].lastName;
+				var ownerID = val.owner_id
+				var verb = val.category;
+				var issuerName = userList[val.issuer_id].firstName + ' ' + userList[val.issuer_id].lastName ;
+				var issuerID = val.issuer_id;
+				var hashtag = (val.hashtag != null) ? val.hashtag : "somewhere";
+				var timestamp = new Date(val.created).toDateString();
+				var itemHTML = getItemHTML(ownerID, ownerName, verb, issuerID, issuerName, hashtag, timestamp);
 				$("#myStarList").append(itemHTML);	
 			}
 	 	);
 	 		
  	}
  		
+
+}
+
+function getItemHTML(ownerID, ownerName, verb, issuerID, issuerName, hashtag, timestamp)
+{
+		var itemHTML = '';
+		itemHTML += '<div class="well" style="height:4em; margin-bottom:0;">'				
+		itemHTML += 	'<div style="float:left; width:80%;">'
+		itemHTML += 	'	<img class="pull-left" width="40" height="40" style="padding-right:1em;" src="../static/img/goldstar.png" />'
+		itemHTML += 		'<span font-size:1.2em;><a href="/users/'+ownerID+'">' + ownerName+ '</a> '+verb+' <a href="/users/'+issuerID+'">'+ issuerName + '</a></span> <br/>'
+		//itemHTML += 		'<span style="font-size:1.0em;">at <a href="#" >' + hashtag + '</a></span><br/>'
+		itemHTML += 		'<span style="font-size:1.0em;">at' + hashtag + '</span><br/>'
+		itemHTML += 		'<span style="font-size:0.8em">'+timestamp+' </span> <br/>'
+		itemHTML += 	'</div>'
+		itemHTML += 	'<a href="#">'
+		itemHTML += 		'<div style="float:right; height:90%; width:20%;position:relative; padding-top:1.5em;">'
+		itemHTML += 				'<div class="iconDiv">'
+		itemHTML += 				'	<i class="icon-chevron-right pull-right"></i>'
+		itemHTML += 			'	</div>	'					
+		itemHTML += 		'</div>	'	
+		itemHTML += 	'</a>'
+		itemHTML += '</div>	'		
+		itemHTML += 	'<div style="clear:both"></div>'
+		return itemHTML;
 
 }
 function displayEventStars()
