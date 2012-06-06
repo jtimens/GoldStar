@@ -147,62 +147,79 @@
 				
 			</div>
 			<div class="tab-pane" id="leaderBoardTab">
-				
-				<h4>Top Stars</h4>
-					<div class="well tier5" id="tier5">
-						<div class="well-small" style="background-color:#ffffbb">
-							<i>
-								Nobody is this bright yet, will you be the first?
-							</i>
-						</div>			
-					</div>
-					<h4>Almost Stars</h4>
-					<div class="well tier4" id="tier4">
-								<div class="well-small" style="background-color:#ffffbb">
-							<i>
-								Nobody is this bright yet, will you be the first?
-							</i>
-						</div>			
-				
-					</div>
-					<h4>Average Stars</h4>
-					<div class="well tier3" id="tier3">
-								<div class="well-small" style="background-color:#ffffbb">
-							<i>
-								Nobody is this bright yet, will you be the first?
-							</i>
-						</div>			
-				
-		 			</div>
-		 			<h4>Getting There Stars</h4>
-					<div class="well tier2" id="tier2">
-								<div class="well-small" style="background-color:#ffffbb">
-							<i>
-								Nobody is this bright yet, will you be the first?
-							</i>
-						</div>			
-				
-		 			</div>
-		 			<h4>Warming up</h4>
-					<div class="well tier1" id="tier1">
-								<div class="well-small" style="background-color:#ffffbb">
-							<i>
-								Nobody is this bright yet, will you be the first?
-							</i>
-						</div>			
-				
-		 			</div>
-		 			<h4>Starter Stars</h4>
-					<div class="well tier0" id="tier0">
-								<div class="well-small" style="background-color:#ffffbb">
-							<i>
-								Nobody is this bright yet, will you be the first?
-							</i>
-						</div>			
-				
-		 			</div>
+
+			<table style="width:100%; ">
+		
+			<tr>
+				<td style="text-align:left"><i>Hashtag</i><br />					<input type="text" class="input-medium search-query" placeholder="Search by hashtag" style="width:80%;" id="AllStarEventHashTag"><br />					</td>
+				<td style="text-align:left"> 
+				<i>Did</i><br/>	
+					<select style="width:80%" id="myFeedFilter">
+						<option selected>All</option>
+						<option>Influenced</option>
+						<option>Helped</option>
+						<option>Guided</option>
+						<option>Impressed</option>
+						<option>Persuaded</option>
+						<option>Inspired</option>
+					</select></td>
+			</tr>
+			</table>
+
+			<h4>Top Stars</h4>
+				<div class="well tier5" id="tier5">
+					<div class="well-small" style="background-color:#ffffbb">
+						<i>
+							Nobody is this bright yet, will you be the first?
+						</i>
+					</div>			
+				</div>
+				<h4>Almost Stars</h4>
+				<div class="well tier4" id="tier4">
+							<div class="well-small" style="background-color:#ffffbb">
+						<i>
+							Nobody is this bright yet, will you be the first?
+						</i>
+					</div>			
+			
+				</div>
+				<h4>Average Stars</h4>
+				<div class="well tier3" id="tier3">
+							<div class="well-small" style="background-color:#ffffbb">
+						<i>
+							Nobody is this bright yet, will you be the first?
+						</i>
+					</div>			
+			
 	 			</div>
-			</div>
+	 			<h4>Getting There Stars</h4>
+				<div class="well tier2" id="tier2">
+							<div class="well-small" style="background-color:#ffffbb">
+						<i>
+							Nobody is this bright yet, will you be the first?
+						</i>
+					</div>			
+			
+	 			</div>
+	 			<h4>Warming up</h4>
+				<div class="well tier1" id="tier1">
+							<div class="well-small" style="background-color:#ffffbb">
+						<i>
+							Nobody is this bright yet, will you be the first?
+						</i>
+					</div>			
+			
+	 			</div>
+	 			<h4>Starter Stars</h4>
+				<div class="well tier0" id="tier0">
+							<div class="well-small" style="background-color:#ffffbb">
+						<i>
+							Nobody is this bright yet, will you be the first?
+						</i>
+					</div>			
+			
+	 			</div>
+	 		</div>
 		</div>
 
 {% endblock %}
@@ -213,7 +230,6 @@
 		if (canUseStorage())
 		{
 			sessionStorage.userID = {{user.ID}}
-			//alert(localStorage.userID)
 			pageInit();
 		}
 		

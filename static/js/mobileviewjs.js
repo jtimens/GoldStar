@@ -16,8 +16,12 @@ function pageInit()
 	//load objects
 	loadCurrentStars();
 
+	var hashtags = getHashTags("all");
 	$( "#EventTextBox" ).autocomplete({
-				source: getHashTags("all")
+				source: hashtags
+			});	
+	$( "#AllStarEventHashTag" ).autocomplete({
+				source: hashtags
 			});	
 }
 

@@ -54,11 +54,11 @@ class Star(db.Model):
 	description = db.Column(db.Unicode)
 	category = db.Column(db.Unicode)
 	created = db.Column(db.DateTime, default = datetime.datetime.now())
-	issuer_email = db.Column(db.Unicode, db.ForeignKey('user.email'))
-	owner_email = db.Column(db.Unicode, db.ForeignKey('user.email'))
+	issuer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 	hashtag = db.Column(db.Unicode)
-	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_email==User.email')
-	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_email==User.email")
+	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
+	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 	#Validation defs which validate 1 parameter of the table at a time
 
 	@validates('hashtag')
@@ -112,7 +112,6 @@ class Star(db.Model):
 	def validate_issuer_id(self, key, string):
 		e=""
 		string = str(string)
-		
 		if len(e):
 			exception = starValidation()
 			exception.errors = dict(issuer_id = e)
@@ -311,10 +310,10 @@ def userPage(userID):
 	try:
 		#get info for other user
 		u = User.query.filter_by(id = userID).one()
-		# starsIssued = Star.query.filter_by(issuer_id = userID).count()
-		# starsReceived = Star.query.filter_by(owner_id = userID).count()
+		starsIssued = Star.query.filter_by(issuer_id = userID).count()
+		starsReceived = Star.query.filter_by(owner_id = userID).count()
 		otherUser = userPageUser.userPageUser(u.firstName, u.lastName, userID)
-		#otherUser.addStarsCount(starsIssued, starsReceived)
+		otherUser.addStarsCount(starsIssued, starsReceived)
 		#get info for this user
 		me = User.query.filter_by(id = current_user.get_id()).one()
 		thisUser = userPageUser.userPageUser(me.firstName, me.lastName, me.id)
