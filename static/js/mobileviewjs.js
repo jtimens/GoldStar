@@ -86,8 +86,104 @@ function displayLeaderBoard()
 		 	$("#tier2").html(defaultDiv);	
 		 	$("#tier1").html(defaultDiv);	
 		 	$("#tier0").html(defaultDiv);	
-		 	 	
-		 	$.each(data.leaders, function(i, val)
+		 	
+		 	/*----------------------------------matts stuff----------------------------------*/
+		 	e = data.leaders;
+		 	numberOfUsers = data.leaders.length;
+		 	var userArrAll = [];
+		 	for(var i = 0; i < numberOfUsers; ++i){
+		 		userArrAll[userArrAll.length] = {Name: e[i].firstName + " " + e[i].lastName, numOfStars: e[i].starCount, id: e[i].id};
+		 	}
+
+		 	console.log(userArrAll);
+
+		 	var userArrHasStar = [];
+		 	//weed out people with 0 stars
+		 	for(var j = 0; j < userArrAll.length; ++j){
+		 		if (userArrAll[j].numOfStars > 0){
+		 			userArrHasStar[userArrHasStar.length] = userArrAll[j];
+		 		}
+		 	}
+		 	
+		 	console.log(userArrHasStar);
+
+		 	//sort arrays
+		 	console.log(userArrAll.sort(function(a,b){
+		 		return parseInt(a.numOfStars) - parseInt(b.numOfStars);
+		 	}));
+
+		 	var tierOnePercent = 0.50;
+		 	var tierTwoPercent = 0.25;
+		 	var tierThreePercent = 0.1;
+		 	var tierFourPercent = 0.05;
+		 	var tierFivePercent = 0.01;
+
+		 	var tierOneUsers = Math.ceil(numberOfUsers * tierOnePercent);
+		 	var tierTwoUsers = Math.ceil(numberOfUsers * tierTwoPercent);
+		 	var tierThreeUsers = Math.ceil(numberOfUsers * tierThreePercent);
+		 	var tierFourUsers = Math.ceil(numberOfUsers * tierFourPercent);
+		 	var tierFiveUsers = Math.ceil(numberOfUsers * tierFivePercent);
+
+		 	console.log("1%: "+tierOneUsers+" \b5%: "+tierTwoUsers+" \b10%: "+tierThreeUsers+" \b25%: "+tierFourUsers+" \b50%: "+tierFiveUsers);
+
+		 	for(var i = userArrAll.length - 1; i >= 0; --i){
+		 		var divToChange = "#";
+		 		var flag = false;
+		 		if (userArrAll[i].numOfStars == 0 && flag == false){
+		 			divToChange += "tier0";
+		 			flag = true;
+		 		}
+		 		if (tierFiveUsers > 0 && flag == false){
+		 			divToChange += "tier5";
+		 			tierFiveUsers -= 1;
+		 			flag = true;
+		 		}
+		 		if (tierFourUsers > 0 && flag == false){
+		 			divToChange += "tier4";
+		 			tierFourUsers -= 1;
+		 			flag = true;
+		 		}
+		 		if (tierThreeUsers > 0 && flag == false){
+		 			divToChange += "tier3";
+		 			tierThreeUsers -= 1;
+		 			flag = true;
+		 		}
+		 		if (tierTwoUsers > 0 && flag == false){
+		 			divToChange += "tier2";
+		 			tierTwoUsers -= 1;
+		 			flag = true;
+		 		}
+		 		if (tierOneUsers > 0 && flag == false){
+		 			divToChange += "tier1";
+		 			tierOneUsers -= 1;
+		 			flag = true;
+		 		}
+		 			
+
+		 		var itemHTML = '';
+				itemHTML += '<a href="/users/' + userArrAll[i].id + '"><div class="well" style="height:4em; margin-bottom:0;">'				
+				itemHTML += 	'<div style="float:left; width:80%;">'
+				itemHTML += 	'	<img class="pull-left" width="40" height="40" style="padding-right:1em;" src="../static/img/goldstar.png" />'
+				itemHTML += 		'<span font-size:1.2em;>' + userArrAll[i].Name +' </span> <br/>';
+				itemHTML += 		'<span style="font-size:1em"><i>Stars:' + userArrAll[i].numOfStars + '</i> </span> <br/>'
+				itemHTML += 	'</div>'
+				itemHTML += '</div></a>	'		
+				itemHTML += 	'<div style="clear:both"></div>'
+				//checks if the empty message is still there
+				if ($(divToChange).html().indexOf('<div class="well-small"') >= 0 )
+				{
+					//if message is still there for the div, it removes it
+					console.log("still has default message")
+					$(divToChange).html("")
+				}
+				$(divToChange).append(itemHTML);
+				userArrAll.pop();	
+		 	}
+		 	/*-------------------------------end of matts stuff------------------------------*/
+
+
+		 	
+		 	/*$.each(data.leaders, function(i, val)
 		 		{
 		 			var divToChange = "#"
 		 			if (val.starCount >= 75)
@@ -132,7 +228,7 @@ function displayLeaderBoard()
 						$(divToChange).html("")
 					}
 					$(divToChange).append(itemHTML);	
-		 		});
+		 		});*/
 		 });
 }
 
