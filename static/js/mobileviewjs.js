@@ -23,7 +23,6 @@ function pageInit()
 	$( "#AllStarEventHashTag" ).autocomplete({
 				source: hashtags
 			});	
-	
 }
 
 function loadCurrentStars()

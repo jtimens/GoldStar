@@ -172,19 +172,20 @@ function postJSON(id, num)
 	else if (num == 1)
 	{
 		//var e = document.getElementById("select1");
-		if(confirm('Are you sure you want to give a star to ' + $('#modalViewUser').text() + '?'))
+		if(confirm('Are you sure you want to give a star to ' + $('#modalViewUser').val() + '?'))
 		{
 			//var e1 = e.options[e.selectedIndex].value;
 			//starName = e.options[e.selectedIndex].text;
-			var e1 = $('#modalViewUser').val();
+			var e1 = document.getElementById("modalViewUser").name;
 			var starName = $('#modalViewUser').val();
 			sessionStorage.starName = starName;
-			//e = document.getElementById("select2");
-			//var e2 = e.options[e.selectedIndex].value;
+			e = document.getElementById("modalViewVerb");
+			var e2 = e.options[e.selectedIndex].value;
 			//var e3 = document.getElementById("select3").value;
-			var e2 = ('#modalViewVerb').val();
-			var e3 = ('#modalViewTextarea').text();
+			//var e2 = $('#modalViewVerb').val();
+			var e3 = $('#modalViewTextarea').val();
 			var userData = '{"description":"'+e3+'","category":"'+e2+'","issuer_id":"'+sessionStorage.userID+'","owner_id":"'+e1+'"}';
+			//alert(userData);
 			$.ajax({
 				type: "POST",
 				url: "/api/star",
@@ -192,7 +193,13 @@ function postJSON(id, num)
 				contentType: "application/json",
 				success: function(data){
 					sessionStorage.starID = data.id;
-					alert("You successfully gave a star!");
+					alert("You successfully gave a star to "+starName+"!");
+				},
+				complete: function(){
+					window.location = "/";
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					window.location = "/error";
 				}
 			});
 		}
@@ -200,24 +207,42 @@ function postJSON(id, num)
 }
 function getJSON(num)
 {
+	var usersHidden = []
+	var usersDisplay = []
 	if (num == 0)
 	{
 		$.getJSON('/api/user', function(jdata)
 		{	
-			var users = new Array()
 			for(var i in jdata.objects){
 				var currentUser = jdata.objects[i];
 				//userList[currentUser.id] = currentUser;				
 				//users.push(currentUser.firstName + " " + currentUser.lastName);
+				if (sessionStorage.userID != currentUser.id)
 				{
-					users.push('{ label: "'+ currentUser.firstName + ' ' + currentUser.lastName + '", value: "' + currentUser.id + '"}')
+					usersHidden.push(currentUser.id);
+					usersDisplay.push(currentUser.firstName + ' ' + currentUser.lastName + ' (' +currentUser.email+')');
 				}
+				
 					
 			}
 			// ko.applyBindings(jdata,document.getElementById('give1'));			
 			$( "#modalViewUser" ).autocomplete({
-				source: [users]
-			});		
+				source: usersDisplay,
+				select: function(event, ui){
+					var indexofDisplay =  $.inArray(ui.item.value,usersDisplay);
+					for (var i = 0; i <= usersDisplay.length; ++i){
+						if (indexofDisplay == i){
+							//alert("User: " + ui.item.value +", ID: " + usersHidden[i]);
+							document.getElementById("modalViewUser").name = usersHidden[i];
+							break;
+						}
+					}
+					//alert(document.getElementById("modalViewUser").name);					
+				},
+				search: function(event, ui){
+					document.getElementById("modalViewUser").name = "NoID";
+				}
+			});
 		});
 	}
 	if (num == 1)

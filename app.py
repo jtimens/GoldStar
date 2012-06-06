@@ -100,7 +100,7 @@ class Star(db.Model):
 	def validate_owner_id(self, key, string):
 		e=""
 		string = str(string)
-		if str(self.issuer_email) == string:
+		if str(self.issuer_id) == string:
 			e = "Can't give yourself a star"
 		if len(e):
 			exception = starValidation()
@@ -415,6 +415,14 @@ def specificLeaderboard(hashtag):
 		u = User.query.filter_by(id = userID).one()
 		thisUser = userPageUser.userPageUser(u.firstName, u.lastName,u.id )
 		return render_template("error.html", page = p,user = thisUser)
+
+@app.route('/error')
+def errorPage():
+	p = page.Page("Oops!", False)
+	userID = current_user.get_id()
+	u = User.query.filter_by(id = userID).one()
+	thisUser = userPageUser.userPageUser(u.firstName, u.lastName,u.id )
+	return render_template("error.html", page = p,user = thisUser)
 
 
 auth_func = lambda: current_user.is_authenticated()
