@@ -401,16 +401,18 @@ def getLeaderboard():
 	for i in Leaderboards:
 		leaderList.append(dict(firstName=i.firstName,lastName=i.lastName,starCount=len(i.stars), id=i.id))
 	return jsonify(dict(leaders = leaderList))
+
 @app.route('/getHashtags')
 def getHashtags():
 	hashtagList = []
 	hashtagQuery = Star.query.order_by(Star.hashtag).all()
 	for tag in hashtagQuery:
-		if tag.hashtag != "":
+		if tag.hashtag != None or tag.hashtag != "":
 			if tag.hashtag not in hashtagList:
 				hashtagList.append(tag.hashtag)
 				print tag.hashtag
 	return jsonify(dict(hashtags = hashtagList))
+
 @app.route('/leaderboard/<string:hashtag>')
 def specificLeaderboard(hashtag):
 	hashtag = '#' + hashtag.lower()
