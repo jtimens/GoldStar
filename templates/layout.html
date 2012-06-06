@@ -71,7 +71,7 @@
 				</table>
 				<div style="clear:both"></div>
 				<h4>Description</h4>
-				<textarea id="modalViewTextarea" onKeyDown="limitText(this.id, 100);" onKeyUp="limitText(this.id, 100);" style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit)"></textarea>
+				<textarea id="modalViewTextarea" onKeyDown="limitText(this.id, 100);" onKeyUp="limitText(this.id, 100);" style="resize:none; width:98%" rows="3" placeholder="Short description (100 character limit) *Optional"></textarea>
 				<h4>Hashtag</h4>
 				<input id="modalViewEvent" style="width:98%" type="text" class="input-medium" placeholder="Event" />
 			</div>
@@ -104,6 +104,10 @@
 				var e2 = e.options[e.selectedIndex].value;
 				if (e2 == "Select One"){
 					alert("Please select a verb.");
+					noErrors = false;
+				}
+				if (document.getElementById("modalViewEvent").value == ""){
+					alert("Please use a hashtag.");
 					noErrors = false;
 				}
 				if(noErrors)
