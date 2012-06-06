@@ -193,10 +193,13 @@ function postJSON(id, num)
 				contentType: "application/json",
 				success: function(data){
 					sessionStorage.starID = data.id;
-					alert("You successfully gave a star!");
+					alert("You successfully gave a star to "+starName+"!");
 				},
 				complete: function(){
 					window.location = "/";
+				},
+				error: function(jqXHR, textStatus, errorThrown){
+					alert(errorThrown + " " + textStatus + " " + jqXHR);
 				}
 			});
 		}
@@ -217,7 +220,7 @@ function getJSON(num)
 				if (sessionStorage.userID != currentUser.id)
 				{
 					usersHidden.push(currentUser.id);
-					usersDisplay.push(currentUser.firstName + ' ' + currentUser.lastName);
+					usersDisplay.push(currentUser.firstName + ' ' + currentUser.lastName + ' (' +currentUser.email+')');
 				}
 				
 					
@@ -229,12 +232,12 @@ function getJSON(num)
 					var indexofDisplay =  $.inArray(ui.item.value,usersDisplay);
 					for (var i = 0; i <= usersDisplay.length; ++i){
 						if (indexofDisplay == i){
-							alert("User: " + ui.item.value +", ID: " + usersHidden[i]);
+							//alert("User: " + ui.item.value +", ID: " + usersHidden[i]);
 							document.getElementById("modalViewUser").name = usersHidden[i];
 							break;
 						}
 					}
-					alert(document.getElementById("modalViewUser").name);					
+					//alert(document.getElementById("modalViewUser").name);					
 				}
 			});
 		});
