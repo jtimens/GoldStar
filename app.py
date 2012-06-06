@@ -12,7 +12,7 @@ from threading import Thread
 import userPageUser
 import StarObject
 import page
-
+from pythontincan import startThread
 
 # Create the app for Flask
 app = Flask(__name__)
@@ -60,8 +60,6 @@ class Star(db.Model):
 	issuer = db.relationship("User", backref="issued", primaryjoin='Star.issuer_id==User.id')
 	owner = db.relationship("User", backref="stars", primaryjoin="Star.owner_id==User.id")
 	#Validation defs which validate 1 parameter of the table at a time
-	def models_committed(self,changes):
-		print "got here"
 	#Validates the Description
 	@validates('description')
 	def validate_description(self, key, string):
@@ -364,14 +362,33 @@ def feedback():
 def logout():
 	logout_user()
 	return redirect('/')
-
+def models_committed(sender,changes):
+	session = db.create_scoped_session()
+	query = session.query(User)
+	for change in changes:
+		if isinstance(change[0],Star):
+			s = change[0]
+			users = query.filter(User.id.in_([s.owner_id,s.issuer_id]))
+			owner_name = ''
+			owner_email =''
+			issuer_name = ''
+			for user in users:
+				if user.id == s.owner_id:
+					owner_email = user.email
+					owner_name = str(makeName(user.firstName,user.lastName,user.email))		
+				else:
+					issuer_name = str(makeName(user.firstName,user.lastName,user.email))
+			startThread(owner_name,owner_email,"interacted",issuer_name)
+def makeName(userFirstName, userLastName, userEmail):
+	fullName = "{0} {1}({2})".format(str(userFirstName), str(userLastName), str(userEmail))
+	return fullName
 auth_func = lambda: current_user.is_authenticated()
 #Creates the API
 #manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func)
 manager.create_api(User, methods=['GET', 'POST'], validation_exceptions=[userValidation], authentication_required_for=['GET'], authentication_function=auth_func, 
 	include_columns=['firstName', 'lastName', 'twitterUser', 'stars', 'issued'])
 manager.create_api(Star, methods=['GET', 'POST'], validation_exceptions=[starValidation])
-
+flask.ext.sqlalchemy.models_committed.connect(models_committed,sender=app)
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
