@@ -15,14 +15,7 @@ function pageInit()
 	
 	//load objects
 	loadCurrentStars();
-
-	var hashtags = getHashTags("all");
-	$( "#EventTextBox" ).autocomplete({
-				source: hashtags
-			});	
-	$( "#AllStarEventHashTag" ).autocomplete({
-				source: hashtags
-			});	
+	getHashTags('all');
 }
 
 function loadCurrentStars()
@@ -278,9 +271,20 @@ function loadHashtagStars()
 //returns the hashtags
 function  getHashTags(whatTags)
 {
+	var hashlist
 	console.log(whatTags);
-	//get hashtags here
-	rv = ['ape','bear','cat', 'dog'];
-	return rv;
+	var hashurl = "/getHashtags"
+	$.getJSON(hashurl, function(data)
+	{
+		console.log(data);
+		$( "#EventTextBox" ).autocomplete({
+				datatype: "json",
+				source: data.hashtags
+			});	
+		$( "#AllStarEventHashTag" ).autocomplete({
+				datatype: "json",
+				source: data.hashtags
+			});	
+	});
 
 }
